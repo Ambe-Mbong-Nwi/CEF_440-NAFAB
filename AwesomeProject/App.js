@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import LoginForm from './Componetns/Shared/Butoon';
+import { Button, StyleSheet, Text, View,TextInput } from 'react-native';
+import SignUp from './Componetns/Form/SignUp';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Starting theApp </Text>
-      <Text>hello bro  </Text>
-      <StatusBar style="auto" />      
+      <SignUp/>
     </View>
     
   );
