@@ -1,10 +1,13 @@
-import { View, Text,TextInput,Button,StyleSheet } from 'react-native'
+import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch  } from 'react-native'
 import React from 'react'
 
 export default function SignUp() {
+  // write the funcion 
+function trymy(){
+  alert("yo");
+}
   return (
-    <View>
-
+    <View >  
     <Text
       style={{
       marginBottom:10,
@@ -13,7 +16,7 @@ export default function SignUp() {
     >
    Sign Up with
    <Text 
-           style={{
+          style={{
             color:'#0CAA00',
           }}
    >  Carryam GO</Text> 
@@ -32,22 +35,54 @@ export default function SignUp() {
 style={styles.Textinput}
 placeholder='Phone number'
   />
-{/* subjected to changes for the select input field  */}
 <TextInput
 style={styles.Textinput}
  secureTextEntry={true}
  placeholder='password'
   />
+  {/* subjected to massive changes  */}
+          <View
+          style={{  
+            borderColor:'blue',
+            borderWidth:2,
+            flexDirection:'row'
+          }}
+          >
+          <View
+          > 
+             <Switch
+                         style={{  
+                          borderColor:'red',
+                          borderWidth:2,
+                          height:30
+                        }}
+             /> 
+              </View>
 
-<Button
- title='Sign up'
- style={{
-    backgroundColor: "red",
-    width: 10,
-    height: 40,
-    borderRadius: 50,
-    color:'red'
-  }} />
+          <View
+                 style={{  
+                  borderColor:'black',
+                  borderWidth:2,      
+                  width:'85%'
+                }}
+          > 
+            <Text>I agree to the
+              <Text> Terms</Text> and  <Text>Policies</Text> 
+              of CarryAm Go
+             </Text>
+          
+           </View>
+          </View>
+
+  <View style={styles.container}>
+      <TouchableOpacity 
+      onPress={trymy}
+      style={styles.button} >
+          <Text style={styles.btnText}  >Sign Up</Text>
+  </TouchableOpacity>
+  <Text style={{fontSize:15  }}  >Already have an account
+     <Text style={styles.text} > Sign in </Text> </Text>
+    </View>
 
   </View>
   </View>
@@ -65,5 +100,29 @@ const styles= StyleSheet.create({
         marginBottom:10,
         borderRadius:7,
         paddingLeft:7  
+    },
+    btnText:{
+      color:'white',
+      fontSize:17,
+      textAlign:'center'
+    },
+    button:{
+      backgroundColor:'#0A9100',
+      paddingTop:7,
+      paddingBottom:7,
+      width:150,
+      borderRadius:7,
+      marginBottom:15,
+      marginTop:20   
+    },
+    container: {
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    text:{
+      color:'#0CAA00'
     }
+
+
+
 })
