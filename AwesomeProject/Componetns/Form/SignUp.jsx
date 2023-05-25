@@ -1,6 +1,5 @@
-import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch  } from 'react-native'
+import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select  } from 'react-native'
 import React from 'react'
-
 export default function SignUp() {
   // write the funcion 
 function trymy(){
@@ -35,39 +34,26 @@ function trymy(){
 style={styles.Textinput}
 placeholder='Phone number'
   />
+  {/* subjectd to changes */}
+
+  {/* end of changes made */}
 <TextInput
 style={styles.Textinput}
  secureTextEntry={true}
  placeholder='password'
   />
-  {/* subjected to massive changes  */}
+  {/*check bok area */}
           <View
-          style={{  
-            borderColor:'blue',
-            borderWidth:2,
-            flexDirection:'row'
-          }}
-          >
+          style={{flexDirection:'row'   }}>        
           <View
           > 
-             <Switch
-                         style={{  
-                          borderColor:'red',
-                          borderWidth:2,
-                          height:30
-                        }}
+             <Switch    style={{  height:30 }}          
              /> 
               </View>
 
-          <View
-                 style={{  
-                  borderColor:'black',
-                  borderWidth:2,      
-                  width:'85%'
-                }}
-          > 
+          <View style={{ width:'85%' }}>          
             <Text>I agree to the
-              <Text> Terms</Text> and  <Text>Policies</Text> 
+              <Text> Terms</Text> and  <Text>Policies </Text> 
               of CarryAm Go
              </Text>
           
