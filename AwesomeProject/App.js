@@ -1,23 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { Button, StyleSheet, Text, View } from 'react-native';
-import LoginForm from './Componetns/Shared/Butoon';
+import { Button, StyleSheet, Text, View,TextInput,SafeAreaView } from 'react-native';
+import SignUp from './Componetns/Form/SignUp';
 
 export default function App() {
   return (
+    <SafeAreaView style={{  backgroundColor:'green' }} >  
     <View style={styles.container}>
-      <Text>Starting theApp </Text>
-      <Text>hello bro  </Text>
-      <StatusBar style="auto" />      
+      <SignUp/>
     </View>
-    
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop:70,
+    padding:15,
+    paddingTop:55
   },
 });
