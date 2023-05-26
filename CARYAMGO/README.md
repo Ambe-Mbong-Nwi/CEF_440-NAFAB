@@ -1,1 +1,1 @@
-## This folder contains the market management mobile App with some pages built using ReactNative
+## This folder contains our market management mobile App 'CARYAMGO' with some pages built using ReactNative
