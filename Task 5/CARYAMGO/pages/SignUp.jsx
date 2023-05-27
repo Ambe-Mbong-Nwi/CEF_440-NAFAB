@@ -4,6 +4,7 @@ import { useState } from 'react';
 // import { Picker } from '@react-native-picker/picker';
 // import DropDownPicker from 'react-native-dropdown-picker';
 import { SelectList } from 'react-native-dropdown-select-list'
+import { Feather,AntDesign } from '@expo/vector-icons';
 
 export default function SignUp() {
   // write the funcion 
@@ -26,10 +27,12 @@ handleChange = (value) => {
   return (
     <SafeAreaView style={{  backgroundColor:'green' }} > 
     <View style={styles.container1} >  
+    <AntDesign name="arrowleft" size={24} color="black" />
     <Text
       style={{
-      marginBottom:10,
-      fontSize:20
+      marginBottom:25,
+      fontSize:20,
+      textAlign:'center'
        }}
     >
    Sign Up with
@@ -54,12 +57,19 @@ style={styles.Textinput}
 placeholder='Phone number'
   />
   {/* subjectd to changes */}
-  <View>    
+  <View style={{ marginTop:5,}} >    
   <SelectList 
+
         setSelected={(val) => setSelected(val)} 
         data={data} 
         save="value"
-    />
+    /> 
+    <View style={{flexDirection:'row', marginTop:5    }}  >
+        <Feather name="alert-circle" size={24} color="black" />
+        <Text style={{marginTop:2,color:'#000000',marginLeft:7 }} > 
+    Tell us what kind of user you are </Text>
+          </View>
+ 
     </View>
   {/* end of changes made */}
 <TextInput
@@ -72,7 +82,7 @@ style={styles.Textinput}
           style={{flexDirection:'row'   }}>        
           <View
           > 
-             <Switch    style={{  height:30 }}          
+             <Switch style={{  height:30 }}          
              /> 
               </View>
 
@@ -138,6 +148,7 @@ const styles= StyleSheet.create({
         backgroundColor: '#fff',
         marginTop:80,
         padding:15,
+        paddingTop:50,
         width:'100%',
         height:'100%'
     }
