@@ -1,16 +1,22 @@
 import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView   } from 'react-native'
 import React from 'react'
+import { useState } from 'react';
 // import { Picker } from '@react-native-picker/picker';
+// import DropDownPicker from 'react-native-dropdown-picker';
+import { SelectList } from 'react-native-dropdown-select-list'
 
 export default function SignUp() {
   // write the funcion 
 function trymy(){
   alert("yo");
 }
-// subjected to changes 
-state = {
-  value: 'Option 1',
-};
+// subjectd to changes 
+const [selected, setSelected] = React.useState("");
+  
+const data = [
+    {key:'1', value:'Buyer'},
+    {key:'2', value:'Seller'},
+]
 
 handleChange = (value) => {
   this.setState({
@@ -48,7 +54,13 @@ style={styles.Textinput}
 placeholder='Phone number'
   />
   {/* subjectd to changes */}
-
+  <View>    
+  <SelectList 
+        setSelected={(val) => setSelected(val)} 
+        data={data} 
+        save="value"
+    />
+    </View>
   {/* end of changes made */}
 <TextInput
 style={styles.Textinput}
@@ -126,6 +138,8 @@ const styles= StyleSheet.create({
         backgroundColor: '#fff',
         marginTop:80,
         padding:15,
+        width:'100%',
+        height:'100%'
     }
 
 
