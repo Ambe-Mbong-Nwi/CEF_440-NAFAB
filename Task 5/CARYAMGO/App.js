@@ -6,9 +6,10 @@ import AddToCart from './pages/AddToCart';
 import Notification from './pages/Notification';
 import SignUp from './pages/SignUp';
 
+
 export default function App() {
   return (
-    <View style={styles.container}>
+    <View >
 
       {/* <Notification /> */}
       <SignUp/>
