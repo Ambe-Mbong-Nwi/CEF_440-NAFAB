@@ -6,13 +6,15 @@ import AddToCart from './pages/AddToCart';
 import Notification from './pages/Notification';
 import SignUp from './pages/SignUp';
 import Intropage from './pages/IntroPage';
+import OptionPage from './pages/OptionPage';
 
 export default function App() {
   return (
     <View style={styles.container}>
 
       {/* <Notification /> */}
- <Intropage/>
+      <OptionPage/>
+ {/* <Intropage/> */}
       {/* <SignUp/> */}
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
