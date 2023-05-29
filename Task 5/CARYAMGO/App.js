@@ -4,18 +4,20 @@ import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import WelcomePage from './pages/WelcomePage';
 import AddToCart from './pages/AddToCart';
 import Notification from './pages/Notification';
-import SignUp from './pages/SignUp';
+import SignUp from './pages/SignUpBuyer';
 import Intropage from './pages/IntroPage';
 import OptionPage from './pages/OptionPage';
+import SignUpVendor from './pages/SignUpVendor';
 
 export default function App() {
   return (
     <View style={styles.container}>
 
       {/* <Notification /> */}
-      <OptionPage/>
- {/* <Intropage/> */}
+      {/* <OptionPage/> */}
+ <Intropage/>
       {/* <SignUp/> */}
+      {/* <SignUpVendor/> */}
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
