@@ -4,7 +4,7 @@ import { Feather,AntDesign } from '@expo/vector-icons';
 
 export default function SignUpVendor() {
     function trymy(){
-        alert("yo");
+        alert("yo bro");
       }
   return (
     <SafeAreaView style={{  backgroundColor:'green' }} > 
