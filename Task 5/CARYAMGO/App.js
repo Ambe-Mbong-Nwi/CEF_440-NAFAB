@@ -15,9 +15,9 @@ export default function App() {
 
       {/* <Notification /> */}
       {/* <OptionPage/> */}
- <Intropage/>
+ {/* <Intropage/> */}
       {/* <SignUp/> */}
-      {/* <SignUpVendor/> */}
+      <SignUpVendor/>
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           

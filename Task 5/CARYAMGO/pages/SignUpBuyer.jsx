@@ -39,6 +39,7 @@ function trymy(){
               placeholder='Email'
   />
       <TextInput
+      keyboardType='numeric'
 style={styles.Textinput}
 placeholder='Phone number'
   />

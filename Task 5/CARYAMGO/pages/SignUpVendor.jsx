@@ -1,4 +1,4 @@
-import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView   } from 'react-native'
+import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView, ViewBase   } from 'react-native'
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
@@ -36,8 +36,26 @@ export default function SignUpVendor() {
   />
       <TextInput
 style={styles.Textinput}
+keyboardType='numeric'
 placeholder='Phone number'
   />
+ <TextInput
+style={styles.Textinput}
+placeholder='Town'    
+  />
+{/* Flexed input fields */}
+
+<View style={{flexDirection:'row',justifyContent:'space-between' }} >
+<TextInput
+style={styles.Textinput1}
+placeholder='Name of Market'    
+  />
+ <TextInput
+ keyboardType='numeric'
+style={styles.Textinput2}
+placeholder='Shade Number'    
+  />
+</View>  
 <TextInput
 style={styles.Textinput}
  secureTextEntry={true}
@@ -82,11 +100,32 @@ const styles = StyleSheet.create({
         height: 50,
         borderColor: 'gray',
         borderWidth: 1,
-        marginTop:5,
         marginTop:8,
         marginBottom:10,
         borderRadius:7,
         paddingLeft:7  
+    },
+    Textinput1:{
+        height: 50,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginTop:8,
+        marginBottom:10,
+        borderRadius:7,
+        paddingLeft:7,
+        flex:1,
+        marginRight:10
+    },
+    Textinput2:{
+        height: 50,
+        borderColor: 'gray',
+        borderWidth: 1,
+        marginTop:8,
+        marginBottom:10,
+        borderRadius:7,
+        paddingLeft:7,
+        flex:1,
+        marginLeft:10
     },
     btnText:{
       color:'white',
