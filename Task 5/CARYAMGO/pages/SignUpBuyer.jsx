@@ -26,7 +26,7 @@ function trymy(){
           style={{
             color:'#0CAA00',
           }}
-   >  Carryam GO</Text> 
+   >  Carryam-GO</Text> 
   </Text>
 
   <View>
