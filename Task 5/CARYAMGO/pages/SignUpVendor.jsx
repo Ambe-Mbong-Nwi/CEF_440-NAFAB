@@ -20,11 +20,10 @@ export default function SignUpVendor() {
    Sign Up with
    <Text 
           style={{
-            color:'#0CAA00',
+            color:'#0CAA00'
           }}
    >  Carryam-GO</Text> 
   </Text>
-
   <View>
   <TextInput
   style={styles.Textinput}
