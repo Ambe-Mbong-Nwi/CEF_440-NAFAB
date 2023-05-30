@@ -8,6 +8,7 @@ import SignUp from './pages/SignUpBuyer';
 import Intropage from './pages/IntroPage';
 import OptionPage from './pages/OptionPage';
 import SignUpVendor from './pages/SignUpVendor';
+import Login from './pages/Login';
 
 export default function App() {
   return (
@@ -17,7 +18,8 @@ export default function App() {
       {/* <OptionPage/> */}
  {/* <Intropage/> */}
       {/* <SignUp/> */}
-      <SignUpVendor/>
+      {/* <SignUpVendor/> */}
+      <Login/>
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
