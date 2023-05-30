@@ -1,4 +1,4 @@
-import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView   } from 'react-native'
+import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,SafeAreaView   } from 'react-native'
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
@@ -7,7 +7,7 @@ const Login = () => {
         alert("yo");
       }
   return (
-    <SafeAreaView style={{  backgroundColor:'green', width:'105%',  }} > 
+    <SafeAreaView style={{  backgroundColor:'green', width:'100%',  }} > 
     <View style={styles.container1} >  
     <AntDesign name="arrowleft" size={24} color="black" />
     <View style={{   marginBottom:100,marginTop:50  }}  >  
@@ -46,7 +46,7 @@ style={styles.Textinput}
 
   <View style={styles.container}>
       <TouchableOpacity 
-      onPress={trymy}
+    //   onPress={trymy}
       style={styles.button} >
           <Text style={styles.btnText}  >LOGIN</Text>
   </TouchableOpacity>

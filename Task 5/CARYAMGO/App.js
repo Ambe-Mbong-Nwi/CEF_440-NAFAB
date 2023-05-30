@@ -9,6 +9,7 @@ import Intropage from './pages/IntroPage';
 import OptionPage from './pages/OptionPage';
 import SignUpVendor from './pages/SignUpVendor';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
 
 export default function App() {
   return (
@@ -19,7 +20,8 @@ export default function App() {
  {/* <Intropage/> */}
       {/* <SignUp/> */}
       {/* <SignUpVendor/> */}
-      <Login/>
+      {/* <Login/> */}
+      <ForgotPassword/>
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
