@@ -1,8 +1,6 @@
 import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView   } from 'react-native'
 import React from 'react'
 import { useState } from 'react';
-// import { Picker } from '@react-native-picker/picker';
-// import DropDownPicker from 'react-native-dropdown-picker';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
@@ -11,19 +9,7 @@ export default function SignUp() {
 function trymy(){
   alert("yo");
 }
-// subjectd to changes 
-const [selected, setSelected] = React.useState("");
-  
-const data = [
-    {key:'1', value:'Buyer'},
-    {key:'2', value:'Seller'},
-]
 
-handleChange = (value) => {
-  this.setState({
-    value,
-  });
-};
   return (
     <SafeAreaView style={{  backgroundColor:'green' }} > 
     <View style={styles.container1} >  
@@ -40,7 +26,7 @@ handleChange = (value) => {
           style={{
             color:'#0CAA00',
           }}
-   >  Carryam GO</Text> 
+   >  Carryam-GO</Text> 
   </Text>
 
   <View>
@@ -53,25 +39,10 @@ handleChange = (value) => {
               placeholder='Email'
   />
       <TextInput
+      keyboardType='numeric'
 style={styles.Textinput}
 placeholder='Phone number'
   />
-  {/* subjectd to changes */}
-  <View style={{ marginTop:5,}} >    
-  <SelectList 
-
-        setSelected={(val) => setSelected(val)} 
-        data={data} 
-        save="value"
-    /> 
-    <View style={{flexDirection:'row', marginTop:5    }}  >
-        <Feather name="alert-circle" size={24} color="black" />
-        <Text style={{marginTop:2,color:'#000000',marginLeft:7 }} > 
-    Tell us what kind of user you are </Text>
-          </View>
- 
-    </View>
-  {/* end of changes made */}
 <TextInput
 style={styles.Textinput}
  secureTextEntry={true}

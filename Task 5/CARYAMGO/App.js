@@ -4,7 +4,14 @@ import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
 import WelcomePage from './pages/WelcomePage';
 import AddToCart from './pages/AddToCart';
 import Notification from './pages/Notification';
-import SignUp from './pages/SignUp';
+import SignUp from './pages/SignUpBuyer';
+import Intropage from './pages/IntroPage';
+import OptionPage from './pages/OptionPage';
+import SignUpVendor from './pages/SignUpVendor';
+import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
+import VerificationNum from './pages/VerificationNum';
+import VerificationEmail from './pages/VerificationEmail';
 
 
 export default function App() {
@@ -12,7 +19,14 @@ export default function App() {
     <View >
 
       {/* <Notification /> */}
-      <SignUp/>
+      {/* <OptionPage/> */}
+ {/* <Intropage/> */}
+      {/* <SignUp/> */}
+      {/* <SignUpVendor/> */}
+      {/* <Login/> */}
+      {/* <ForgotPassword/> */}
+      {/* <VerificationNum/> */}
+      <VerificationEmail/>
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
