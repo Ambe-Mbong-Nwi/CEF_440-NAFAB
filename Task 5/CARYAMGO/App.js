@@ -13,9 +13,10 @@ import ForgotPassword from './pages/ForgotPassword';
 import VerificationNum from './pages/VerificationNum';
 import VerificationEmail from './pages/VerificationEmail';
 
+
 export default function App() {
   return (
-    <View style={styles.container}>
+    <View >
 
       {/* <Notification /> */}
       {/* <OptionPage/> */}

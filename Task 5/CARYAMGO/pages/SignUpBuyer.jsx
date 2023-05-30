@@ -117,7 +117,11 @@ const styles= StyleSheet.create({
     },
     container1: {
         backgroundColor: '#fff',
+
         marginTop:150,
+
+        marginTop:80,
+
         padding:15,
         paddingTop:50,
         width:'100%',
