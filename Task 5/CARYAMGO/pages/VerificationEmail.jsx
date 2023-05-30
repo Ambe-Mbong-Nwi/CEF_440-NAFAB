@@ -2,7 +2,7 @@ import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,SafeAreaView   
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
-export default function VerificationNum() {
+export default function VerificationEmail() {
   return (
     <SafeAreaView style={{  backgroundColor:'green', width:'100%',  }} > 
     <View style={styles.container} >
@@ -14,7 +14,7 @@ export default function VerificationNum() {
        {/* space reserved for the image */}
      </View>
 <View>
-    <Text style={{fontSize:20,textAlign:'center' }}  >Please enter the code sent to 674****43</Text>
+    <Text style={{fontSize:20,textAlign:'center' }}  >Please enter the code sent to bn*******gmail.com</Text>
 </View>
 {/* flexed squares */}
 <View  style={styles.boxCont}>

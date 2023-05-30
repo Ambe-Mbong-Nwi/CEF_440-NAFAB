@@ -11,6 +11,7 @@ import SignUpVendor from './pages/SignUpVendor';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import VerificationNum from './pages/VerificationNum';
+import VerificationEmail from './pages/VerificationEmail';
 
 export default function App() {
   return (
@@ -23,7 +24,8 @@ export default function App() {
       {/* <SignUpVendor/> */}
       {/* <Login/> */}
       {/* <ForgotPassword/> */}
-      <VerificationNum/>
+      {/* <VerificationNum/> */}
+      <VerificationEmail/>
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
