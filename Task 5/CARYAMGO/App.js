@@ -10,6 +10,7 @@ import OptionPage from './pages/OptionPage';
 import SignUpVendor from './pages/SignUpVendor';
 import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
+import VerificationNum from './pages/VerificationNum';
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
       {/* <SignUp/> */}
       {/* <SignUpVendor/> */}
       {/* <Login/> */}
-      <ForgotPassword/>
+      {/* <ForgotPassword/> */}
+      <VerificationNum/>
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
