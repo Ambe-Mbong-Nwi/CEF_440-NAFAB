@@ -12,6 +12,7 @@ import Login from './pages/Login';
 import ForgotPassword from './pages/ForgotPassword';
 import VerificationNum from './pages/VerificationNum';
 import VerificationEmail from './pages/VerificationEmail';
+import ProfilePage from './pages/ProfilePage';
 
 
 export default function App() {
@@ -26,7 +27,11 @@ export default function App() {
       {/* <Login/> */}
       {/* <ForgotPassword/> */}
       {/* <VerificationNum/> */}
-      <VerificationEmail/>
+      {/* <VerificationEmail/> */}
+      <ProfilePage shopnmame="Leony shop" market =" Muea market"
+      Email="loenglain@gmail.com" Phonenumber="674733043" profilestatus="Buyer"
+      location="Buea" marketname="Central Market" shadename="Shade 5" password="*************"
+      />
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
