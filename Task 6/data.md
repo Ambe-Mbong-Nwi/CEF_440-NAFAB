@@ -154,4 +154,12 @@ VALUES
 
 ```
 
-These INSERT statements will populate the respective tables with 10 sample data entries based on Cameroonian products, localities, and names. The passwords are encrypted using the `crypt` function with the Blowfish algorithm (``).
+The expression `E'\\x'||md5('password')::bytea` is used to convert the result of the `md5` function into a `bytea` type and concatenate it with the prefix `\\x`. This format is commonly used to represent binary data, including hashed passwords.
+
+In PostgreSQL, the `md5` function is used to calculate the MD5 hash of a given input. The MD5 algorithm is a widely used cryptographic hash function that produces a 128-bit (16-byte) hash value. It takes an input string and returns a fixed-length hexadecimal string representation of the hash.
+
+When storing passwords in a database, it is considered good practice to store them in a hashed format rather than plaintext. Hashing is a one-way process, meaning it is computationally difficult to reverse the hash and obtain the original password. This adds an extra layer of security to protect user passwords in case of a data breach.
+
+In the provided expression, the `md5` function calculates the hash of the password string, and `::bytea` casts it to the `bytea` data type. The `E'\\x'` prefix is used to indicate that the following string should be interpreted as a hexadecimal value.
+
+Overall, the expression `E'\\x'||md5('password')::bytea` combines the MD5 hashing and bytea casting to represent the hashed password as a hexadecimal string in the format required for storage in the `bytea` column.
