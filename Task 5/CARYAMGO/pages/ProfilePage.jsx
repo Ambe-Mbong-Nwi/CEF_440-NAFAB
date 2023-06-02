@@ -1,8 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { Feather,AntDesign } from '@expo/vector-icons';
+import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from '@expo/vector-icons';
 
-export default function ProfilePage() {
+export default function ProfilePage(props) {
   return (
    <SafeAreaView style={styles.safeare}  >  
     <View  style={styles.main} >
@@ -15,17 +15,83 @@ export default function ProfilePage() {
         <View></View>
         <View >
             <Text style={{
-                fontSize:17,
+                fontSize:16,
                 textAlign:"center",
                 color:"white",
                 fontWeight:600
-                 } } > Leony shop </Text>
+                 } } > {props.shopnmame}</Text>
             <Text style={{textAlign:"center",
-            fontSize:16,
+            fontSize:15,
             color:"white" ,
-            fontWeight:600} }>Muea market</Text>
+            fontWeight:600} }>{props.market} </Text>
+        </View> 
+    </View>
+    <View style={styles.main2}>
+        <View style={styles.View1} >
+            <Text>Profile Details</Text>
+            <AntDesign name="minuscircleo" size={24} color="black" />
         </View>
-      
+        {/* profile informations  */}
+       <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <MaterialCommunityIcons name="email-outline" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3  }}  > {props.Email} </Text>
+            </View>
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+        <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <SimpleLineIcons name="phone" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3  }}  > {props.Phonenumber} </Text>
+            </View>
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+        <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <MaterialCommunityIcons name="account-outline" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3 }}  > {props.profilestatus} </Text>
+            </View>   
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+        <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <Feather name="map-pin" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3 }}  > {props.location} </Text>
+            </View>   
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+        <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <Feather name="home" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3 }}  > {props.marketname} </Text>
+            </View>   
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+        <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <MaterialCommunityIcons name="home-variant-outline" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3 }}  > {props.shadename} </Text>
+            </View>   
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+        {/* password , may lead to further logis in hashing  */}
+        <View style={styles.View1} >
+            <View style={styles.View11} > 
+            <Ionicons name="lock-closed-outline" size={24} color="black" />
+            <Text style={{marginTop:2,marginLeft:3 }}  > {props.password} </Text>
+            </View>   
+        <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
+        </View>
+
+        <View style={styles.View1} >
+            <Text>Edit prpoducts </Text>
+            <AntDesign name="minuscircleo" size={24} color="black" />
+        </View>
+        <View style={styles.View1} >
+            <Text>Add products </Text>
+            <AntDesign name="minuscircleo" size={24} color="black" />
+        </View>
+
     </View>
     </SafeAreaView> 
   )
@@ -43,10 +109,26 @@ main:{
  backgroundColor:'#0A9100',
  padding:15,
 paddingTop:70,
+borderBottomLeftRadius:20,
+borderBottomRightRadius:20
+
 
 },
 main1:{
     flexDirection:"row",
     justifyContent:"space-between",
+},
+main2:{
+ padding:15,
+},
+View1:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    paddingBottom:10
+},
+View11:{
+    flexDirection:"row",
+    justifyContent:"space-between", 
+    paddingLeft:10,
 }
 })

@@ -28,7 +28,10 @@ export default function App() {
       {/* <ForgotPassword/> */}
       {/* <VerificationNum/> */}
       {/* <VerificationEmail/> */}
-      <ProfilePage/>
+      <ProfilePage shopnmame="Leony shop" market =" Muea market"
+      Email="loenglain@gmail.com" Phonenumber="674733043" profilestatus="Buyer"
+      location="Buea" marketname="Central Market" shadename="Shade 5" password="*************"
+      />
       {/* <AddToCart /> */}
       {/* <WelcomePage /> */}
           
