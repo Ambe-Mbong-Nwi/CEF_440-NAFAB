@@ -33,7 +33,7 @@ CREATE TABLE Product(
     product_price INTEGER NOT NULL,
     product_quantity INTEGER NOT NULL,
     seller_id INTEGER REFERENCES Seller(seller_id) ON DELETE CASCADE,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
+    created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- creating the message table
@@ -55,11 +55,11 @@ CREATE TABLE Shop(
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- creating the order table
-CREATE TABLE Order(
-    order_id SERIAL PRIMARY KEY,
-    order_name VARCHAR(50) NOT NULL,
-    order_amount INTEGER NOT NULL,
+-- creating the orders table
+CREATE TABLE Orders(
+    orders_id SERIAL PRIMARY KEY,
+    orders_name VARCHAR(50) NOT NULL,
+    orders_amount INTEGER NOT NULL,
     product_id INTEGER REFERENCES Product(product_id) ON DELETE CASCADE,
     seller_id INTEGER REFERENCES Seller(seller_id) ON DELETE CASCADE,
     buyer_id INTEGER REFERENCES Buyer(buyer_id) ON DELETE CASCADE,
@@ -67,19 +67,28 @@ CREATE TABLE Order(
 );
 
 -- creating the notification table
-CREATE TABLE Notification(
+CREATE TABLE Notification (
     notification_id SERIAL PRIMARY KEY,
     notification_content VARCHAR(255) NOT NULL,
     recipient_id INTEGER,
     recipient_role VARCHAR(10),
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    FOREIGN KEY (recipient_id, recipient_role)
-        REFERENCES (
-            SELECT seller_id AS id, 'seller' AS role FROM Seller
-            UNION ALL
-            SELECT buyer_id, 'buyer' FROM Buyer
-        ) ON DELETE CASCADE
+    created_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+CREATE TABLE RecipientMapping (
+    recipient_id INTEGER,
+    recipient_role VARCHAR(10),
+    PRIMARY KEY (recipient_id, recipient_role),
+    FOREIGN KEY (recipient_id) REFERENCES Seller(seller_id) ON DELETE CASCADE,
+    FOREIGN KEY (recipient_id) REFERENCES Buyer(buyer_id) ON DELETE CASCADE
+);
+
+
+ALTER TABLE Notification
+ADD CONSTRAINT fk_recipient_mapping
+FOREIGN KEY (recipient_id, recipient_role)
+REFERENCES RecipientMapping(recipient_id, recipient_role) ON DELETE CASCADE;
+
 
 -- creating the admin table
 CREATE TABLE Admin(
