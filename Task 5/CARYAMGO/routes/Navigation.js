@@ -64,7 +64,7 @@ export default function Navigation() {
       component={Messaging}
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
-        
+        header: () => null,   //remove the default header
       }}/>
 
       <Tab.Screen 
@@ -72,6 +72,7 @@ export default function Navigation() {
       component={AddToCart} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
+        header: () => null,   //remove the default header
       }}/>
 
       <Tab.Screen 
@@ -79,6 +80,7 @@ export default function Navigation() {
       component={Notification} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
+        header: () => null,   //remove the default header
       }}/>
 
       <Tab.Screen 
@@ -86,6 +88,7 @@ export default function Navigation() {
       component={ProfilePage} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
+        header: () => null,   //remove the default header
       }}/>
 
     </Tab.Navigator>
