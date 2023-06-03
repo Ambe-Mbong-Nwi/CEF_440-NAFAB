@@ -22,27 +22,27 @@ import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
-    <View >
+    // <View >
 
-      {/* <Notification /> */}
-      {/* <OptionPage/> */}
- {/* <Intropage/> */}
-      {/* <SignUp/> */}
-      {/* <SignUpVendor/> */}
-      {/* <Login/> */}
-      {/* <ForgotPassword/> */}
-      {/* <VerificationNum/> */}
-      {/* <VerificationEmail/> */}
-      {/* <ProfilePage shopnmame="Leony shop" market =" Muea market"
-      Email="loenglain@gmail.com" Phonenumber="674733043" profilestatus="Buyer"
-      location="Buea" marketname="Central Market" shadename="Shade 5" password="*************"
-      /> */}
-      {/* <AddToCart /> */}
-      <WelcomePage />
-      {/* <NavigationContainer>
+//       {/* <Notification /> */}
+//       // {/* <OptionPage/> */}
+//  {/* <Intropage/> */}
+//       {/* <SignUp/> */}
+//       {/* <SignUpVendor/> */}
+//       {/* <Login/> */}
+//       {/* <ForgotPassword/> */}
+//       {/* <VerificationNum/> */}
+//       {/* <VerificationEmail/> */}
+      // {/* <ProfilePage shopnmame="Leony shop" market =" Muea market"
+      // Email="loenglain@gmail.com" Phonenumber="674733043" profilestatus="Buyer"
+      // location="Buea" marketname="Central Market" shadename="Shade 5" password="*************"
+      // /> */}
+      // {/* <AddToCart /> */}
+      // // <WelcomePage />
+      <NavigationContainer>
           <Navigation />
-        </NavigationContainer>   */}
-    </View>
+        </NavigationContainer>  
+    // </View>
     
   );
 }
