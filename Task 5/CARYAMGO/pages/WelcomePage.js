@@ -2,9 +2,10 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
 import { EvilIcons, Ionicons } from '@expo/vector-icons';
 import Card from '../shared/card';
-import Footer from '../shared/footer';
 
-export default function WelcomePage() {
+
+//taking in inbuilt navigation prop to use to navigate to another screen
+export default function WelcomePage({ navigation }) {
     return(
         <View>
         <ScrollView>
@@ -23,12 +24,13 @@ export default function WelcomePage() {
             <Text style={styles.welcomename}>Fonge Bertin</Text>
             <Text style={styles.topproducts}>Top Products</Text>
             <View style={styles.layout}>
-                <Card />
-                <Card />
-                <Card />
+                {/* passing in navigation prop to be used in card for the .navigate function. */}
+                <Card navigation = { navigation }/>
+                <Card navigation = { navigation }/>
+                <Card navigation = { navigation }/>  
             </View>
         </ScrollView>
-        <Footer />
+      
         </View>
     )}
 

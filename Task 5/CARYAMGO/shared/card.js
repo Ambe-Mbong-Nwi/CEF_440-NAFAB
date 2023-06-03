@@ -2,8 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, Button, TouchableOpacity} from 'react-native';
  //TouchableOpacity replaces button so it can be styled
 
+//taking in navigation prop from parent to use to navigate to another screen
+export default function Card({ navigation }) {
 
-export default function Card() {
+    const pressHandler = () => {
+        navigation.navigate('Order');
+    }
+
     return(
         // <ScrollView>
         <View>
@@ -20,7 +25,7 @@ export default function Card() {
                     </View>
                     <Text style={styles.itemshop}>Ambe's Shop</Text>
                     <Text style={styles.itemdirection}>Muea Market: Shade 13</Text>
-                    <TouchableOpacity style={styles.orderbutton}>
+                    <TouchableOpacity style={styles.orderbutton} onPress={ pressHandler }>
                         <Text style={styles.ordertext}>Order</Text>
                     </TouchableOpacity>
                 </View>
@@ -39,7 +44,7 @@ export default function Card() {
                     </View>
                     <Text style={styles.itemshop}>Ambe's Shop</Text>
                     <Text style={styles.itemdirection}>Muea Market: Shade 13</Text>
-                    <TouchableOpacity style={styles.orderbutton}>
+                    <TouchableOpacity style={styles.orderbutton} onPress={ pressHandler }>
                         <Text style={styles.ordertext}>Order</Text>
                     </TouchableOpacity>
                 </View>
@@ -58,7 +63,7 @@ export default function Card() {
                     </View>
                     <Text style={styles.itemshop}>Ambe's Shop</Text>
                     <Text style={styles.itemdirection}>Muea Market: Shade 13</Text>
-                    <TouchableOpacity style={styles.orderbutton}>
+                    <TouchableOpacity style={styles.orderbutton} onPress={ pressHandler }>
                         <Text style={styles.ordertext}>Order</Text>
                     </TouchableOpacity>
                 </View>

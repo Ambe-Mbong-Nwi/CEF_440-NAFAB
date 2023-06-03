@@ -6,7 +6,7 @@ export default function Order() {
     return(
         <View>
         <ScrollView>
-            <Text>footer</Text>
+            <Text>Order Page</Text>
         </ScrollView>
 
         </View>

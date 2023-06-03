@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
 import { AntDesign, EvilIcons, MaterialIcons, Ionicons, Entypo} from '@expo/vector-icons';
-import Footer from '../shared/footer';
+
  
 
 
@@ -37,7 +37,7 @@ export default function Notification() {
                 </View>
             
             </ScrollView>
-            <Footer />
+         
             </View>
             
     )}

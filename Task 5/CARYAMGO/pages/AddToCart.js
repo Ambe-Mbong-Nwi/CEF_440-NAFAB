@@ -2,9 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Image } from 'react-native';
 import { EvilIcons, MaterialIcons } from '@expo/vector-icons';
 import Card from '../shared/card';
-import Footer from '../shared/footer';
 
-export default function AddToCart() {
+//taking in inbuilt navigation prop to use to navigate to another screen
+export default function AddToCart({ navigation }) {
     return(
         <View>
         <ScrollView>
@@ -36,12 +36,12 @@ export default function AddToCart() {
                 </View>
             </View>
             <View style={styles.layout}>
-                <Card />
-                <Card />
-                <Card />
+                <Card navigation = { navigation }/>
+                <Card navigation = { navigation }/>
+                <Card navigation = { navigation }/>
             </View>
         </ScrollView>
-        <Footer />
+      
         </View>
     )}
 

@@ -1,11 +1,12 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import cartStack from '../routes/cartStack';
+import HomeOrderrStack from './HomeOrderrStack';
+import DiscountOrderrStack from './DiscountOrderrStack';
 import Notification from '../pages/Notification';
-import AddToCart from '../pages/AddToCart';
+// import AddToCart from '../pages/AddToCart';
 import Messaging from '../pages/Messaging';
 import ProfilePage from '../pages/ProfilePage';
 import Icon from 'react-native-vector-icons/Ionicons';
-import WelcomePage from '../pages/WelcomePage';
+// import WelcomePage from '../pages/WelcomePage';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,11 +35,11 @@ export default function Navigation() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'WelcomePage') {
+          if (route.name === "HomeOrderrStack" ) {
             iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'Messaging') {
             iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
-            } else if (route.name === 'AddToCart') {
+            } else if (route.name === 'DiscountOrderrStack') {
                 iconName = focused ? 'cart' : 'cart-outline';
             } else if (route.name === 'Notification') {
                 iconName = focused ? 'notifications' : 'notifications-outline';
@@ -52,8 +53,8 @@ export default function Navigation() {
       })}>
 
       <Tab.Screen 
-      name="WelcomePage" 
-      component={WelcomePage} 
+      name="HomeOrderrStack" 
+      component={HomeOrderrStack} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header
@@ -68,8 +69,8 @@ export default function Navigation() {
       }}/>
 
       <Tab.Screen 
-      name="AddToCart" 
-      component={AddToCart} 
+      name="DiscountOrderrStack" 
+      component={DiscountOrderrStack} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header
