@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "expo": "^48.0.19",
+    "expo-splash-screen": "~0.18.2",
+    "react-native-splash-screen": "^3.3.0"
+  }
+}
