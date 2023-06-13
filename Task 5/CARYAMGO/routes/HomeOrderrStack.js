@@ -9,10 +9,14 @@ export default function HomeOrderrStack() {
   return (
     
       <Stack.Navigator>
+        {/* // screenOptions={{headerShown: false}}> */}
         <Stack.Screen 
         name="WelcomePage" 
         component={WelcomePage} 
-        screenOptions={{headerShown: false}} />
+        screenOptions={{
+          tabBarShowLabel: false,
+          headerShown: false,
+          title: 'j'}} />
         <Stack.Screen name="Order" component={Order} />
       </Stack.Navigator>
     
