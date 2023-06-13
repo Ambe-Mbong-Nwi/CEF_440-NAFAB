@@ -6,7 +6,7 @@ export default function Messaging() {
     return(
         <View>
         <ScrollView>
-            <Text>footer</Text>
+            <Text>messago</Text>
         </ScrollView>
 
         </View>
