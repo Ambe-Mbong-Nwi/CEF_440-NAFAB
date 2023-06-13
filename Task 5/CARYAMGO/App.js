@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View, ScrollView } from 'react-native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
+// import { createStackNavigator } from '@react-navigation/stack';
 import Entypo from '@expo/vector-icons/Entypo';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
@@ -24,7 +26,6 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
-
   useEffect(() => {
     async function prepare() {
       try {
@@ -59,8 +60,10 @@ export default function App() {
   if (!appIsReady) {
     return null;
   }
-
+//  subjected to changes
+// const Stack = createStackNavigator();
   return (
+    <NavigationContainer> 
     <View
       style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
       onLayout={onLayoutRootView}
@@ -68,5 +71,6 @@ export default function App() {
    <OptionPage/>
   
     </View>
+    </NavigationContainer> 
   );
 }
