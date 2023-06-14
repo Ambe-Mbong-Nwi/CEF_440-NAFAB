@@ -32,20 +32,6 @@ RCT_ENUM_CONVERTER(
 
 @end
 
-@implementation RCTConvert (UIUserInterfaceStyle)
-
-RCT_ENUM_CONVERTER(
-    UIUserInterfaceStyle,
-    (@{
-      @"unspecified" : @(UIUserInterfaceStyleUnspecified),
-      @"light" : @(UIUserInterfaceStyleLight),
-      @"dark" : @(UIUserInterfaceStyleDark),
-    }),
-    UIUserInterfaceStyleUnspecified,
-    integerValue)
-
-@end
-
 @interface RCTAlertManager () <NativeAlertManagerSpec>
 
 @end
@@ -94,7 +80,6 @@ RCT_EXPORT_METHOD(alertWithArgs : (JS::NativeAlertManager::Args &)args callback 
   NSString *defaultValue = [RCTConvert NSString:args.defaultValue()];
   NSString *cancelButtonKey = [RCTConvert NSString:args.cancelButtonKey()];
   NSString *destructiveButtonKey = [RCTConvert NSString:args.destructiveButtonKey()];
-  NSString *preferredButtonKey = [RCTConvert NSString:args.preferredButtonKey()];
   UIKeyboardType keyboardType = [RCTConvert UIKeyboardType:args.keyboardType()];
 
   if (!title && !message) {
@@ -118,15 +103,6 @@ RCT_EXPORT_METHOD(alertWithArgs : (JS::NativeAlertManager::Args &)args callback 
   RCTAlertController *alertController = [RCTAlertController alertControllerWithTitle:title
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleAlert];
-
-#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && defined(__IPHONE_13_0) && \
-    __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
-  if (@available(iOS 13.0, *)) {
-    UIUserInterfaceStyle userInterfaceStyle = [RCTConvert UIUserInterfaceStyle:args.userInterfaceStyle()];
-    alertController.overrideUserInterfaceStyle = userInterfaceStyle;
-  }
-#endif
-
   switch (type) {
     case RCTAlertViewStylePlainTextInput: {
       [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
@@ -176,37 +152,32 @@ RCT_EXPORT_METHOD(alertWithArgs : (JS::NativeAlertManager::Args &)args callback 
       buttonStyle = UIAlertActionStyleDestructive;
     }
     __weak RCTAlertController *weakAlertController = alertController;
-
-    UIAlertAction *alertAction =
-        [UIAlertAction actionWithTitle:buttonTitle
-                                 style:buttonStyle
-                               handler:^(__unused UIAlertAction *action) {
-                                 switch (type) {
-                                   case RCTAlertViewStylePlainTextInput:
-                                   case RCTAlertViewStyleSecureTextInput:
-                                     callback(@[ buttonKey, [weakAlertController.textFields.firstObject text] ]);
-                                     [weakAlertController hide];
-                                     break;
-                                   case RCTAlertViewStyleLoginAndPasswordInput: {
-                                     NSDictionary<NSString *, NSString *> *loginCredentials = @{
-                                       @"login" : [weakAlertController.textFields.firstObject text],
-                                       @"password" : [weakAlertController.textFields.lastObject text]
-                                     };
-                                     callback(@[ buttonKey, loginCredentials ]);
-                                     [weakAlertController hide];
-                                     break;
-                                   }
-                                   case RCTAlertViewStyleDefault:
-                                     callback(@[ buttonKey ]);
-                                     [weakAlertController hide];
-                                     break;
-                                 }
-                               }];
-    [alertController addAction:alertAction];
-
-    if ([buttonKey isEqualToString:preferredButtonKey]) {
-      [alertController setPreferredAction:alertAction];
-    }
+    [alertController
+        addAction:[UIAlertAction
+                      actionWithTitle:buttonTitle
+                                style:buttonStyle
+                              handler:^(__unused UIAlertAction *action) {
+                                switch (type) {
+                                  case RCTAlertViewStylePlainTextInput:
+                                  case RCTAlertViewStyleSecureTextInput:
+                                    callback(@[ buttonKey, [weakAlertController.textFields.firstObject text] ]);
+                                    [weakAlertController hide];
+                                    break;
+                                  case RCTAlertViewStyleLoginAndPasswordInput: {
+                                    NSDictionary<NSString *, NSString *> *loginCredentials = @{
+                                      @"login" : [weakAlertController.textFields.firstObject text],
+                                      @"password" : [weakAlertController.textFields.lastObject text]
+                                    };
+                                    callback(@[ buttonKey, loginCredentials ]);
+                                    [weakAlertController hide];
+                                    break;
+                                  }
+                                  case RCTAlertViewStyleDefault:
+                                    callback(@[ buttonKey ]);
+                                    [weakAlertController hide];
+                                    break;
+                                }
+                              }]];
   }
 
   if (!_alertControllers) {

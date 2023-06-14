@@ -7,11 +7,12 @@
 
 #include "PointerEvent.h"
 
-namespace facebook::react {
+namespace facebook {
+namespace react {
 
 #if RN_DEBUG_STRING_CONVERTIBLE
 
-std::string getDebugName(PointerEvent const & /*pointerEvent*/) {
+std::string getDebugName(PointerEvent const &pointerEvent) {
   return "PointerEvent";
 }
 
@@ -23,26 +24,12 @@ std::vector<DebugStringConvertibleObject> getDebugProps(
       {"pressure", getDebugDescription(pointerEvent.pressure, options)},
       {"pointerType", getDebugDescription(pointerEvent.pointerType, options)},
       {"clientPoint", getDebugDescription(pointerEvent.clientPoint, options)},
-      {"screenPoint", getDebugDescription(pointerEvent.screenPoint, options)},
-      {"offsetPoint", getDebugDescription(pointerEvent.offsetPoint, options)},
-      {"width", getDebugDescription(pointerEvent.width, options)},
-      {"height", getDebugDescription(pointerEvent.height, options)},
-      {"tiltX", getDebugDescription(pointerEvent.tiltX, options)},
-      {"tiltY", getDebugDescription(pointerEvent.tiltY, options)},
-      {"detail", getDebugDescription(pointerEvent.detail, options)},
-      {"buttons", getDebugDescription(pointerEvent.buttons, options)},
-      {"tangentialPressure",
-       getDebugDescription(pointerEvent.tangentialPressure, options)},
-      {"twist", getDebugDescription(pointerEvent.twist, options)},
-      {"ctrlKey", getDebugDescription(pointerEvent.ctrlKey, options)},
-      {"shiftKey", getDebugDescription(pointerEvent.shiftKey, options)},
-      {"altKey", getDebugDescription(pointerEvent.altKey, options)},
-      {"metaKey", getDebugDescription(pointerEvent.metaKey, options)},
-      {"isPrimary", getDebugDescription(pointerEvent.isPrimary, options)},
-      {"button", getDebugDescription(pointerEvent.button, options)},
+      {"target", getDebugDescription(pointerEvent.target, options)},
+      {"timestamp", getDebugDescription(pointerEvent.timestamp, options)},
   };
 }
 
 #endif
 
-} // namespace facebook::react
+} // namespace react
+} // namespace facebook

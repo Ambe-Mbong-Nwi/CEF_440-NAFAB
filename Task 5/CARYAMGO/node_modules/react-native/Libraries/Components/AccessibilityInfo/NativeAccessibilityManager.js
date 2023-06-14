@@ -9,7 +9,6 @@
  */
 
 import type {TurboModule} from '../../TurboModule/RCTExport';
-
 import * as TurboModuleRegistry from '../../TurboModule/TurboModuleRegistry';
 
 export interface Spec extends TurboModule {
@@ -27,10 +26,6 @@ export interface Spec extends TurboModule {
   ) => void;
   +getCurrentReduceMotionState: (
     onSuccess: (isReduceMotionEnabled: boolean) => void,
-    onError: (error: Object) => void,
-  ) => void;
-  +getCurrentPrefersCrossFadeTransitionsState?: (
-    onSuccess: (prefersCrossFadeTransitions: boolean) => void,
     onError: (error: Object) => void,
   ) => void;
   +getCurrentReduceTransparencyState: (

@@ -8,9 +8,8 @@
  * @flow
  */
 
-import type {DialogOptions} from '../NativeModules/specs/NativeDialogManagerAndroid';
-
 import Platform from '../Utilities/Platform';
+import type {DialogOptions} from '../NativeModules/specs/NativeDialogManagerAndroid';
 import RCTAlertManager from './RCTAlertManager';
 
 export type AlertType =
@@ -22,14 +21,12 @@ export type AlertButtonStyle = 'default' | 'cancel' | 'destructive';
 export type Buttons = Array<{
   text?: string,
   onPress?: ?Function,
-  isPreferred?: boolean,
   style?: AlertButtonStyle,
   ...
 }>;
 
 type Options = {
   cancelable?: ?boolean,
-  userInterfaceStyle?: 'unspecified' | 'light' | 'dark',
   onDismiss?: ?() => void,
   ...
 };
@@ -47,15 +44,7 @@ class Alert {
     options?: Options,
   ): void {
     if (Platform.OS === 'ios') {
-      Alert.prompt(
-        title,
-        message,
-        buttons,
-        'default',
-        undefined,
-        undefined,
-        options,
-      );
+      Alert.prompt(title, message, buttons, 'default');
     } else if (Platform.OS === 'android') {
       const NativeDialogManagerAndroid =
         require('../NativeModules/specs/NativeDialogManagerAndroid').default;
@@ -93,8 +82,6 @@ class Alert {
         config.buttonPositive = buttonPositive.text || defaultPositiveText;
       }
 
-      /* $FlowFixMe[missing-local-annot] The type annotation(s) required by
-       * Flow's LTI update could not be added via codemod */
       const onAction = (action, buttonKey) => {
         if (action === constants.buttonClicked) {
           if (buttonKey === constants.buttonNeutral) {
@@ -108,7 +95,7 @@ class Alert {
           options && options.onDismiss && options.onDismiss();
         }
       };
-      const onError = (errorMessage: string) => console.warn(errorMessage);
+      const onError = errorMessage => console.warn(errorMessage);
       NativeDialogManagerAndroid.showAlert(config, onError, onAction);
     }
   }
@@ -120,14 +107,12 @@ class Alert {
     type?: ?AlertType = 'plain-text',
     defaultValue?: string,
     keyboardType?: string,
-    options?: Options,
   ): void {
     if (Platform.OS === 'ios') {
-      let callbacks: Array<?any> = [];
+      let callbacks = [];
       const buttons = [];
       let cancelButtonKey;
       let destructiveButtonKey;
-      let preferredButtonKey;
       if (typeof callbackOrButtons === 'function') {
         callbacks = [callbackOrButtons];
       } else if (Array.isArray(callbackOrButtons)) {
@@ -138,11 +123,8 @@ class Alert {
           } else if (btn.style === 'destructive') {
             destructiveButtonKey = String(index);
           }
-          if (btn.isPreferred) {
-            preferredButtonKey = String(index);
-          }
           if (btn.text || index < (callbackOrButtons || []).length - 1) {
-            const btnDef: {[number]: string} = {};
+            const btnDef = {};
             btnDef[index] = btn.text || '';
             buttons.push(btnDef);
           }
@@ -158,9 +140,7 @@ class Alert {
           defaultValue,
           cancelButtonKey,
           destructiveButtonKey,
-          preferredButtonKey,
           keyboardType,
-          userInterfaceStyle: options?.userInterfaceStyle || undefined,
         },
         (id, value) => {
           const cb = callbacks[id];

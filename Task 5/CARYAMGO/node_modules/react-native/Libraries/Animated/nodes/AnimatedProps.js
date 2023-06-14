@@ -10,16 +10,17 @@
 
 'use strict';
 
+const {AnimatedEvent} = require('../AnimatedEvent');
+const AnimatedNode = require('./AnimatedNode');
+const AnimatedStyle = require('./AnimatedStyle');
+const NativeAnimatedHelper = require('../NativeAnimatedHelper');
+const ReactNative = require('../../Renderer/shims/ReactNative');
+
+const invariant = require('invariant');
+
 import type {PlatformConfig} from '../AnimatedPlatformConfig';
 
-import {findNodeHandle} from '../../ReactNative/RendererProxy';
-import {AnimatedEvent} from '../AnimatedEvent';
-import NativeAnimatedHelper from '../NativeAnimatedHelper';
-import AnimatedNode from './AnimatedNode';
-import AnimatedStyle from './AnimatedStyle';
-import invariant from 'invariant';
-
-export default class AnimatedProps extends AnimatedNode {
+class AnimatedProps extends AnimatedNode {
   _props: Object;
   _animatedView: any;
   _callback: () => void;
@@ -37,23 +38,26 @@ export default class AnimatedProps extends AnimatedNode {
   }
 
   __getValue(): Object {
-    const props: {[string]: any | ((...args: any) => void)} = {};
+    const props = {};
     for (const key in this._props) {
       const value = this._props[key];
       if (value instanceof AnimatedNode) {
-        props[key] = value.__getValue();
+        if (!value.__isNative || value instanceof AnimatedStyle) {
+          // We cannot use value of natively driven nodes this way as the value we have access from
+          // JS may not be up to date.
+          props[key] = value.__getValue();
+        }
       } else if (value instanceof AnimatedEvent) {
         props[key] = value.__getHandler();
       } else {
         props[key] = value;
       }
     }
-
     return props;
   }
 
   __getAnimatedValue(): Object {
-    const props: {[string]: any} = {};
+    const props = {};
     for (const key in this._props) {
       const value = this._props[key];
       if (value instanceof AnimatedNode) {
@@ -122,7 +126,9 @@ export default class AnimatedProps extends AnimatedNode {
 
   __connectAnimatedView(): void {
     invariant(this.__isNative, 'Expected node to be marked as "native"');
-    const nativeViewTag: ?number = findNodeHandle(this._animatedView);
+    const nativeViewTag: ?number = ReactNative.findNodeHandle(
+      this._animatedView,
+    );
     invariant(
       nativeViewTag != null,
       'Unable to locate attached view in the native tree',
@@ -135,7 +141,9 @@ export default class AnimatedProps extends AnimatedNode {
 
   __disconnectAnimatedView(): void {
     invariant(this.__isNative, 'Expected node to be marked as "native"');
-    const nativeViewTag: ?number = findNodeHandle(this._animatedView);
+    const nativeViewTag: ?number = ReactNative.findNodeHandle(
+      this._animatedView,
+    );
     invariant(
       nativeViewTag != null,
       'Unable to locate attached view in the native tree',
@@ -157,7 +165,7 @@ export default class AnimatedProps extends AnimatedNode {
   }
 
   __getNativeConfig(): Object {
-    const propsConfig: {[string]: number} = {};
+    const propsConfig = {};
     for (const propKey in this._props) {
       const value = this._props[propKey];
       if (value instanceof AnimatedNode) {
@@ -171,3 +179,5 @@ export default class AnimatedProps extends AnimatedNode {
     };
   }
 }
+
+module.exports = AnimatedProps;

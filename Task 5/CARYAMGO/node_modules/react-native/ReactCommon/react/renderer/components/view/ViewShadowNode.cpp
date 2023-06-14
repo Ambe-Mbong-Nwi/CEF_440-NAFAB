@@ -8,11 +8,32 @@
 #include "ViewShadowNode.h"
 #include <react/config/ReactNativeConfig.h>
 #include <react/renderer/components/view/primitives.h>
-#include <react/renderer/core/CoreFeatures.h>
 
-namespace facebook::react {
+namespace facebook {
+namespace react {
 
 char const ViewComponentName[] = "View";
+
+static inline bool keepRawValuesInViewProps(PropsParserContext const &context) {
+  static bool shouldUseRawProps = true;
+
+#ifdef ANDROID
+  static bool initialized = false;
+
+  if (!initialized) {
+    auto config =
+        context.contextContainer.find<std::shared_ptr<const ReactNativeConfig>>(
+            "ReactNativeConfig");
+    if (config.has_value()) {
+      initialized = true;
+      shouldUseRawProps = !config.value()->getBool(
+          "react_native_new_architecture:use_mapbuffer_for_viewprops");
+    }
+  }
+#endif
+
+  return shouldUseRawProps;
+}
 
 ViewShadowNodeProps::ViewShadowNodeProps(
     PropsParserContext const &context,
@@ -22,7 +43,7 @@ ViewShadowNodeProps::ViewShadowNodeProps(
           context,
           sourceProps,
           rawProps,
-          !CoreFeatures::enableMapBuffer){};
+          keepRawValuesInViewProps(context)){};
 
 ViewShadowNode::ViewShadowNode(
     ShadowNodeFragment const &fragment,
@@ -49,7 +70,7 @@ void ViewShadowNode::initialize() noexcept {
       (viewProps.zIndex.has_value() &&
        viewProps.yogaStyle.positionType() != YGPositionTypeStatic) ||
       viewProps.yogaStyle.display() == YGDisplayNone ||
-      viewProps.getClipsContentToBounds() || viewProps.events.bits.any() ||
+      viewProps.getClipsContentToBounds() ||
       isColorMeaningful(viewProps.shadowColor) ||
       viewProps.accessibilityElementsHidden ||
       viewProps.accessibilityViewIsModal ||
@@ -63,6 +84,7 @@ void ViewShadowNode::initialize() noexcept {
   bool formsView = formsStackingContext ||
       isColorMeaningful(viewProps.backgroundColor) ||
       isColorMeaningful(viewProps.foregroundColor) ||
+      viewProps.events.bits.any() ||
       !(viewProps.yogaStyle.border() == YGStyle::Edges{}) ||
       !viewProps.testId.empty();
 
@@ -85,10 +107,7 @@ void ViewShadowNode::initialize() noexcept {
   } else {
     traits_.unset(ShadowNodeTraits::Trait::FormsStackingContext);
   }
-
-#ifdef ANDROID
-  traits_.set(ShadowNodeTraits::Trait::AndroidMapBufferPropsSupported);
-#endif
 }
 
-} // namespace facebook::react
+} // namespace react
+} // namespace facebook

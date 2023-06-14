@@ -16,7 +16,8 @@
 #define STUB_VIEW_LOG(code)
 #endif
 
-namespace facebook::react {
+namespace facebook {
+namespace react {
 
 StubViewTree::StubViewTree(ShadowView const &shadowView) {
   auto view = std::make_shared<StubView>();
@@ -199,11 +200,6 @@ void StubViewTree::mutate(ShadowViewMutationList const &mutations) {
         break;
       }
 
-      case ShadowViewMutation::RemoveDeleteTree: {
-        // TODO: do something here
-        break;
-      }
-
       case ShadowViewMutation::Update: {
         STUB_VIEW_LOG({
           LOG(ERROR) << "StubView: Update [" << mutation.newChildShadowView.tag
@@ -310,4 +306,5 @@ bool operator!=(StubViewTree const &lhs, StubViewTree const &rhs) {
   return !(lhs == rhs);
 }
 
-} // namespace facebook::react
+} // namespace react
+} // namespace facebook

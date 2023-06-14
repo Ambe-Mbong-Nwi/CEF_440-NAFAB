@@ -10,33 +10,35 @@
 
 'use strict';
 
-import type {EventConfig, Mapping} from './AnimatedEvent';
+const {AnimatedEvent, attachNativeEvent} = require('./AnimatedEvent');
+const AnimatedAddition = require('./nodes/AnimatedAddition');
+const AnimatedDiffClamp = require('./nodes/AnimatedDiffClamp');
+const AnimatedDivision = require('./nodes/AnimatedDivision');
+const AnimatedInterpolation = require('./nodes/AnimatedInterpolation');
+const AnimatedModulo = require('./nodes/AnimatedModulo');
+const AnimatedMultiplication = require('./nodes/AnimatedMultiplication');
+const AnimatedNode = require('./nodes/AnimatedNode');
+const AnimatedSubtraction = require('./nodes/AnimatedSubtraction');
+const AnimatedTracking = require('./nodes/AnimatedTracking');
+const AnimatedValue = require('./nodes/AnimatedValue');
+const AnimatedValueXY = require('./nodes/AnimatedValueXY');
+const DecayAnimation = require('./animations/DecayAnimation');
+const SpringAnimation = require('./animations/SpringAnimation');
+const TimingAnimation = require('./animations/TimingAnimation');
+
+const createAnimatedComponent = require('./createAnimatedComponent');
+
 import type {
   AnimationConfig,
   EndCallback,
   EndResult,
 } from './animations/Animation';
+import type {TimingAnimationConfig} from './animations/TimingAnimation';
 import type {DecayAnimationConfig} from './animations/DecayAnimation';
 import type {SpringAnimationConfig} from './animations/SpringAnimation';
-import type {TimingAnimationConfig} from './animations/TimingAnimation';
+import type {Mapping, EventConfig} from './AnimatedEvent';
 
-import {AnimatedEvent, attachNativeEvent} from './AnimatedEvent';
-import DecayAnimation from './animations/DecayAnimation';
-import SpringAnimation from './animations/SpringAnimation';
-import TimingAnimation from './animations/TimingAnimation';
-import createAnimatedComponent from './createAnimatedComponent';
-import AnimatedAddition from './nodes/AnimatedAddition';
 import AnimatedColor from './nodes/AnimatedColor';
-import AnimatedDiffClamp from './nodes/AnimatedDiffClamp';
-import AnimatedDivision from './nodes/AnimatedDivision';
-import AnimatedInterpolation from './nodes/AnimatedInterpolation';
-import AnimatedModulo from './nodes/AnimatedModulo';
-import AnimatedMultiplication from './nodes/AnimatedMultiplication';
-import AnimatedNode from './nodes/AnimatedNode';
-import AnimatedSubtraction from './nodes/AnimatedSubtraction';
-import AnimatedTracking from './nodes/AnimatedTracking';
-import AnimatedValue from './nodes/AnimatedValue';
-import AnimatedValueXY from './nodes/AnimatedValueXY';
 
 export type CompositeAnimation = {
   start: (callback?: ?EndCallback) => void,
@@ -92,7 +94,7 @@ const _combineCallbacks = function (
   config: $ReadOnly<{...AnimationConfig, ...}>,
 ) {
   if (callback && config.onComplete) {
-    return (...args: Array<EndResult>) => {
+    return (...args) => {
       config.onComplete && config.onComplete(...args);
       callback && callback(...args);
     };
@@ -306,7 +308,7 @@ const sequence = function (
   let current = 0;
   return {
     start: function (callback?: ?EndCallback) {
-      const onComplete = function (result: EndResult) {
+      const onComplete = function (result) {
         if (!result.finished) {
           callback && callback(result);
           return;
@@ -367,7 +369,7 @@ const parallel = function (
 ): CompositeAnimation {
   let doneCount = 0;
   // Make sure we only call stop() at most once for each animation
-  const hasEnded: {[number]: boolean} = {};
+  const hasEnded = {};
   const stopTogether = !(config && config.stopTogether === false);
 
   const result = {
@@ -378,7 +380,7 @@ const parallel = function (
       }
 
       animations.forEach((animation, idx) => {
-        const cb = function (endResult: EndResult | {finished: boolean}) {
+        const cb = function (endResult) {
           hasEnded[idx] = true;
           doneCount++;
           if (doneCount === animations.length) {
@@ -415,7 +417,7 @@ const parallel = function (
       });
     },
 
-    _startNativeLoop: function (): empty {
+    _startNativeLoop: function () {
       throw new Error(
         'Loops run using the native driver cannot contain Animated.parallel animations',
       );
@@ -458,7 +460,6 @@ type LoopAnimationConfig = {
 
 const loop = function (
   animation: CompositeAnimation,
-  // $FlowFixMe[prop-missing]
   {iterations = -1, resetBeforeIteration = true}: LoopAnimationConfig = {},
 ): CompositeAnimation {
   let isFinished = false;
@@ -550,19 +551,6 @@ const event = function (
   }
 };
 
-// All types of animated nodes that represent scalar numbers and can be interpolated (etc)
-type AnimatedNumeric =
-  | AnimatedAddition
-  | AnimatedDiffClamp
-  | AnimatedDivision
-  | AnimatedInterpolation<number>
-  | AnimatedModulo
-  | AnimatedMultiplication
-  | AnimatedSubtraction
-  | AnimatedValue;
-
-export type {AnimatedNumeric as Numeric};
-
 /**
  * The `Animated` library is designed to make animations fluid, powerful, and
  * easy to build and maintain. `Animated` focuses on declarative relationships
@@ -573,7 +561,7 @@ export type {AnimatedNumeric as Numeric};
  *
  * See https://reactnative.dev/docs/animated
  */
-export default {
+module.exports = {
   /**
    * Standard value class for driving animations.  Typically initialized with
    * `new Animated.Value(0);`

@@ -12,8 +12,6 @@
 #include <jsi/JSIDynamic.h>
 #include <jsi/jsi.h>
 
-#include <react/renderer/core/RawPropsPrimitives.h>
-
 #include <react/debug/react_native_assert.h>
 
 namespace facebook {
@@ -96,7 +94,7 @@ class RawValue {
    * Casts the value to a specified type.
    */
   template <typename T>
-  explicit operator T() const {
+  explicit operator T() const noexcept {
     return castValue(dynamic_, (T *)nullptr);
   }
 
@@ -212,36 +210,40 @@ class RawValue {
     return RawValue(dynamic);
   }
 
-  static bool castValue(const folly::dynamic &dynamic, bool *type) {
+  static bool castValue(const folly::dynamic &dynamic, bool *type) noexcept {
     return dynamic.getBool();
   }
 
-  static int castValue(const folly::dynamic &dynamic, int *type) {
+  static int castValue(const folly::dynamic &dynamic, int *type) noexcept {
     return static_cast<int>(dynamic.asInt());
   }
 
-  static int64_t castValue(const folly::dynamic &dynamic, int64_t *type) {
+  static int64_t castValue(
+      const folly::dynamic &dynamic,
+      int64_t *type) noexcept {
     return dynamic.asInt();
   }
 
-  static float castValue(const folly::dynamic &dynamic, float *type) {
+  static float castValue(const folly::dynamic &dynamic, float *type) noexcept {
     return static_cast<float>(dynamic.asDouble());
   }
 
-  static double castValue(const folly::dynamic &dynamic, double *type) {
+  static double castValue(
+      const folly::dynamic &dynamic,
+      double *type) noexcept {
     return dynamic.asDouble();
   }
 
   static std::string castValue(
       const folly::dynamic &dynamic,
-      std::string *type) {
+      std::string *type) noexcept {
     return dynamic.getString();
   }
 
   template <typename T>
   static std::vector<T> castValue(
       const folly::dynamic &dynamic,
-      std::vector<T> *type) {
+      std::vector<T> *type) noexcept {
     react_native_assert(dynamic.isArray());
     auto result = std::vector<T>{};
     result.reserve(dynamic.size());
@@ -254,7 +256,7 @@ class RawValue {
   template <typename T>
   static std::vector<std::vector<T>> castValue(
       const folly::dynamic &dynamic,
-      std::vector<std::vector<T>> *type) {
+      std::vector<std::vector<T>> *type) noexcept {
     react_native_assert(dynamic.isArray());
     auto result = std::vector<std::vector<T>>{};
     result.reserve(dynamic.size());
@@ -267,7 +269,7 @@ class RawValue {
   template <typename T>
   static butter::map<std::string, T> castValue(
       const folly::dynamic &dynamic,
-      butter::map<std::string, T> *type) {
+      butter::map<std::string, T> *type) noexcept {
     react_native_assert(dynamic.isObject());
     auto result = butter::map<std::string, T>{};
     for (const auto &item : dynamic.items()) {

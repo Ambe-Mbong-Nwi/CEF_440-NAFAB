@@ -10,15 +10,15 @@
 
 'use strict';
 
+const AnimatedInterpolation = require('./AnimatedInterpolation');
+const AnimatedNode = require('./AnimatedNode');
+const AnimatedValue = require('./AnimatedValue');
+const AnimatedWithChildren = require('./AnimatedWithChildren');
+
 import type {PlatformConfig} from '../AnimatedPlatformConfig';
 import type {InterpolationConfigType} from './AnimatedInterpolation';
-import type AnimatedNode from './AnimatedNode';
 
-import AnimatedInterpolation from './AnimatedInterpolation';
-import AnimatedValue from './AnimatedValue';
-import AnimatedWithChildren from './AnimatedWithChildren';
-
-export default class AnimatedAddition extends AnimatedWithChildren {
+class AnimatedAddition extends AnimatedWithChildren {
   _a: AnimatedNode;
   _b: AnimatedNode;
 
@@ -38,9 +38,7 @@ export default class AnimatedAddition extends AnimatedWithChildren {
     return this._a.__getValue() + this._b.__getValue();
   }
 
-  interpolate<OutputT: number | string>(
-    config: InterpolationConfigType<OutputT>,
-  ): AnimatedInterpolation<OutputT> {
+  interpolate(config: InterpolationConfigType): AnimatedInterpolation {
     return new AnimatedInterpolation(this, config);
   }
 
@@ -62,3 +60,5 @@ export default class AnimatedAddition extends AnimatedWithChildren {
     };
   }
 }
+
+module.exports = AnimatedAddition;

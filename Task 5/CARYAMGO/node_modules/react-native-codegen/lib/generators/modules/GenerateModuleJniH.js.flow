@@ -54,8 +54,7 @@ namespace react {
 
 ${modules}
 
-JSI_EXPORT
-std::shared_ptr<TurboModule> ${libraryName}_ModuleProvider(const std::string &moduleName, const JavaTurboModule::InitParams &params);
+std::shared_ptr<TurboModule> ${libraryName}_ModuleProvider(const std::string moduleName, const JavaTurboModule::InitParams &params);
 
 } // namespace react
 } // namespace facebook
@@ -92,9 +91,6 @@ LOCAL_SHARED_LIBRARIES := libfbjni \
   libreact_render_core \
   libreact_render_debug \
   libreact_render_graphics \
-  libreact_render_imagemanager \
-  libreact_render_mapbuffer \
-  librrc_image \
   librrc_view \
   libturbomodulejsijni \
   libyoga
@@ -135,15 +131,12 @@ target_link_libraries(
   fbjni
   folly_runtime
   glog
-  jsi
   ${libraryName !== 'rncore' ? 'react_codegen_rncore' : ''}
   react_debug
   react_nativemodule_core
   react_render_core
   react_render_debug
   react_render_graphics
-  react_render_imagemanager
-  rrc_image
   rrc_view
   turbomodulejsijni
   yoga
