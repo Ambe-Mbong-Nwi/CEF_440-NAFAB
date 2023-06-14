@@ -9,7 +9,6 @@
  */
 
 'use strict';
-import type {CommandParamTypeAnnotation} from '../../CodegenSchema';
 
 import type {
   NamedShape,
@@ -122,8 +121,6 @@ function getJavaValueForProp(
           return 'ColorPropConverter.getColor(value, view.getContext())';
         case 'ImageSourcePrimitive':
           return '(ReadableMap) value';
-        case 'ImageRequestPrimitive':
-          return '(ReadableMap) value';
         case 'PointPrimitive':
           return '(ReadableMap) value';
         case 'EdgeInsetsPrimitive':
@@ -173,10 +170,7 @@ function generatePropCasesString(
     }`;
 }
 
-function getCommandArgJavaType(
-  param: NamedShape<CommandParamTypeAnnotation>,
-  index: number,
-) {
+function getCommandArgJavaType(param, index) {
   const {typeAnnotation} = param;
 
   switch (typeAnnotation.type) {
@@ -235,7 +229,7 @@ function generateCommandCasesString(
   return commandMethods;
 }
 
-function getClassExtendString(component: ComponentShape): string {
+function getClassExtendString(component): string {
   const extendString = component.extendsProps
     .map(extendProps => {
       switch (extendProps.type) {
@@ -257,7 +251,7 @@ function getClassExtendString(component: ComponentShape): string {
   return extendString;
 }
 
-function getDelegateImports(component: ComponentShape) {
+function getDelegateImports(component) {
   const imports = getImports(component, 'delegate');
   // The delegate needs ReadableArray for commands always.
   // The interface doesn't always need it
@@ -271,10 +265,7 @@ function getDelegateImports(component: ComponentShape) {
   return imports;
 }
 
-function generateMethods(
-  propsString: string,
-  commandsString: null | string,
-): string {
+function generateMethods(propsString, commandsString): string {
   return [
     PropSetterTemplate({propCases: propsString}),
     commandsString != null
@@ -296,7 +287,7 @@ module.exports = {
     const normalizedPackageName = 'com.facebook.react.viewmanagers';
     const outputDir = `java/${normalizedPackageName.replace(/\./g, '/')}`;
 
-    const files = new Map<string, string>();
+    const files = new Map();
     Object.keys(schema.modules).forEach(moduleName => {
       const module = schema.modules[moduleName];
       if (module.type !== 'Component') {

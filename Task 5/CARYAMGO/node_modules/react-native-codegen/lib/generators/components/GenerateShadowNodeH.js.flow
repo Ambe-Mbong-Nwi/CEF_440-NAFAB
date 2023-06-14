@@ -36,9 +36,7 @@ const FileTemplate = ({
 #pragma once
 
 ${imports}#include <react/renderer/components/${libraryName}/Props.h>
-#include <react/renderer/components/${libraryName}/States.h>
 #include <react/renderer/components/view/ConcreteViewShadowNode.h>
-#include <jsi/jsi.h>
 
 namespace facebook {
 namespace react {
@@ -57,15 +55,14 @@ const ComponentTemplate = ({
   eventEmitter: string,
 }) =>
   `
-JSI_EXPORT extern const char ${className}ComponentName[];
+extern const char ${className}ComponentName[];
 
 /*
  * \`ShadowNode\` for <${className}> component.
  */
 using ${className}ShadowNode = ConcreteViewShadowNode<
     ${className}ComponentName,
-    ${className}Props${eventEmitter},
-    ${className}State>;
+    ${className}Props${eventEmitter}>;
 `.trim();
 
 module.exports = {
@@ -76,6 +73,8 @@ module.exports = {
     assumeNonnull: boolean = false,
   ): FilesOutput {
     const fileName = 'ShadowNodes.h';
+
+    let hasAnyEvents = false;
 
     const moduleResults = Object.keys(schema.modules)
       .map(moduleName => {
@@ -97,7 +96,15 @@ module.exports = {
               return;
             }
 
-            const eventEmitter = `,\n    ${componentName}EventEmitter`;
+            const hasEvents = component.events.length > 0;
+
+            if (hasEvents) {
+              hasAnyEvents = true;
+            }
+
+            const eventEmitter = hasEvents
+              ? `,\n${componentName}EventEmitter`
+              : '';
 
             const replacedTemplate = ComponentTemplate({
               className: componentName,
@@ -116,7 +123,7 @@ module.exports = {
     const replacedTemplate = FileTemplate({
       componentClasses: moduleResults,
       libraryName,
-      imports: eventEmitterImport,
+      imports: hasAnyEvents ? eventEmitterImport : '',
     });
 
     return new Map([[fileName, replacedTemplate]]);

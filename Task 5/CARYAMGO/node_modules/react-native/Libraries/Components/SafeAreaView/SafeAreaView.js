@@ -8,14 +8,22 @@
  * @format
  */
 
-import type {ViewProps} from '../View/ViewPropTypes';
-import type {SafeAreaViewType} from './SafeAreaView.flow';
-
 import Platform from '../../Utilities/Platform';
-import View from '../View/View';
 import * as React from 'react';
+import View from '../View/View';
 
-let exported: React.AbstractComponent<ViewProps, React.ElementRef<typeof View>>;
+import type {HostComponent} from '../../Renderer/shims/ReactNativeTypes';
+import type {ViewProps} from '../View/ViewPropTypes';
+
+type Props = $ReadOnly<{|
+  ...ViewProps,
+  emulateUnlessSupported?: boolean,
+|}>;
+
+let exported: React.AbstractComponent<
+  Props,
+  React.ElementRef<HostComponent<mixed>>,
+>;
 
 /**
  * Renders nested content and automatically applies paddings reflect the portion
@@ -27,9 +35,27 @@ let exported: React.AbstractComponent<ViewProps, React.ElementRef<typeof View>>;
  * sensor housing area on iPhone X).
  */
 if (Platform.OS === 'android') {
-  exported = View;
+  exported = React.forwardRef<Props, React.ElementRef<HostComponent<mixed>>>(
+    function SafeAreaView(props, forwardedRef) {
+      const {emulateUnlessSupported, ...localProps} = props;
+      return <View {...localProps} ref={forwardedRef} />;
+    },
+  );
 } else {
-  exported = require('./RCTSafeAreaViewNativeComponent').default;
+  const RCTSafeAreaViewNativeComponent =
+    require('./RCTSafeAreaViewNativeComponent').default;
+
+  exported = React.forwardRef<Props, React.ElementRef<HostComponent<mixed>>>(
+    function SafeAreaView(props, forwardedRef) {
+      return (
+        <RCTSafeAreaViewNativeComponent
+          emulateUnlessSupported={true}
+          {...props}
+          ref={forwardedRef}
+        />
+      );
+    },
+  );
 }
 
-export default (exported: SafeAreaViewType);
+export default exported;

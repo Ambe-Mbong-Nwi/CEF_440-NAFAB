@@ -8,13 +8,14 @@
  * @format
  */
 
-import StyleSheet, {
-  type ColorValue,
-  type ViewStyleProp,
-} from '../../StyleSheet/StyleSheet';
-import Platform from '../../Utilities/Platform';
-import RCTInputAccessoryViewNativeComponent from './RCTInputAccessoryViewNativeComponent';
 import * as React from 'react';
+import Platform from '../../Utilities/Platform';
+import StyleSheet, {
+  type ViewStyleProp,
+  type ColorValue,
+} from '../../StyleSheet/StyleSheet';
+
+import RCTInputAccessoryViewNativeComponent from './RCTInputAccessoryViewNativeComponent';
 
 /**
  * Note: iOS only
@@ -87,23 +88,22 @@ type Props = $ReadOnly<{|
 
 class InputAccessoryView extends React.Component<Props> {
   render(): React.Node {
-    if (Platform.OS === 'ios') {
-      if (React.Children.count(this.props.children) === 0) {
-        return null;
-      }
-
-      return (
-        <RCTInputAccessoryViewNativeComponent
-          style={[this.props.style, styles.container]}
-          nativeID={this.props.nativeID}
-          backgroundColor={this.props.backgroundColor}>
-          {this.props.children}
-        </RCTInputAccessoryViewNativeComponent>
-      );
-    } else {
+    if (Platform.OS !== 'ios') {
       console.warn('<InputAccessoryView> is only supported on iOS.');
+    }
+
+    if (React.Children.count(this.props.children) === 0) {
       return null;
     }
+
+    return (
+      <RCTInputAccessoryViewNativeComponent
+        style={[this.props.style, styles.container]}
+        nativeID={this.props.nativeID}
+        backgroundColor={this.props.backgroundColor}>
+        {this.props.children}
+      </RCTInputAccessoryViewNativeComponent>
+    );
   }
 }
 

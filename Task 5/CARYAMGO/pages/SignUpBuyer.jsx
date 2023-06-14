@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { SelectList } from 'react-native-dropdown-select-list'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
-export default function SignUp() {
+export default function SignUp({navigation}) {
   // write the funcion 
 function trymy(){
   alert("yo");
@@ -13,7 +13,9 @@ function trymy(){
   return (
     <SafeAreaView style={{  backgroundColor:'green' }} > 
     <View style={styles.container1} >  
-    <AntDesign name="arrowleft" size={24} color="black" />
+    <AntDesign
+     onPress={() => navigation.navigate('Home')}
+    name="arrowleft" size={24} color="black" />
     <Text
       style={{
       marginBottom:25,

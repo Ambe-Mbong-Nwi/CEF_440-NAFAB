@@ -9,13 +9,8 @@
 
 #include <utility>
 
-namespace facebook::react {
-
-/**
- * Initialize static feature flags for this module.
- * These flags should be treated as temporary.
- */
-bool ShadowViewMutation::PlatformSupportsRemoveDeleteTreeInstruction = false;
+namespace facebook {
+namespace react {
 
 ShadowViewMutation ShadowViewMutation::CreateMutation(ShadowView shadowView) {
   return {
@@ -27,16 +22,13 @@ ShadowViewMutation ShadowViewMutation::CreateMutation(ShadowView shadowView) {
   };
 }
 
-ShadowViewMutation ShadowViewMutation::DeleteMutation(
-    ShadowView shadowView,
-    bool isRedundantOperation) {
+ShadowViewMutation ShadowViewMutation::DeleteMutation(ShadowView shadowView) {
   return {
       /* .type = */ Delete,
       /* .parentShadowView = */ {},
       /* .oldChildShadowView = */ std::move(shadowView),
       /* .newChildShadowView = */ {},
       /* .index = */ -1,
-      /* .isRedundantOperation */ isRedundantOperation,
   };
 }
 
@@ -56,24 +48,9 @@ ShadowViewMutation ShadowViewMutation::InsertMutation(
 ShadowViewMutation ShadowViewMutation::RemoveMutation(
     ShadowView parentShadowView,
     ShadowView childShadowView,
-    int index,
-    bool isRedundantOperation) {
-  return {
-      /* .type = */ Remove,
-      /* .parentShadowView = */ std::move(parentShadowView),
-      /* .oldChildShadowView = */ std::move(childShadowView),
-      /* .newChildShadowView = */ {},
-      /* .index = */ index,
-      /* .isRedundantOperation */ isRedundantOperation,
-  };
-}
-
-ShadowViewMutation ShadowViewMutation::RemoveDeleteTreeMutation(
-    ShadowView parentShadowView,
-    ShadowView childShadowView,
     int index) {
   return {
-      /* .type = */ RemoveDeleteTree,
+      /* .type = */ Remove,
       /* .parentShadowView = */ std::move(parentShadowView),
       /* .oldChildShadowView = */ std::move(childShadowView),
       /* .newChildShadowView = */ {},
@@ -83,11 +60,10 @@ ShadowViewMutation ShadowViewMutation::RemoveDeleteTreeMutation(
 
 ShadowViewMutation ShadowViewMutation::UpdateMutation(
     ShadowView oldChildShadowView,
-    ShadowView newChildShadowView,
-    ShadowView parentShadowView) {
+    ShadowView newChildShadowView) {
   return {
       /* .type = */ Update,
-      /* .parentShadowView = */ std::move(parentShadowView),
+      /* .parentShadowView = */ {},
       /* .oldChildShadowView = */ std::move(oldChildShadowView),
       /* .newChildShadowView = */ std::move(newChildShadowView),
       /* .index = */ -1,
@@ -115,14 +91,12 @@ ShadowViewMutation::ShadowViewMutation(
     ShadowView parentShadowView,
     ShadowView oldChildShadowView,
     ShadowView newChildShadowView,
-    int index,
-    bool isRedundantOperation)
+    int index)
     : type(type),
       parentShadowView(std::move(parentShadowView)),
       oldChildShadowView(std::move(oldChildShadowView)),
       newChildShadowView(std::move(newChildShadowView)),
-      index(index),
-      isRedundantOperation(isRedundantOperation) {}
+      index(index) {}
 
 #if RN_DEBUG_STRING_CONVERTIBLE
 
@@ -138,8 +112,6 @@ std::string getDebugName(ShadowViewMutation const &mutation) {
       return "Remove";
     case ShadowViewMutation::Update:
       return "Update";
-    case ShadowViewMutation::RemoveDeleteTree:
-      return "RemoveDeleteTree";
   }
 }
 
@@ -147,19 +119,19 @@ std::vector<DebugStringConvertibleObject> getDebugProps(
     ShadowViewMutation const &mutation,
     DebugStringConvertibleOptions options) {
   return {
-      mutation.oldChildShadowView.componentHandle != 0
+      mutation.oldChildShadowView.componentHandle
           ? DebugStringConvertibleObject{"oldChild",
                                          getDebugDescription(
                                              mutation.oldChildShadowView,
                                              options)}
           : DebugStringConvertibleObject{},
-      mutation.newChildShadowView.componentHandle != 0
+      mutation.newChildShadowView.componentHandle
           ? DebugStringConvertibleObject{"newChild",
                                          getDebugDescription(
                                              mutation.newChildShadowView,
                                              options)}
           : DebugStringConvertibleObject{},
-      mutation.parentShadowView.componentHandle != 0
+      mutation.parentShadowView.componentHandle
           ? DebugStringConvertibleObject{"parent",
                                          getDebugDescription(
                                              mutation.parentShadowView,
@@ -175,4 +147,5 @@ std::vector<DebugStringConvertibleObject> getDebugProps(
 
 #endif
 
-} // namespace facebook::react
+} // namespace react
+} // namespace facebook

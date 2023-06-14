@@ -8,25 +8,24 @@
  * @format
  */
 
-import type {HostComponent} from '../Renderer/shims/ReactNativeTypes';
+import {isHoverEnabled} from './HoverState';
+import invariant from 'invariant';
+import SoundManager from '../Components/Sound/SoundManager';
+import {normalizeRect, type RectOrSize} from '../StyleSheet/Rect';
 import type {
   BlurEvent,
   FocusEvent,
-  MouseEvent,
   PressEvent,
+  MouseEvent,
 } from '../Types/CoreEventTypes';
-
-import SoundManager from '../Components/Sound/SoundManager';
-import ReactNativeFeatureFlags from '../ReactNative/ReactNativeFeatureFlags';
-import UIManager from '../ReactNative/UIManager';
-import {type RectOrSize, normalizeRect} from '../StyleSheet/Rect';
-import {type PointerEvent} from '../Types/CoreEventTypes';
-import Platform from '../Utilities/Platform';
-import {isHoverEnabled} from './HoverState';
 import PressabilityPerformanceEventEmitter from './PressabilityPerformanceEventEmitter.js';
 import {type PressabilityTouchSignal as TouchSignal} from './PressabilityTypes.js';
-import invariant from 'invariant';
+import Platform from '../Utilities/Platform';
+import UIManager from '../ReactNative/UIManager';
+import type {HostComponent} from '../Renderer/shims/ReactNativeTypes';
 import * as React from 'react';
+import ReactNativeFeatureFlags from '../ReactNative/ReactNativeFeatureFlags';
+import {type PointerEvent} from '../Types/CoreEventTypes';
 
 export type PressabilityConfig = $ReadOnly<{|
   /**
@@ -161,8 +160,8 @@ export type EventHandlers = $ReadOnly<{|
   onFocus: (event: FocusEvent) => void,
   onMouseEnter?: (event: MouseEvent) => void,
   onMouseLeave?: (event: MouseEvent) => void,
-  onPointerEnter?: (event: PointerEvent) => void,
-  onPointerLeave?: (event: PointerEvent) => void,
+  onPointerEnter2?: (event: PointerEvent) => void,
+  onPointerLeave2?: (event: PointerEvent) => void,
   onResponderGrant: (event: PressEvent) => void,
   onResponderMove: (event: PressEvent) => void,
   onResponderRelease: (event: PressEvent) => void,
@@ -256,20 +255,20 @@ const Transitions = Object.freeze({
   },
 });
 
-const isActiveSignal = (signal: TouchState) =>
+const isActiveSignal = signal =>
   signal === 'RESPONDER_ACTIVE_PRESS_IN' ||
   signal === 'RESPONDER_ACTIVE_LONG_PRESS_IN';
 
-const isActivationSignal = (signal: TouchState) =>
+const isActivationSignal = signal =>
   signal === 'RESPONDER_ACTIVE_PRESS_OUT' ||
   signal === 'RESPONDER_ACTIVE_PRESS_IN';
 
-const isPressInSignal = (signal: TouchState) =>
+const isPressInSignal = signal =>
   signal === 'RESPONDER_INACTIVE_PRESS_IN' ||
   signal === 'RESPONDER_ACTIVE_PRESS_IN' ||
   signal === 'RESPONDER_ACTIVE_LONG_PRESS_IN';
 
-const isTerminalSignal = (signal: TouchSignal) =>
+const isTerminalSignal = signal =>
   signal === 'RESPONDER_TERMINATED' || signal === 'RESPONDER_RELEASE';
 
 const DEFAULT_LONG_PRESS_DELAY_MS = 500;
@@ -550,7 +549,6 @@ export default class Pressability {
 
     if (process.env.NODE_ENV === 'test') {
       // We are setting this in order to find this node in ReactNativeTestTools
-      // $FlowFixMe[prop-missing]
       responderEventHandlers.onStartShouldSetResponder.testOnly_pressabilityConfig =
         () => this._config;
     }
@@ -559,12 +557,12 @@ export default class Pressability {
       ReactNativeFeatureFlags.shouldPressibilityUseW3CPointerEventsForHover()
     ) {
       const hoverPointerEvents = {
-        onPointerEnter: undefined,
-        onPointerLeave: undefined,
+        onPointerEnter2: undefined,
+        onPointerLeave2: undefined,
       };
       const {onHoverIn, onHoverOut} = this._config;
       if (onHoverIn != null) {
-        hoverPointerEvents.onPointerEnter = (event: PointerEvent) => {
+        hoverPointerEvents.onPointerEnter2 = (event: PointerEvent) => {
           this._isHovered = true;
           this._cancelHoverOutDelayTimeout();
           if (onHoverIn != null) {
@@ -581,7 +579,7 @@ export default class Pressability {
         };
       }
       if (onHoverOut != null) {
-        hoverPointerEvents.onPointerLeave = (event: PointerEvent) => {
+        hoverPointerEvents.onPointerLeave2 = (event: PointerEvent) => {
           if (this._isHovered) {
             this._isHovered = false;
             this._cancelHoverInDelayTimeout();
@@ -810,14 +808,7 @@ export default class Pressability {
     }
   }
 
-  _measureCallback = (
-    left: number,
-    top: number,
-    width: number,
-    height: number,
-    pageX: number,
-    pageY: number,
-  ) => {
+  _measureCallback = (left, top, width, height, pageX, pageY) => {
     if (!left && !top && !width && !height && !pageX && !pageY) {
       return;
     }
@@ -927,11 +918,7 @@ export default class Pressability {
   }
 }
 
-function normalizeDelay(
-  delay: ?number,
-  min: number = 0,
-  fallback: number = 0,
-): number {
+function normalizeDelay(delay: ?number, min = 0, fallback = 0): number {
   return Math.max(min, delay ?? fallback);
 }
 
@@ -948,15 +935,16 @@ const getTouchFromPressEvent = (event: PressEvent) => {
 };
 
 function convertPointerEventToMouseEvent(input: PointerEvent): MouseEvent {
-  const {clientX, clientY} = input.nativeEvent;
+  const {touchHistory: _, ...synthEvent} = input;
+  const {clientX, clientY, timestamp} = input.nativeEvent;
   return {
-    ...input,
+    ...synthEvent,
     nativeEvent: {
       clientX,
       clientY,
       pageX: clientX,
       pageY: clientY,
-      timestamp: input.timeStamp,
+      timestamp,
     },
   };
 }

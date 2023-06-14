@@ -10,7 +10,6 @@
  */
 
 import NativeVibration from './NativeVibration';
-
 const Platform = require('../Utilities/Platform');
 
 /**
@@ -41,7 +40,7 @@ function vibrateByPattern(pattern: Array<number>, repeat: boolean = false) {
 }
 
 function vibrateScheduler(
-  id: number,
+  id,
   pattern: Array<number>,
   repeat: boolean,
   nextIndex: number,

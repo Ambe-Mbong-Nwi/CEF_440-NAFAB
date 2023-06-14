@@ -9,8 +9,7 @@ export default function HomeOrderrStack() {
   return (
     
       <Stack.Navigator>
-<<<<<<< HEAD
-<<<<<<< HEAD
+{/* <<<<<<< HEAD
         {/* // screenOptions={{headerShown: false}}> */}
         <Stack.Screen 
         name="WelcomePage" 
@@ -19,13 +18,11 @@ export default function HomeOrderrStack() {
           tabBarShowLabel: false,
           headerShown: false,
           title: 'j'}} />
-=======
         <Stack.Screen 
         name="WelcomePage" 
         component={WelcomePage} 
         screenOptions={{headerShown: false}} />
->>>>>>> 3ecfdb68 (order button navigation)
-=======
+{/* ======= */}
         {/* // screenOptions={{headerShown: false}}> */}
         <Stack.Screen 
         name="WelcomePage" 
@@ -34,7 +31,7 @@ export default function HomeOrderrStack() {
           tabBarShowLabel: false,
           headerShown: false,
           title: 'j'}} />
->>>>>>> bd651fa4 (messaging)
+{/* >>>>>>> bd651fa4 (messaging) */}
         <Stack.Screen name="Order" component={Order} />
       </Stack.Navigator>
     

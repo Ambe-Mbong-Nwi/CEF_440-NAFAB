@@ -10,21 +10,21 @@
 
 'use strict';
 
-import type {Numeric as AnimatedNumeric} from './AnimatedImplementation';
-import type {EndResult} from './animations/Animation';
+const {AnimatedEvent, attachNativeEvent} = require('./AnimatedEvent');
+const AnimatedImplementation = require('./AnimatedImplementation');
+const AnimatedInterpolation = require('./nodes/AnimatedInterpolation');
+const AnimatedNode = require('./nodes/AnimatedNode');
+const AnimatedValue = require('./nodes/AnimatedValue');
+const AnimatedValueXY = require('./nodes/AnimatedValueXY');
+
+const createAnimatedComponent = require('./createAnimatedComponent');
+
 import type {EndCallback} from './animations/Animation';
+import type {TimingAnimationConfig} from './animations/TimingAnimation';
 import type {DecayAnimationConfig} from './animations/DecayAnimation';
 import type {SpringAnimationConfig} from './animations/SpringAnimation';
-import type {TimingAnimationConfig} from './animations/TimingAnimation';
 
-import {AnimatedEvent, attachNativeEvent} from './AnimatedEvent';
-import AnimatedImplementation from './AnimatedImplementation';
-import createAnimatedComponent from './createAnimatedComponent';
 import AnimatedColor from './nodes/AnimatedColor';
-import AnimatedInterpolation from './nodes/AnimatedInterpolation';
-import AnimatedNode from './nodes/AnimatedNode';
-import AnimatedValue from './nodes/AnimatedValue';
-import AnimatedValueXY from './nodes/AnimatedValueXY';
 
 /**
  * Animations are a source of flakiness in snapshot testing. This mock replaces
@@ -43,7 +43,7 @@ function mockAnimationStart(
     const guardedCallback =
       callback == null
         ? callback
-        : (...args: Array<EndResult>) => {
+        : (...args) => {
             if (inAnimationCallback) {
               console.warn(
                 'Ignoring recursive animation callback when running mock animations',
@@ -158,15 +158,12 @@ type LoopAnimationConfig = {
 
 const loop = function (
   animation: CompositeAnimation,
-  // $FlowFixMe[prop-missing]
   {iterations = -1}: LoopAnimationConfig = {},
 ): CompositeAnimation {
   return emptyAnimation;
 };
 
-export type {AnimatedNumeric as Numeric};
-
-export default {
+module.exports = {
   Value: AnimatedValue,
   ValueXY: AnimatedValueXY,
   Color: AnimatedColor,

@@ -20,7 +20,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -76,7 +75,6 @@ public class ReactScrollView extends ScrollView
   private final @Nullable OverScroller mScroller;
   private final VelocityHelper mVelocityHelper = new VelocityHelper();
   private final Rect mRect = new Rect(); // for reuse to avoid allocation
-  private final Rect mTempRect = new Rect();
   private final Rect mOverflowInset = new Rect();
 
   private boolean mActivelyScrolling;
@@ -122,8 +120,6 @@ public class ReactScrollView extends ScrollView
     mScroller = getOverScrollerFromParent();
     setOnHierarchyChangeListener(this);
     setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY);
-
-    ViewCompat.setAccessibilityDelegate(this, new ReactScrollViewAccessibilityDelegate());
   }
 
   @Override
@@ -193,10 +189,6 @@ public class ReactScrollView extends ScrollView
 
   public void setScrollEnabled(boolean scrollEnabled) {
     mScrollEnabled = scrollEnabled;
-  }
-
-  public boolean getScrollEnabled() {
-    return mScrollEnabled;
   }
 
   public void setPagingEnabled(boolean pagingEnabled) {
@@ -307,19 +299,6 @@ public class ReactScrollView extends ScrollView
     super.requestChildFocus(child, focused);
   }
 
-  private int getScrollDelta(View descendent) {
-    descendent.getDrawingRect(mTempRect);
-    offsetDescendantRectToMyCoords(descendent, mTempRect);
-    return computeScrollDeltaToGetChildRectOnScreen(mTempRect);
-  }
-
-  /** Returns whether the given descendent is partially scrolled in view */
-  public boolean isPartiallyScrolledInView(View descendent) {
-    int scrollDelta = getScrollDelta(descendent);
-    descendent.getDrawingRect(mTempRect);
-    return scrollDelta != 0 && Math.abs(scrollDelta) < mTempRect.width();
-  }
-
   private void scrollToChild(View child) {
     Rect tempRect = new Rect();
     child.getDrawingRect(tempRect);
@@ -405,7 +384,6 @@ public class ReactScrollView extends ScrollView
       float velocityX = mVelocityHelper.getXVelocity();
       float velocityY = mVelocityHelper.getYVelocity();
       ReactScrollViewHelper.emitScrollEndDragEvent(this, velocityX, velocityY);
-      NativeGestureUtil.notifyNativeGestureEnded(this, ev);
       mDragging = false;
       // After the touch finishes, we may need to do some scrolling afterwards either as a result
       // of a fling or because we need to page align the content
@@ -417,16 +395,6 @@ public class ReactScrollView extends ScrollView
     }
 
     return super.onTouchEvent(ev);
-  }
-
-  @Override
-  public boolean dispatchGenericPointerEvent(MotionEvent ev) {
-    // We do not dispatch the pointer event if its children are not supposed to receive it
-    if (!PointerEvents.canChildrenBeTouchTarget(mPointerEvents)) {
-      return false;
-    }
-
-    return super.dispatchGenericPointerEvent(ev);
   }
 
   @Override
@@ -481,7 +449,18 @@ public class ReactScrollView extends ScrollView
 
   @Override
   public void fling(int velocityY) {
-    final int correctedVelocityY = correctFlingVelocityY(velocityY);
+    // Workaround.
+    // On Android P if a ScrollView is inverted, we will get a wrong sign for
+    // velocityY (see https://issuetracker.google.com/issues/112385925).
+    // At the same time, mOnScrollDispatchHelper tracks the correct velocity direction.
+    //
+    // Hence, we can use the absolute value from whatever the OS gives
+    // us and use the sign of what mOnScrollDispatchHelper has tracked.
+    float signum = Math.signum(mOnScrollDispatchHelper.getYFlingVelocity());
+    if (signum == 0) {
+      signum = Math.signum(velocityY);
+    }
+    final int correctedVelocityY = (int) (Math.abs(velocityY) * signum);
 
     if (mPagingEnabled) {
       flingAndSnap(correctedVelocityY);
@@ -518,25 +497,6 @@ public class ReactScrollView extends ScrollView
       super.fling(correctedVelocityY);
     }
     handlePostTouchScrolling(0, correctedVelocityY);
-  }
-
-  private int correctFlingVelocityY(int velocityY) {
-    if (Build.VERSION.SDK_INT != Build.VERSION_CODES.P) {
-      return velocityY;
-    }
-
-    // Workaround.
-    // On Android P if a ScrollView is inverted, we will get a wrong sign for
-    // velocityY (see https://issuetracker.google.com/issues/112385925).
-    // At the same time, mOnScrollDispatchHelper tracks the correct velocity direction.
-    //
-    // Hence, we can use the absolute value from whatever the OS gives
-    // us and use the sign of what mOnScrollDispatchHelper has tracked.
-    float signum = Math.signum(mOnScrollDispatchHelper.getYFlingVelocity());
-    if (signum == 0) {
-      signum = Math.signum(velocityY);
-    }
-    return (int) (Math.abs(velocityY) * signum);
   }
 
   private void enableFpsListener() {

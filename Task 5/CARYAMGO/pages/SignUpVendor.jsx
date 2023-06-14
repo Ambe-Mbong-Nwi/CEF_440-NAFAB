@@ -1,15 +1,24 @@
 import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView, ViewBase   } from 'react-native'
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function SignUpVendor() {
+const Stack = createNativeStackNavigator(); 
+
+export default function SignUpVendor({navigation}) {
     function trymy(){
         alert("yo bro");
       }
   return (
     <SafeAreaView style={{  backgroundColor:'green' }} > 
     <View style={styles.container1} >  
-    <AntDesign name="arrowleft" size={24} color="black" />
+    <TouchableOpacity 
+     onPress={() => navigation.navigate('Home')}
+    >
+    <AntDesign  name="arrowleft" size={24} color="black" />
+    </TouchableOpacity>
+   
     <Text
       style={{
       marginBottom:25,
@@ -149,7 +158,7 @@ const styles = StyleSheet.create({
     },
     container1: {
         backgroundColor: '#fff',
-        marginTop:150,
+        marginTop:80,
         padding:15,
         paddingTop:50,
         width:'100%',
