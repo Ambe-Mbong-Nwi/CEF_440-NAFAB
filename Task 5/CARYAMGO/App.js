@@ -21,7 +21,7 @@ import VerificationNum from './pages/VerificationNum';
 import VerificationEmail from './pages/VerificationEmail';
 import ProfilePage from './pages/ProfilePage';
 
-// Keep the splash screen visible while we fetch resources
+// Keep the splash screen visible while we fetch resources to be displayed
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
