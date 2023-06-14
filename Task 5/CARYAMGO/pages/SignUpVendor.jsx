@@ -1,10 +1,6 @@
 import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView, ViewBase   } from 'react-native'
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NavigationContainer } from '@react-navigation/native';
-
-const Stack = createNativeStackNavigator(); 
 
 export default function SignUpVendor({navigation}) {
     function trymy(){
