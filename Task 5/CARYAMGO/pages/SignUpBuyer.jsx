@@ -1,14 +1,11 @@
 import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,Select,SafeAreaView   } from 'react-native'
-import React from 'react'
-import { useState } from 'react';
+import { useState,React } from 'react';
 // import { SelectList } from 'react-native-dropdown-select-list'
 import { Feather,AntDesign } from '@expo/vector-icons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function SignUp({navigation}) {
-  // write the funcion 
-function trymy(){
-  alert("yo");
-}
+
 // states to validate the form 
 const [username, setUsername] = useState('');
 const [email, setEmail] = useState('');
@@ -44,20 +41,26 @@ const validateForm = () => {
   if (!password) {
     errors.password = 'Password is required';
   }
-
-  setFormErrors(errors);
+ setFormErrors(errors);
 
   // Check if there are any errors
   if (Object.keys(errors).length === 0) {
     navigation.navigate('WelcomePage');
+    // reset form values after submitting the form 
+    setUsername("")
+    setEmail("")
+    setPhoneNumber("")
+    setPassword("")
+    setToggleSwitch("")
   }
 };
 
-const validateEmail = (email) => {
-  // Regular expression for email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-};
+  {/* validate the email input field */}
+  const validateEmail = (email) => {
+    // Regular expression for email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
 const validatePhoneNumber = (phoneNumber) => {
   // Regular expression for phone number validation
@@ -67,6 +70,7 @@ const validatePhoneNumber = (phoneNumber) => {
 
 
   return (
+ <ScrollView> 
     <SafeAreaView style={{  backgroundColor:'green' }} > 
     <View style={styles.container1} >  
     <AntDesign
@@ -145,7 +149,6 @@ style={[styles.Textinput,formErrors.password && styles.inputError]}
 
   <View style={styles.container}>
       <TouchableOpacity 
-      // onPress={trymy}
       onPress={validateForm}
       style={styles.button} >
           <Text style={styles.btnText}  >Sign Up</Text>
@@ -157,6 +160,7 @@ style={[styles.Textinput,formErrors.password && styles.inputError]}
   </View>
   </View>
   </SafeAreaView>
+  </ScrollView>
   )
 }
 
