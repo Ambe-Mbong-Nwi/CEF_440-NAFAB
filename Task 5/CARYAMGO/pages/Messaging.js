@@ -7,6 +7,10 @@ export default function Messaging({ children }) {
     return(
         <View>
         <ScrollView>
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bd651fa4 (messaging)
             {children}
             <MessagingItem
                 picture = {require('../assets/Besingi.png')} style={styles.sellerImage}
@@ -137,6 +141,12 @@ export default function Messaging({ children }) {
                 hasStory 
             >
             </MessagingItem>
+<<<<<<< HEAD
+=======
+            <Text>messago</Text>
+>>>>>>> b939560f (subscription page)
+=======
+>>>>>>> bd651fa4 (messaging)
         </ScrollView>
 
         </View>
