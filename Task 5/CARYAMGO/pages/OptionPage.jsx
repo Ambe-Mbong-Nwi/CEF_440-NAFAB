@@ -3,7 +3,6 @@ import React from 'react'
 
 export default function OptionPage() {
   // call the navigation hook to get the navigation object 
-  // const navigation = useNavigation();
   return (
     <View style={styles.main}>
       <Text style={styles.maintxt}  > Join CarryAm-Go As a  </Text>
