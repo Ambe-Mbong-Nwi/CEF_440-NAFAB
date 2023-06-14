@@ -1,11 +1,15 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 export default function MessagingItem({ picture, userName, bio, lastMessage, time, notification, isBlocked, isMuted, hasStory}) {
 
-    const showStoryCircle = () => {
+    const navigation = useNavigation();
 
+    const pressHandler = () => {
+        navigation.navigate('Chat', {userName, picture});
     }
+
 
     const showNotification = (type) => {
             if (notification && type === 'number') {
@@ -23,8 +27,8 @@ export default function MessagingItem({ picture, userName, bio, lastMessage, tim
 
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.conversation}>
-                <TouchableOpacity style={[styles.ImageContainer, showStoryCircle()]}>
+            <TouchableOpacity style={styles.conversation} onPress={ pressHandler }>
+                <TouchableOpacity style={styles.ImageContainer}>
                     <Image style={styles.Image} source={ picture } />
 
                 </TouchableOpacity>

@@ -6,6 +6,7 @@ import Card from '../shared/card';
 
 //taking in inbuilt navigation prop to use to navigate to another screen
 export default function WelcomePage({ navigation }) {
+
     return(
         <View>
         <ScrollView>

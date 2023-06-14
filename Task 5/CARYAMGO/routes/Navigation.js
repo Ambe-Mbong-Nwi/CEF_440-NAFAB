@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeOrderrStack from './HomeOrderrStack';
 import DiscountOrderrStack from './DiscountOrderrStack';
+import MessageChatStack from './MessageChatStack';
 import Notification from '../pages/Notification';
 // import AddToCart from '../pages/AddToCart';
-import Messaging from '../pages/Messaging';
+//import Messaging from '../pages/Messaging';
 import ProfilePage from '../pages/ProfilePage';
 import Icon from 'react-native-vector-icons/Ionicons';
 // import WelcomePage from '../pages/WelcomePage';
@@ -37,7 +38,7 @@ export default function Navigation() {
 
           if (route.name === "HomeOrderrStack" ) {
             iconName = focused ? 'home' : 'home-outline';
-            } else if (route.name === 'Messaging') {
+            } else if (route.name === 'MessageChatStack') {
             iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
             } else if (route.name === 'DiscountOrderrStack') {
                 iconName = focused ? 'cart' : 'cart-outline';
@@ -61,11 +62,14 @@ export default function Navigation() {
       }}/>
 
       <Tab.Screen 
-      name="Messaging" 
-      component={Messaging}
+      name="MessageChatStack" 
+      component={MessageChatStack}
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header
+        tabBarVisible: () => null,
+        tabBarVisible: false,
+        tabBarStyle: { display: "none" },
       }}/>
 
       <Tab.Screen 

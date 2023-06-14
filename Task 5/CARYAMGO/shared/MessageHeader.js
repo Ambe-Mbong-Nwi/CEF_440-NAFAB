@@ -1,18 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
 import { AntDesign, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
-import OrderHeader from "../shared/OrderHeader";
 
 
-export default function Order({ navigation }) {
-
-    const handleBackPress = () => {
-        navigation.goBack();
-      };
-
+export default function MessageHeader({ onBackPress }) {
     return(
         <View style={styles.container}>
-           <OrderHeader onBackPress={handleBackPress} />
+            <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
+                <AntDesign name="arrowleft" size={24} color="white" />
+            </TouchableOpacity>
+            
+               <Text style={styles.Message}>Messaging</Text>
+               <View style={styles.searchOptions}>
+                    <TouchableOpacity style={styles.search}>
+                        <FontAwesome5 name="search" size={24} color="white" />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <SimpleLineIcons name="options-vertical" size={24} color="white" />
+                    </TouchableOpacity>
+               </View>
          
             
         </View>

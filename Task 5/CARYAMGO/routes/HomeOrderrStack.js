@@ -8,8 +8,8 @@ const Stack = createNativeStackNavigator();
 export default function HomeOrderrStack() {
   return (
     
-      <Stack.Navigator>
-        {/* // screenOptions={{headerShown: false}}> */}
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}>
         <Stack.Screen 
         name="WelcomePage" 
         component={WelcomePage} 

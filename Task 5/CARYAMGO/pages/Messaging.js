@@ -1,14 +1,24 @@
 import React from 'react';
 import MessagingItem from '../shared/MessageItem';
+import MessageHeader from '../shared/MessageHeader';
 import { StyleSheet, Text, View, ScrollView, TextInput } from 'react-native';
 import { EvilIcons, Ionicons } from '@expo/vector-icons';
 
-export default function Messaging({ children }) {
+export default function Messaging({ navigation, children }) {
+
+    const handleBackPress = () => {
+        navigation.goBack();
+      };
+
     return(
         <View>
+        <MessageHeader onBackPress={handleBackPress} />
         <ScrollView>
+            
             {children}
+           
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Besingi.png')} style={styles.sellerImage}
                 userName = "Naura babe"
                 bio = "My name is Naura"
@@ -22,6 +32,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Bertin.jpg')} style={styles.sellerImage}
                 userName = "Bertin"
                 bio = "My name is Bertin"
@@ -35,6 +46,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation } 
                 picture = {require('../assets/Abong.jpg')} style={styles.sellerImage}
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
@@ -48,6 +60,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/naura.png')} style={styles.sellerImage}
                 userName = "Naura babe"
                 bio = "My name is Naura"
@@ -61,6 +74,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Ambe.jpg')} style={styles.sellerImage}
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
@@ -74,6 +88,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Besingi.png')} style={styles.sellerImage}
                 userName = "Naura babe"
                 bio = "My name is Naura"
@@ -87,6 +102,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Bertin.jpg')} style={styles.sellerImage}
                 userName = "Bertin"
                 bio = "My name is Bertin"
@@ -100,6 +116,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Abong.jpg')} style={styles.sellerImage}
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
@@ -113,6 +130,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/naura.png')} style={styles.sellerImage}
                 userName = "Naura babe"
                 bio = "My name is Naura"
@@ -126,6 +144,7 @@ export default function Messaging({ children }) {
             </MessagingItem>
 
             <MessagingItem
+                navigation = { navigation }
                 picture = {require('../assets/Ambe.jpg')} style={styles.sellerImage}
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
