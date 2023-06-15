@@ -12,13 +12,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiscountOrderrStack from './routes/DiscountOrderrStack';
 import NavugationVendor from './routes/NavugationVendor';
+import DiscountProfile from './pages/DiscountProfile';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    <NavugationVendor/>
+    {/* <NavugationVendor/> */}
+    <DiscountProfile/>
     {/* <Stack.Navigator>
       <Stack.Screen
         name="Home"
