@@ -21,6 +21,7 @@ global.performance = {
   now: jest.fn(Date.now),
 };
 
+global.Promise = jest.requireActual('promise');
 global.regeneratorRuntime = jest.requireActual('regenerator-runtime/runtime');
 global.window = global;
 
@@ -127,17 +128,13 @@ jest
       isGrayscaleEnabled: jest.fn(),
       isInvertColorsEnabled: jest.fn(),
       isReduceMotionEnabled: jest.fn(),
-      prefersCrossFadeTransitions: jest.fn(),
       isReduceTransparencyEnabled: jest.fn(),
       isScreenReaderEnabled: jest.fn(() => Promise.resolve(false)),
+      removeEventListener: jest.fn(),
       setAccessibilityFocus: jest.fn(),
-      sendAccessibilityEvent: jest.fn(),
+      sendAccessibilityEvent_unstable: jest.fn(),
       getRecommendedTimeoutMillis: jest.fn(),
     },
-  }))
-  .mock('../Libraries/Components/Clipboard/Clipboard', () => ({
-    getString: jest.fn(() => ''),
-    setString: jest.fn(),
   }))
   .mock('../Libraries/Components/RefreshControl/RefreshControl', () =>
     jest.requireActual(
@@ -180,6 +177,7 @@ jest
     openSettings: jest.fn(),
     addEventListener: jest.fn(),
     getInitialURL: jest.fn(() => Promise.resolve()),
+    removeEventListener: jest.fn(),
     sendIntent: jest.fn(),
   }))
   // Mock modules defined by the native layer (ex: Objective-C, Java)
@@ -204,6 +202,10 @@ jest
       getAllKeys: jest.fn(callback =>
         process.nextTick(() => callback(null, [])),
       ),
+    },
+    Clipboard: {
+      getString: jest.fn(() => ''),
+      setString: jest.fn(),
     },
     DeviceInfo: {
       getConstants() {
@@ -230,7 +232,7 @@ jest
       reload: jest.fn(),
     },
     ImageLoader: {
-      getSize: jest.fn(url => Promise.resolve([320, 240])),
+      getSize: jest.fn(url => Promise.resolve({width: 320, height: 240})),
       prefetchImage: jest.fn(),
     },
     ImageViewManager: {
@@ -353,10 +355,6 @@ jest
     '../Libraries/Utilities/verifyComponentAttributeEquivalence',
     () => function () {},
   )
-  .mock('../Libraries/Vibration/Vibration', () => ({
-    vibrate: jest.fn(),
-    cancel: jest.fn(),
-  }))
   .mock('../Libraries/Components/View/ViewNativeComponent', () => {
     const React = require('react');
     const Component = class extends React.Component {

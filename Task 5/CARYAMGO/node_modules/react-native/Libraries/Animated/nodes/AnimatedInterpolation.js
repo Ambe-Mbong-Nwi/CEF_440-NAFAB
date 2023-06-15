@@ -12,19 +12,20 @@
 
 'use strict';
 
-import type {PlatformConfig} from '../AnimatedPlatformConfig';
-import type AnimatedNode from './AnimatedNode';
+const AnimatedNode = require('./AnimatedNode');
+const AnimatedWithChildren = require('./AnimatedWithChildren');
+const NativeAnimatedHelper = require('../NativeAnimatedHelper');
 
-import normalizeColor from '../../StyleSheet/normalizeColor';
-import NativeAnimatedHelper from '../NativeAnimatedHelper';
-import AnimatedWithChildren from './AnimatedWithChildren';
-import invariant from 'invariant';
+const invariant = require('invariant');
+const normalizeColor = require('../../StyleSheet/normalizeColor');
+
+import type {PlatformConfig} from '../AnimatedPlatformConfig';
 
 type ExtrapolateType = 'extend' | 'identity' | 'clamp';
 
-export type InterpolationConfigType<OutputT: number | string> = $ReadOnly<{
+export type InterpolationConfigType = $ReadOnly<{
   inputRange: $ReadOnlyArray<number>,
-  outputRange: $ReadOnlyArray<OutputT>,
+  outputRange: $ReadOnlyArray<number> | $ReadOnlyArray<string>,
   easing?: (input: number) => number,
   extrapolate?: ExtrapolateType,
   extrapolateLeft?: ExtrapolateType,
@@ -37,14 +38,14 @@ const linear = (t: number) => t;
  * Very handy helper to map input ranges to output ranges with an easing
  * function and custom behavior outside of the ranges.
  */
-function createInterpolation<OutputT: number | string>(
-  config: InterpolationConfigType<OutputT>,
-): (input: number) => OutputT {
+function createInterpolation(
+  config: InterpolationConfigType,
+): (input: number) => number | string {
   if (config.outputRange && typeof config.outputRange[0] === 'string') {
-    return (createInterpolationFromStringOutputRange((config: any)): any);
+    return createInterpolationFromStringOutputRange(config);
   }
 
-  const outputRange: $ReadOnlyArray<number> = (config.outputRange: any);
+  const outputRange: Array<number> = (config.outputRange: any);
 
   const inputRange = config.inputRange;
 
@@ -86,7 +87,7 @@ function createInterpolation<OutputT: number | string>(
     );
 
     const range = findRange(input, inputRange);
-    return (interpolate(
+    return interpolate(
       input,
       inputRange[range],
       inputRange[range + 1],
@@ -95,7 +96,7 @@ function createInterpolation<OutputT: number | string>(
       easing,
       extrapolateLeft,
       extrapolateRight,
-    ): any);
+    );
   };
 }
 
@@ -194,7 +195,7 @@ const stringShapeRegex = /[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?/g;
  *   -45deg                  // values with units
  */
 function createInterpolationFromStringOutputRange(
-  config: InterpolationConfigType<string>,
+  config: InterpolationConfigType,
 ): (input: number) => string {
   let outputRange: Array<string> = (config.outputRange: any);
   invariant(outputRange.length >= 2, 'Bad output range');
@@ -298,19 +299,17 @@ function checkInfiniteRange(name: string, arr: $ReadOnlyArray<number>) {
   );
 }
 
-export default class AnimatedInterpolation<
-  OutputT: number | string,
-> extends AnimatedWithChildren {
+class AnimatedInterpolation extends AnimatedWithChildren {
   // Export for testing.
   static __createInterpolation: (
-    config: InterpolationConfigType<OutputT>,
-  ) => (input: number) => OutputT = createInterpolation;
+    config: InterpolationConfigType,
+  ) => (input: number) => number | string = createInterpolation;
 
   _parent: AnimatedNode;
-  _config: InterpolationConfigType<OutputT>;
-  _interpolation: (input: number) => OutputT;
+  _config: InterpolationConfigType;
+  _interpolation: (input: number) => number | string;
 
-  constructor(parent: AnimatedNode, config: InterpolationConfigType<OutputT>) {
+  constructor(parent: AnimatedNode, config: InterpolationConfigType) {
     super();
     this._parent = parent;
     this._config = config;
@@ -331,9 +330,7 @@ export default class AnimatedInterpolation<
     return this._interpolation(parentValue);
   }
 
-  interpolate<NewOutputT: number | string>(
-    config: InterpolationConfigType<NewOutputT>,
-  ): AnimatedInterpolation<NewOutputT> {
+  interpolate(config: InterpolationConfigType): AnimatedInterpolation {
     return new AnimatedInterpolation(this, config);
   }
 
@@ -346,7 +343,7 @@ export default class AnimatedInterpolation<
     super.__detach();
   }
 
-  __transformDataType(range: $ReadOnlyArray<OutputT>): Array<any> {
+  __transformDataType(range: Array<any>): Array<any> {
     return range.map(NativeAnimatedHelper.transformDataType);
   }
 
@@ -358,6 +355,9 @@ export default class AnimatedInterpolation<
     return {
       inputRange: this._config.inputRange,
       // Only the `outputRange` can contain strings so we don't need to transform `inputRange` here
+      /* $FlowFixMe[incompatible-call] (>=0.38.0) - Flow error detected during
+       * the deployment of v0.38.0. To see the error, remove this comment and
+       * run flow */
       outputRange: this.__transformDataType(this._config.outputRange),
       extrapolateLeft:
         this._config.extrapolateLeft || this._config.extrapolate || 'extend',
@@ -367,3 +367,5 @@ export default class AnimatedInterpolation<
     };
   }
 }
+
+module.exports = AnimatedInterpolation;

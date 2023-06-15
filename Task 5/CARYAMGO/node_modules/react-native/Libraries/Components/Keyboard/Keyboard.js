@@ -8,13 +8,12 @@
  * @flow strict-local
  */
 
-import type {EventSubscription} from '../../vendor/emitter/EventEmitter';
-
 import NativeEventEmitter from '../../EventEmitter/NativeEventEmitter';
 import LayoutAnimation from '../../LayoutAnimation/LayoutAnimation';
 import dismissKeyboard from '../../Utilities/dismissKeyboard';
 import Platform from '../../Utilities/Platform';
 import NativeKeyboardObserver from './NativeKeyboardObserver';
+import type {EventSubscription} from '../../vendor/emitter/EventEmitter';
 
 export type KeyboardEventName = $Keys<KeyboardEventDefinitions>;
 
@@ -25,7 +24,7 @@ export type KeyboardEventEasing =
   | 'linear'
   | 'keyboard';
 
-export type KeyboardMetrics = $ReadOnly<{|
+export type KeyboardEventCoordinates = $ReadOnly<{|
   screenX: number,
   screenY: number,
   width: number,
@@ -37,7 +36,7 @@ export type KeyboardEvent = AndroidKeyboardEvent | IOSKeyboardEvent;
 type BaseKeyboardEvent = {|
   duration: number,
   easing: KeyboardEventEasing,
-  endCoordinates: KeyboardMetrics,
+  endCoordinates: KeyboardEventCoordinates,
 |};
 
 export type AndroidKeyboardEvent = $ReadOnly<{|
@@ -48,7 +47,7 @@ export type AndroidKeyboardEvent = $ReadOnly<{|
 
 export type IOSKeyboardEvent = $ReadOnly<{|
   ...BaseKeyboardEvent,
-  startCoordinates: KeyboardMetrics,
+  startCoordinates: KeyboardEventCoordinates,
   isEventFromThisApp: boolean,
 |}>;
 
@@ -104,23 +103,12 @@ type KeyboardEventDefinitions = {
  */
 
 class Keyboard {
-  _currentlyShowing: ?KeyboardEvent;
-
   _emitter: NativeEventEmitter<KeyboardEventDefinitions> =
     new NativeEventEmitter(
       // T88715063: NativeEventEmitter only used this parameter on iOS. Now it uses it on all platforms, so this code was modified automatically to preserve its behavior
       // If you want to use the native module on other platforms, please remove this condition and test its behavior
       Platform.OS !== 'ios' ? null : NativeKeyboardObserver,
     );
-
-  constructor() {
-    this.addListener('keyboardDidShow', ev => {
-      this._currentlyShowing = ev;
-    });
-    this.addListener('keyboardDidHide', _ev => {
-      this._currentlyShowing = null;
-    });
-  }
 
   /**
    * The `addListener` function connects a JavaScript function to an identified native
@@ -138,11 +126,10 @@ class Keyboard {
    * - `keyboardWillChangeFrame`
    * - `keyboardDidChangeFrame`
    *
-   * Android versions prior to API 30 rely on observing layout changes when
-   * `android:windowSoftInputMode` is set to `adjustResize` or `adjustPan`.
-   *
-   * `keyboardWillShow` as well as `keyboardWillHide` are not available on Android since there is
-   * no native corresponding event.
+   * Note that if you set `android:windowSoftInputMode` to `adjustResize`  or `adjustNothing`,
+   * only `keyboardDidShow` and `keyboardDidHide` events will be available on Android.
+   * `keyboardWillShow` as well as `keyboardWillHide` are generally not available on Android
+   * since there is no native corresponding event.
    *
    * @param {function} callback function to be called when the event fires.
    */
@@ -152,6 +139,17 @@ class Keyboard {
     context?: mixed,
   ): EventSubscription {
     return this._emitter.addListener(eventType, listener);
+  }
+
+  /**
+   * @deprecated Use `remove` on the EventSubscription from `addListener`.
+   */
+  removeListener<K: $Keys<KeyboardEventDefinitions>>(
+    eventType: K,
+    listener: (...$ElementType<KeyboardEventDefinitions, K>) => mixed,
+  ): void {
+    // NOTE: This will report a deprecation notice via `console.error`.
+    this._emitter.removeListener(eventType, listener);
   }
 
   /**
@@ -168,20 +166,6 @@ class Keyboard {
    */
   dismiss(): void {
     dismissKeyboard();
-  }
-
-  /**
-   * Whether the keyboard is last known to be visible.
-   */
-  isVisible(): boolean {
-    return !!this._currentlyShowing;
-  }
-
-  /**
-   * Return the metrics of the soft-keyboard if visible.
-   */
-  metrics(): ?KeyboardMetrics {
-    return this._currentlyShowing?.endCoordinates;
   }
 
   /**

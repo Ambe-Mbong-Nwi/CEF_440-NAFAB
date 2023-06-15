@@ -8,17 +8,16 @@
  * @format
  */
 
-import type {HostComponent} from '../../Renderer/shims/ReactNativeTypes';
-import type {EventSubscription} from '../../vendor/emitter/EventEmitter';
-import type {AccessibilityInfoType} from './AccessibilityInfo.flow';
-import type {ElementRef} from 'react';
-
 import RCTDeviceEventEmitter from '../../EventEmitter/RCTDeviceEventEmitter';
-import {sendAccessibilityEvent} from '../../ReactNative/RendererProxy';
+import {sendAccessibilityEvent} from '../../Renderer/shims/ReactNative';
+import type {HostComponent} from '../../Renderer/shims/ReactNativeTypes';
 import Platform from '../../Utilities/Platform';
-import legacySendAccessibilityEvent from './legacySendAccessibilityEvent';
+import type EventEmitter from '../../vendor/emitter/EventEmitter';
+import type {EventSubscription} from '../../vendor/emitter/EventEmitter';
 import NativeAccessibilityInfoAndroid from './NativeAccessibilityInfo';
 import NativeAccessibilityManagerIOS from './NativeAccessibilityManager';
+import legacySendAccessibilityEvent from './legacySendAccessibilityEvent';
+import type {ElementRef} from 'react';
 
 // Events that are only supported on Android.
 type AccessibilityEventDefinitionsAndroid = {
@@ -75,7 +74,7 @@ const EventNames: Map<
  *
  * See https://reactnative.dev/docs/accessibilityinfo
  */
-const AccessibilityInfo: AccessibilityInfoType = {
+const AccessibilityInfo = {
   /**
    * Query whether bold text is currently enabled.
    *
@@ -170,34 +169,6 @@ const AccessibilityInfo: AccessibilityInfoType = {
       } else {
         if (NativeAccessibilityManagerIOS != null) {
           NativeAccessibilityManagerIOS.getCurrentReduceMotionState(
-            resolve,
-            reject,
-          );
-        } else {
-          reject(null);
-        }
-      }
-    });
-  },
-
-  /**
-   * Query whether reduce motion and prefer cross-fade transitions settings are currently enabled.
-   *
-   * Returns a promise which resolves to a boolean.
-   * The result is `true` when  prefer cross-fade transitions is enabled and `false` otherwise.
-   *
-   * See https://reactnative.dev/docs/accessibilityinfo#prefersCrossFadeTransitions
-   */
-  prefersCrossFadeTransitions(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      if (Platform.OS === 'android') {
-        return Promise.resolve(false);
-      } else {
-        if (
-          NativeAccessibilityManagerIOS?.getCurrentPrefersCrossFadeTransitionsState !=
-          null
-        ) {
-          NativeAccessibilityManagerIOS.getCurrentPrefersCrossFadeTransitionsState(
             resolve,
             reject,
           );
@@ -325,14 +296,12 @@ const AccessibilityInfo: AccessibilityInfoType = {
    */
   addEventListener<K: $Keys<AccessibilityEventDefinitions>>(
     eventName: K,
-    // $FlowIssue[incompatible-type] - Flow bug with unions and generics (T128099423)
     handler: (...$ElementType<AccessibilityEventDefinitions, K>) => void,
   ): EventSubscription {
     const deviceEventName = EventNames.get(eventName);
     return deviceEventName == null
       ? {remove(): void {}}
-      : // $FlowFixMe[incompatible-call]
-        RCTDeviceEventEmitter.addListener(deviceEventName, handler);
+      : RCTDeviceEventEmitter.addListener(deviceEventName, handler);
   },
 
   /**
@@ -347,7 +316,7 @@ const AccessibilityInfo: AccessibilityInfoType = {
   /**
    * Send a named accessibility event to a HostComponent.
    */
-  sendAccessibilityEvent(
+  sendAccessibilityEvent_unstable(
     handle: ElementRef<HostComponent<mixed>>,
     eventType: AccessibilityEventTypes,
   ) {
@@ -393,6 +362,25 @@ const AccessibilityInfo: AccessibilityInfoType = {
       } else {
         NativeAccessibilityManagerIOS?.announceForAccessibility(announcement);
       }
+    }
+  },
+
+  /**
+   * @deprecated Use `remove` on the EventSubscription from `addEventListener`.
+   */
+  removeEventListener<K: $Keys<AccessibilityEventDefinitions>>(
+    eventName: K,
+    handler: (...$ElementType<AccessibilityEventDefinitions, K>) => void,
+  ): void {
+    // NOTE: This will report a deprecation notice via `console.error`.
+    const deviceEventName = EventNames.get(eventName);
+    if (deviceEventName != null) {
+      // $FlowIgnore[incompatible-cast]
+      (RCTDeviceEventEmitter: EventEmitter<$FlowFixMe>).removeListener(
+        'deviceEventName',
+        // $FlowFixMe[invalid-tuple-arity]
+        handler,
+      );
     }
   },
 

@@ -57,22 +57,13 @@ function getImports(
 ): Set<string> {
   const imports: Set<string> = new Set();
 
-  function addImportsForNativeName(
-    name:
-      | 'ColorPrimitive'
-      | 'EdgeInsetsPrimitive'
-      | 'ImageRequestPrimitive'
-      | 'ImageSourcePrimitive'
-      | 'PointPrimitive',
-  ) {
+  function addImportsForNativeName(name) {
     switch (name) {
       case 'ColorPrimitive':
         return;
       case 'PointPrimitive':
         return;
       case 'EdgeInsetsPrimitive':
-        return;
-      case 'ImageRequestPrimitive':
         return;
       case 'ImageSourcePrimitive':
         imports.add('#include <react/renderer/components/image/conversions.h>');
@@ -165,8 +156,6 @@ function convertDefaultTypeToString(
         case 'ColorPrimitive':
           return '';
         case 'ImageSourcePrimitive':
-          return '';
-        case 'ImageRequestPrimitive':
           return '';
         case 'PointPrimitive':
           return '';
