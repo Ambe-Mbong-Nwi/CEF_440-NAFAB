@@ -10,21 +10,23 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiscountOrderrStack from './routes/DiscountOrderrStack';
+import Navigation from './routes/Navigation';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    <Stack.Navigator>
+      <Navigation/>
+    {/* <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={OptionPage}
-        // component={WelcomePage}
+        component={WelcomePage}
         options={{ headerShown: false }}
-      />
+      /> */}
       {/* import the routes that link to the various screens   */}
-         <Stack.Screen
+         {/* <Stack.Screen
             name="SignUpVendor"
             component={SignUpVendor}
             options={{ headerShown: false }}
@@ -33,14 +35,14 @@ export default function App() {
             name="SignUpBuyer"
             component={SignUpBuyer}
             options={{ headerShown: false }}
-          />
-               <Stack.Screen
+          /> */}
+               {/* <Stack.Screen
             name="WelcomePage"
             component={WelcomePage}
             options={{ headerShown: true }}
           />
           
-    </Stack.Navigator>
+    </Stack.Navigator> */}
   </NavigationContainer>
   )
 }
