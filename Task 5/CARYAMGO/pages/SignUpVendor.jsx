@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function SignUpVendor({navigation}) {
 
-      // states to validate the form 
+      // states to validate the forms
 const [username, setUsername] = useState('');
 const [phoneNumber, setPhoneNumber] = useState('');
 const [email, setEmail] = useState('');
