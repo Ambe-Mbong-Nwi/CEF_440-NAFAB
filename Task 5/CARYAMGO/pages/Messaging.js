@@ -14,14 +14,7 @@ export default function Messaging({ navigation, children }) {
         <View>
         <MessageHeader onBackPress={handleBackPress} />
         <ScrollView>
-<<<<<<< HEAD
-            
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> bd651fa4 (messaging)
->>>>>>> 0d751675d80201ba296573c25976e0a57f4da616
+
             {children}
            
             <MessagingItem
@@ -163,12 +156,7 @@ export default function Messaging({ navigation, children }) {
                 hasStory 
             >
             </MessagingItem>
-<<<<<<< HEAD
-=======
-            <Text>messago</Text>
->>>>>>> b939560f (subscription page)
-=======
->>>>>>> bd651fa4 (messaging)
+
         </ScrollView>
 
         </View>
