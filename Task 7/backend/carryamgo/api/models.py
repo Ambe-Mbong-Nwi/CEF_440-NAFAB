@@ -62,6 +62,16 @@ class Shop(models.Model):
 
     def __str__(self):
         return self.shop_name
+    
+    def save(self, *args, **kwargs):
+        created = not self.pk  # Check if the shop is being created
+        super().save(*args, **kwargs)
+        if created:
+            Notification.objects.create(
+                notification_type='shop',
+                notification='New shop created',
+                seller=self.seller,
+            )
 
 
 class Product(models.Model):
@@ -76,6 +86,16 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+    
+    def save(self, *args, **kwargs):
+        created = not self.pk  # Check if the product is being created
+        super().save(*args, **kwargs)
+        if created:
+            Notification.objects.create(
+                notification_type='product',
+                notification='New product created',
+                seller=self.seller,
+            )
 
 
 class Order(models.Model):
@@ -100,6 +120,17 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_status
+    
+    def save(self, *args, **kwargs):
+        created = not self.pk  # Check if the order is being created
+        super().save(*args, **kwargs)
+        if created:
+            Notification.objects.create(
+                notification_type='order',
+                notification='New order made',
+                buyer=self.buyer,
+                seller=self.seller,
+            )
 
 
 @receiver(pre_save, sender=Order)
@@ -117,6 +148,17 @@ class Message(models.Model):
 
     def __str__(self):
         return self.message
+    
+    def save(self, *args, **kwargs):
+        created = not self.pk  # Check if the message is being created
+        super().save(*args, **kwargs)
+        if created:
+            Notification.objects.create(
+                notification_type='message',
+                notification='New message received',
+                buyer=self.buyer,
+                seller=self.seller,
+            )
 
 
 class Notification(models.Model):
@@ -139,6 +181,34 @@ class Notification(models.Model):
     def __str__(self):
         return self.notification
 
+    def save(self, *args, **kwargs):
+        if self.pk is None:
+            if self.notification_type == 'product':
+                self.notification = 'New product created'
+                self.buyer = None
+                self.seller = self.seller
+            elif self.notification_type == 'promotion':
+                self.notification = 'New promotion created'
+                self.buyer = self.buyer
+                self.seller = None
+            elif self.notification_type == 'end_promotion':
+                self.notification = 'Promotion has ended'
+                self.buyer = self.buyer
+                self.seller = None
+            elif self.notification_type == 'message':
+                self.notification = 'New message received'
+                self.buyer = self.buyer
+                self.seller = self.seller
+            elif self.notification_type == 'shop':
+                self.notification = 'New shop created'
+                self.buyer = None
+                self.seller = self.seller
+            elif self.notification_type == 'order':
+                self.notification = 'New order made'
+                self.buyer = self.buyer
+                self.seller = self.seller
+        super().save(*args, **kwargs)
+
     def get_recipient(self):
         if self.notification_type in ['promotion', 'end_promotion']:
             return self.buyer
@@ -146,6 +216,7 @@ class Notification(models.Model):
             return self.seller
         elif self.notification_type in ['message', 'order']:
             return self.seller, self.buyer
+
 
 
 class Promotion(models.Model):
@@ -193,6 +264,8 @@ class Subscription(models.Model):
     end_date = models.DateField(blank=True, null=True)
 
     def save(self, *args, **kwargs):
+        if not self.created_at:
+            self.created_at = timezone.now().date()
         self.end_date = self.created_at + self.duration
         super().save(*args, **kwargs)
 
@@ -201,4 +274,4 @@ class Subscription(models.Model):
             self.delete()
 
     def __str__(self):
-        return self.get_sub_type_display()
+        return f"{self.subcription_type} Subscription"

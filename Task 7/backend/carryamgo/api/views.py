@@ -1,26 +1,20 @@
 from rest_framework import generics, status
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login
 from rest_framework.response import Response
-from rest_framework_jwt.settings import api_settings
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import make_password
 from django.utils.crypto import get_random_string
 from rest_framework.permissions import IsAuthenticated
-# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
-
-
 
 from .models import Seller, Buyer, Rating, Shop, Product, Order, Message, Notification, Promotion, Subscription
 from .serializers import (
     SellerSerializer, BuyerSerializer, RatingSerializer, ShopSerializer,
     ProductSerializer, OrderSerializer, MessageSerializer, NotificationSerializer,
-    PromotionSerializer, SubscriptionSerializer
+    PromotionSerializer, SubscriptionSerializer, BuyerAuthenticationSerializer, SellerAuthenticationSerializer
 )
 
 User = get_user_model()
-jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
 
 class SellerListCreateView(generics.ListCreateAPIView):
@@ -29,19 +23,16 @@ class SellerListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
 
-
 class SellerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
     permission_classes = [IsAuthenticated]
 
 
-
 class BuyerListCreateView(generics.ListCreateAPIView):
     queryset = Buyer.objects.all()
-    serializer_class = BuyerSerializer 
+    serializer_class = BuyerSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class BuyerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -50,12 +41,10 @@ class BuyerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
-
 class RatingListCreateView(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
-    serializer_class = RatingSerializer 
+    serializer_class = RatingSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class RatingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -64,12 +53,10 @@ class RatingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
-
 class ShopListCreateView(generics.ListCreateAPIView):
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class ShopRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -78,12 +65,10 @@ class ShopRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
-
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -92,26 +77,22 @@ class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
 
-
 class OrderListCreateView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
-    serializer_class = OrderSerializer 
+    serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
-    serializer_class = OrderSerializer 
+    serializer_class = OrderSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class MessageListCreateView(generics.ListCreateAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class MessageRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -122,9 +103,8 @@ class MessageRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
 class NotificationListCreateView(generics.ListCreateAPIView):
     queryset = Notification.objects.all()
-    serializer_class = NotificationSerializer 
+    serializer_class = NotificationSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class NotificationRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -137,7 +117,6 @@ class PromotionListCreateView(generics.ListCreateAPIView):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
     permission_classes = [IsAuthenticated]
-
 
 
 class PromotionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
@@ -158,41 +137,32 @@ class SubscriptionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIVie
     permission_classes = [IsAuthenticated]
 
 
-
-class BuyerLoginView(generics.GenericAPIView):
-    serializer_class = BuyerSerializer
-
+class SellerAuthenticationAPIView(APIView):
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = SellerAuthenticationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        buyer = User.objects.get(buyer_email=serializer.validated_data['buyer_email'])
-
-        if not buyer.check_password(serializer.validated_data['buyer_password']):
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-        payload = jwt_payload_handler(buyer)
-        token = jwt_encode_handler(payload)
-
-        return Response({'token': token})
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None and user.is_seller:
+            login(request, user)
+            return Response({'detail': 'Seller authentication successful.'})
+        else:
+            return Response({'detail': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class SellerLoginView(generics.GenericAPIView):
-    serializer_class = SellerSerializer
-
+class BuyerAuthenticationAPIView(APIView):
     def post(self, request):
-        serializer = self.serializer_class(data=request.data)
+        serializer = BuyerAuthenticationSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        seller = User.objects.get(seller_email=serializer.validated_data['seller_email'])
-
-        if not seller.check_password(serializer.validated_data['seller_password']):
-            return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-
-        payload = jwt_payload_handler(seller)
-        token = jwt_encode_handler(payload)
-
-        return Response({'token': token})
+        username = serializer.validated_data['username']
+        password = serializer.validated_data['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None and user.is_buyer:
+            login(request, user)
+            return Response({'detail': 'Buyer authentication successful.'})
+        else:
+            return Response({'detail': 'Invalid credentials.'}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 class BuyerRegisterView(generics.CreateAPIView):
