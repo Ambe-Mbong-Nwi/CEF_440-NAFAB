@@ -1,5 +1,5 @@
 -- creating the database
-CREATE DATABASE Carayamgo;
+CREATE DATABASE Carryamgo;
 
 -- creating the seller table
 CREATE TABLE Seller(

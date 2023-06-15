@@ -1,0 +1,31 @@
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('sellers/', views.SellerListCreateView.as_view(), name='seller-list-create'),
+    path('sellers/<int:pk>/', views.SellerRetrieveUpdateDestroyView.as_view(), name='seller-retrieve-update-destroy'),
+    path('buyers/', views.BuyerListCreateView.as_view(), name='buyer-list-create'),
+    path('buyers/<int:pk>/', views.BuyerRetrieveUpdateDestroyView.as_view(), name='buyer-retrieve-update-destroy'),
+    path('buyer/login/', views.BuyerLoginView.as_view(), name='buyer_login'),
+    path('seller/login/', views.SellerLoginView.as_view(), name='seller_login'),
+    path('buyer/register/', views.BuyerRegisterView.as_view(), name='buyer_register'),
+    path('seller/register/', views.SellerRegisterView.as_view(), name='seller_register'),
+    path('ratings/', views.RatingListCreateView.as_view(), name='rating-list-create'),
+    path('ratings/<int:pk>/', views.RatingRetrieveUpdateDestroyView.as_view(), name='rating-retrieve-update-destroy'),
+    path('shops/', views.ShopListCreateView.as_view(), name='shop-list-create'),
+    path('shops/<int:pk>/', views.ShopRetrieveUpdateDestroyView.as_view(), name='shop-retrieve-update-destroy'),
+    path('products/', views.ProductListCreateView.as_view(), name='product-list-create'),
+    path('products/<int:pk>/', views.ProductRetrieveUpdateDestroyView.as_view(), name='product-retrieve-update-destroy'),
+    path('orders/', views.OrderListCreateView.as_view(), name='order-list-create'),
+    path('orders/<int:pk>/', views.OrderRetrieveUpdateDestroyView.as_view(), name='order-retrieve-update-destroy'),
+    path('messages/', views.MessageListCreateView.as_view(), name='message-list-create'),
+    path('messages/<int:pk>/', views.MessageRetrieveUpdateDestroyView.as_view(), name='message-retrieve-update-destroy'),
+    path('notifications/', views.NotificationListCreateView.as_view(), name='notification-list-create'),
+    path('notifications/<int:pk>/', views.NotificationRetrieveUpdateDestroyView.as_view(), name='notification-retrieve-update-destroy'),
+    path('promotions/', views.PromotionListCreateView.as_view(), name='promotion-list-create'),
+    path('promotions/<int:pk>/', views.PromotionRetrieveUpdateDestroyView.as_view(), name='promotion-retrieve-update-destroy'),
+    path('subscriptions/', views.SubscriptionListCreateView.as_view(), name='subscription-list-create'),
+    path('subscriptions/<int:pk>/', views.SubscriptionRetrieveUpdateDestroyView.as_view(), name='subscription-retrieve-update-destroy'),
+    path('forgot-password/', views.ForgotPasswordAPIView.as_view(), name='forgot-password'),
+    path('reset-password/', views.ResetPasswordAPIView.as_view(), name='reset-password'),
+]
