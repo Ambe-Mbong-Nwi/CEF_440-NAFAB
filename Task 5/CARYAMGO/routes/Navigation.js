@@ -24,11 +24,12 @@ export default function Navigation({navigation}) {
           {
             display: "flex",
             backgroundColor: '#EFFAEE',
-            borderRadius: 30,
-            width: 300,
-            height: 60,
+            borderRadius: 20,
+            width: '97%',
+            height: '10%',
             alignSelf: 'center',
             justifyContent: 'center',
+            marginBottom: 3,
           },
           null
         ],
@@ -41,7 +42,7 @@ export default function Navigation({navigation}) {
             } else if (route.name === 'MessageChatStack') {
             iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
             } else if (route.name === 'DiscountOrderrStack') {
-                iconName = focused ? 'cart' : 'cart-outline';
+                iconName = focused ? 'today' : 'today-outline';
             } else if (route.name === 'Notification') {
                 iconName = focused ? 'notifications' : 'notifications-outline';
             } else if (route.name === 'ProfilePage') {

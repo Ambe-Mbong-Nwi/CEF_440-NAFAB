@@ -13,13 +13,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiscountOrderrStack from './routes/DiscountOrderrStack';
 import NavugationVendor from './routes/NavugationVendor';
 import DiscountProfile from './pages/DiscountProfile';
+import Messaging1 from './pages/Messaging1';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-      <Navigation />
+      <Messaging1 />
+      {/* <Navigation /> */}
      {/* <NavugationVendor/> */}
     {/* <DiscountProfile/> */}
     {/* <Stack.Navigator>
