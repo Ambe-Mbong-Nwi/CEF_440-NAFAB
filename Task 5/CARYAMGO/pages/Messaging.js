@@ -19,7 +19,7 @@ export default function Messaging({ navigation, children }) {
            
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Besingi.png')} style={styles.sellerImage}
+                picture = {require('../assets/Besingi.png')} 
                 userName = "Naura babe"
                 bio = "My name is Naura"
                 lastMessage = "Hello i wish to buy"
@@ -33,7 +33,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Bertin.jpg')} style={styles.sellerImage}
+                picture = {require('../assets/Bertin.jpg')} 
                 userName = "Bertin"
                 bio = "My name is Bertin"
                 lastMessage = "I am on my way"
@@ -47,7 +47,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation } 
-                picture = {require('../assets/Abong.jpg')} style={styles.sellerImage}
+                picture = {require('../assets/Abong.jpg')} 
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
                 lastMessage = "Fear!! abeg reduce price"
@@ -61,7 +61,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/naura.png')} style={styles.sellerImage}
+                picture = {require('../assets/naura.png')} 
                 userName = "Naura babe"
                 bio = "My name is Naura"
                 lastMessage = "Hello"
@@ -75,7 +75,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Ambe.jpg')} style={styles.sellerImage}
+                picture = {require('../assets/Ambe.jpg')} 
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
                 lastMessage = "Wahala"
@@ -89,7 +89,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Besingi.png')} style={styles.sellerImage}
+                picture = {require('../assets/Besingi.png')} 
                 userName = "Naura babe"
                 bio = "My name is Naura"
                 lastMessage = "Hello i wish to buy"
@@ -103,7 +103,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Bertin.jpg')} style={styles.sellerImage}
+                picture = {require('../assets/Bertin.jpg')} 
                 userName = "Bertin"
                 bio = "My name is Bertin"
                 lastMessage = "I am on my way"
@@ -117,7 +117,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Abong.jpg')} style={styles.sellerImage}
+                picture = {require('../assets/Abong.jpg')} 
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
                 lastMessage = "Fear!! abeg reduce price"
@@ -131,7 +131,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/naura.png')} style={styles.sellerImage}
+                picture = {require('../assets/naura.png')} 
                 userName = "Naura babe"
                 bio = "My name is Naura"
                 lastMessage = "Hello"
@@ -145,7 +145,7 @@ export default function Messaging({ navigation, children }) {
 
             <MessagingItem
                 navigation = { navigation }
-                picture = {require('../assets/Ambe.jpg')} style={styles.sellerImage}
+                picture = {require('../assets/Ambe.jpg')} 
                 userName = "Ambe babe"
                 bio = "My name is Ambe"
                 lastMessage = "Wahala"
@@ -162,9 +162,4 @@ export default function Messaging({ navigation, children }) {
         </View>
     )}
 
-    const styles = StyleSheet.create({
-
-        sellerImage: {
-
-        },
-    })
+    

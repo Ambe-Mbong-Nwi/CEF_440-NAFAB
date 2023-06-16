@@ -19,37 +19,38 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    {/* <NavugationVendor/> */}
-    <DiscountProfile/>
+      <Navigation />
+     {/* <NavugationVendor/> */}
+    {/* <DiscountProfile/> */}
     {/* <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={OptionPage}
-        options={{ headerShown: false }}
-      /> */}
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={OptionPage}
+    //     options={{ headerShown: false }}
+    //   /> */}
       {/* import the routes that link to the various screens   */}
          {/* <Stack.Screen
-            name="SignUpVendor"
-            component={SignUpVendor}
-            options={{ headerShown: false }}
-          />
-             <Stack.Screen
-            name="SignUpBuyer"
-            component={SignUpBuyer}
-            options={{ headerShown: false }}
-          /> */}
+    //         name="SignUpVendor"
+    //         component={SignUpVendor}
+    //         options={{ headerShown: false }}
+    //       />
+    //          <Stack.Screen
+    //         name="SignUpBuyer"
+    //         component={SignUpBuyer}
+    //         options={{ headerShown: false }}
+    //       /> */}
                {/* <Stack.Screen
-            name="WelcomePage"
-            component={WelcomePage}
-            options={{ headerShown: true }}
-          /> */}
-          {/* <Stack.Screen
-            name="Navigation"
-            component={Navigation}
-            options={{ headerShown: false }}
-          />
+    //         name="WelcomePage"
+    //         component={WelcomePage}
+    //         options={{ headerShown: true }}
+    //       /> */}
+           {/* <Stack.Screen
+    //         name="Navigation"
+    //         component={Navigation}
+    //         options={{ headerShown: false }}
+    //       />
           
-    </Stack.Navigator> */}
+    // </Stack.Navigator> */}
   </NavigationContainer>
   )
 }
