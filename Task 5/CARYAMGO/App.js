@@ -19,8 +19,8 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    {/* <NavugationVendor/> */}
-    <DiscountProfile/>
+    <NavugationVendor/>
+    {/* <DiscountProfile/> */}
     {/* <Stack.Navigator>
       <Stack.Screen
         name="Home"

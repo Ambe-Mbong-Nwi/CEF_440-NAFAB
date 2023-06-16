@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
 export default function SearchBar() {
   return (
-    <SafeAreaView style={styles.Container} >
+    // <SafeAreaView style={styles.Container} >
     <View style={styles.searchBar} >
     <Ionicons name="settings-sharp" size={28} color="black" />
     {/* ICON SECTION */}
@@ -31,7 +31,7 @@ export default function SearchBar() {
           }}
     name="add-shopping-cart" size={28} color="black" />
     </View>
-    </SafeAreaView>
+    // </SafeAreaView>
   )
 }
 

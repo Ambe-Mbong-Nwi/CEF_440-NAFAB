@@ -85,7 +85,7 @@ const validateshadeNumber = (shadeNumber) => {
   return shadeNUmberRegex.test(shadeNumber);
 };
   return (
-   < ScrollView> 
+   <ScrollView> 
     <SafeAreaView style={{  backgroundColor:'green' }} > 
     <View style={styles.container1} >  
     <AntDesign 
