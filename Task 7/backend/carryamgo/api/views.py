@@ -217,18 +217,14 @@ class ResetPasswordAPIView(APIView):
         user_type = request.data.get('user_type')  # Either 'buyer' or 'seller'
 
         if user_type == 'buyer':
-            user = Buyer.objects.filter(reset_password_token=make_password(reset_password_token)).first()
+            user = get_object_or_404(Buyer, reset_password_token=make_password(reset_password_token))
         elif user_type == 'seller':
-            user = Seller.objects.filter(reset_password_token=make_password(reset_password_token)).first()
+            user = get_object_or_404(Seller, reset_password_token=make_password(reset_password_token))
         else:
             return Response({'error': 'Invalid user type'})
 
-        if not user:
-            return Response({'error': 'Invalid reset password token'})
-
-        # Update the user's password
-        user.buyer_password = make_password(new_password) if user_type == 'buyer' else make_password(new_password)
-        user.reset_password_token = None  # Clear the reset password token
+        # Set the new password for the user
+        user.set_password(new_password)
         user.save()
 
-        return Response({'message': 'Password reset successful'})
+        return Response({'detail': 'Password reset successful.'})
