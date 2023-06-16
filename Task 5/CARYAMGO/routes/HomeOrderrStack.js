@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomePage from '../pages/WelcomePage';
 import Order from '../pages/Order';
+import NavugationVendor from '../pages/NavugationVendor';
 
 
 const Stack = createNativeStackNavigator();
@@ -12,10 +13,10 @@ export default function HomeOrderrStack() {
       <Stack.Navigator
         screenOptions={{headerShown: false}}>
 
-      
+      {/*Route to the vendor's home page  */}
         <Stack.Screen 
-        name="WelcomePage" 
-        component={WelcomePage} 
+        name="WelcomePageVendor" 
+        component={NavugationVendor} 
         screenOptions={{
           tabBarShowLabel: false,
           headerShown: false,

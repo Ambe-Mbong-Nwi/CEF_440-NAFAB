@@ -4,15 +4,16 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons,EvilIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
-import SearchBar from '../pages/SearchBar';
-import Discount from '../pages/Discount';
+import SearchBar from './SearchBar';
+import Discount from './Discount';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
 
-export default function NavugationVendor() {
+export default function NavugationVendor({ navigation }) {
   const profileimage = require('../assets/marketlady.png')
   const carbage = require('../assets/cabbage.png')
   const tomato = require('../assets/tomate.png') 
+  const carrot = require('../assets/carrots.png')
   return (
     <SafeAreaView style={styles.Container} >
       <ScrollView 
@@ -43,7 +44,7 @@ export default function NavugationVendor() {
     <View style={styles.cardsContainer}>
           <Card src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card src={carbage} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          <Card src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
         </View>
         <Text>
@@ -85,7 +86,6 @@ hide: true,
     flexWrap: 'wrap',
     justifyContent: 'space-between',
     width: '100%',
-    // paddingHorizontal: 10,
   },
   // cards:{
   //   flexDirection:'row',

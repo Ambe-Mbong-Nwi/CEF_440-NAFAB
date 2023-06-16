@@ -6,6 +6,7 @@ import { MaterialCommunityIcons,Entypo ,FontAwesome } from '@expo/vector-icons';
 
 export default function Card(props) {
   return (
+    // <View style={styles.cards} >  
     <View style={styles.card}  >
             <View style={styles.imageIcon}> 
                 <View style={styles.image1} >  
@@ -38,6 +39,8 @@ export default function Card(props) {
             <Text  style={styles.marketname}>{props.marketname}</Text>
          </View>
     </View>
+    // </View>
+    
   )
 }
 
@@ -46,10 +49,13 @@ image:{
     width:'100%',
     height:150,
   marginBottom:10,
+  borderTopLeftRadius:15,
+  borderTopRightRadius:15
 },
-// image1:{
-//        position:'relative',  
-// },
+image1:{
+       position:'relative',  
+    
+},
 icons:{
     position:'absolute',
     left:290,
@@ -66,7 +72,7 @@ card:{
 width:'100%',
 // height:'65%',
 borderColor:'black',
-borderWidth:2,
+borderWidth:1,
 borderRadius:15,
 marginBottom:10
 },
