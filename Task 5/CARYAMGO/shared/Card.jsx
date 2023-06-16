@@ -53,8 +53,7 @@ image:{
   borderTopRightRadius:15
 },
 image1:{
-       position:'relative',  
-    
+       position:'relative',   
 },
 icons:{
     position:'absolute',
@@ -112,7 +111,8 @@ Input:{
     width:100,
     borderColor:'#0A9100',
     borderWidth:3,
-    margin:5
+    margin:5,
+    paddingL:5
 },
 font:{
    marginTop:7 

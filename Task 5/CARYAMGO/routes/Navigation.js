@@ -24,9 +24,18 @@ export default function Navigation({navigation}) {
           {
             display: "flex",
             backgroundColor: '#EFFAEE',
+
+            borderRadius: 30,
+            // width: 300,
+            width: '95%',
+            // marginLeft:50,
+            // marginRight:50,
+            height: 60,
+
             borderRadius: 20,
             width: '97%',
             height: '10%',
+n
             alignSelf: 'center',
             justifyContent: 'center',
             marginBottom: 3,

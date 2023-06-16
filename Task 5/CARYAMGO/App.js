@@ -21,14 +21,19 @@ export default function App() {
   return (
     <NavigationContainer>
 
+      <NavugationVendor/>
+    {/* <Stack.Navigator>
+
+
     <Stack.Navigator>
+
       <Stack.Screen
         name="Home"
         component={OptionPage}
         options={{ headerShown: false }}
-      />
+      /> */}
       {/* import the routes that link to the various screens   */}
-         <Stack.Screen
+         {/* <Stack.Screen
             name="SignUpVendor"
             component={SignUpVendor}
             options={{ headerShown: false }}
@@ -49,6 +54,9 @@ export default function App() {
             options={{ headerShown: false }}
           />
           
+
+    </Stack.Navigator> */}
+
     </Stack.Navigator>
 
       <Messaging1 />
