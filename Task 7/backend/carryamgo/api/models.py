@@ -1,50 +1,46 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, Permission, Group
 from django.db.models import Avg
-from django.contrib.auth.hashers import make_password
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 from django.utils import timezone
 
 
+class User(AbstractUser):
+    groups = models.ManyToManyField(
+        Group,
+        related_name='api_user_groups',
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='api_user_permissions',
+    )
+    id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=30, null=True, blank=True)
+    last_name = models.CharField(max_length=150, null=True, blank=True)
+
+
 class Seller(models.Model):
-    seller_id = models.AutoField(primary_key=True)
-    seller_name = models.CharField(max_length=100)
-    seller_email = models.EmailField(max_length=254, blank=True, unique=True, verbose_name='Email Address')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, default=None)
     seller_number = models.CharField(max_length=20)
     seller_address = models.CharField(max_length=30)
     name_market = models.CharField(max_length=100)
-    seller_password = models.CharField(max_length=128, verbose_name='Password')
-    reset_password_token = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        self.seller_password = make_password(self.seller_password)
-        super().save(*args, **kwargs)
-
     def __str__(self):
-        return self.seller_name
+        return self.user.username
 
 
 class Buyer(models.Model):
-    buyer_id = models.AutoField(primary_key=True)
-    buyer_name = models.CharField(max_length=100)
-    buyer_email = models.EmailField(max_length=254, blank=True, unique=True, verbose_name='Email Address')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, default=None)
     buyer_number = models.CharField(max_length=20)
-    buyer_password = models.CharField(max_length=128, verbose_name='Password')
-    reset_password_token = models.CharField(max_length=255, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def save(self, *args, **kwargs):
-        self.buyer_password = make_password(self.buyer_password)
-        super().save(*args, **kwargs)
-
     def __str__(self):
-        return self.buyer_name
+        return self.user.username
 
 
 class Rating(models.Model):
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name='buyer_ratings')
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='seller_ratings')
     rating = models.IntegerField(choices=((1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')))
 
     @property
@@ -57,12 +53,12 @@ class Shop(models.Model):
     shop_id = models.AutoField(primary_key=True)
     shop_name = models.CharField(max_length=100)
     shop_address = models.CharField(max_length=30)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.shop_name
-    
+
     def save(self, *args, **kwargs):
         created = not self.pk  # Check if the shop is being created
         super().save(*args, **kwargs)
@@ -81,12 +77,12 @@ class Product(models.Model):
     product_quantity = models.IntegerField(blank=False)
     product_image = models.ImageField(upload_to='Product Image', blank=True)
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, default=1)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.product_name
-    
+
     def save(self, *args, **kwargs):
         created = not self.pk  # Check if the product is being created
         super().save(*args, **kwargs)
@@ -104,9 +100,9 @@ class Order(models.Model):
     order_price = models.IntegerField(blank=False, default=0)
     order_status = models.CharField(max_length=100, default='Pending')
     product_price = models.IntegerField(blank=False, default=0)
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name='orders')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='orders', default=None)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
@@ -120,7 +116,7 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_status
-    
+
     def save(self, *args, **kwargs):
         created = not self.pk  # Check if the order is being created
         super().save(*args, **kwargs)
@@ -133,22 +129,16 @@ class Order(models.Model):
             )
 
 
-@receiver(pre_save, sender=Order)
-def update_order_prices(sender, instance, **kwargs):
-    instance.product_price = instance.product.product_price
-    instance.order_price = instance.calculate_order_price()
-
-
 class Message(models.Model):
     message_id = models.AutoField(primary_key=True)
     message = models.TextField(max_length=100)
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name='messages_sent')
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='messages_received')
     sent_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.message
-    
+
     def save(self, *args, **kwargs):
         created = not self.pk  # Check if the message is being created
         super().save(*args, **kwargs)
@@ -218,10 +208,9 @@ class Notification(models.Model):
             return self.seller, self.buyer
 
 
-
 class Promotion(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='promotions')
     discount_percentage = models.DecimalField(max_digits=5, decimal_places=2)
     original_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     promotion_image = models.ImageField(upload_to='promotion images')
@@ -238,7 +227,7 @@ class Promotion(models.Model):
         return self.product.product_price - discount
 
     def __str__(self):
-        return f"Promotion for {self.product.product_name} by {self.seller.seller_name}"
+        return f"Promotion for {self.product.product_name} by {self.seller.user.username}"
 
 
 class Subscription(models.Model):
@@ -254,24 +243,12 @@ class Subscription(models.Model):
         (100, 100),
         (300, 300),
     )
-
-    subcription_type = models.CharField(choices=SUB_TYPE_CHOICES, max_length=20, default='basic')
+    subscription_type = models.CharField(choices=SUB_TYPE_CHOICES, max_length=20, default='basic')
     subscription_amount = models.IntegerField(choices=SUB_AMOUNT_CHOICES, default=5000)
     subscription_description = models.CharField(max_length=255, default="The best way to get started with our services")
     subscription_inventory = models.IntegerField(choices=SUB_INVENTORY_CHOICES, default=100)
     duration = models.DurationField(default='30 days')
-    created_at = models.DateField(auto_now_add=True)
-    end_date = models.DateField(blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if not self.created_at:
-            self.created_at = timezone.now().date()
-        self.end_date = self.created_at + self.duration
-        super().save(*args, **kwargs)
-
-    def delete_if_expired(self):
-        if self.end_date and self.end_date < timezone.now().date():
-            self.delete()
+    seller = models.OneToOneField(Seller, on_delete=models.CASCADE, related_name='subscriptions')
 
     def __str__(self):
-        return f"{self.subcription_type} Subscription"
+        return f"{self.subscription_type} Subscription"
