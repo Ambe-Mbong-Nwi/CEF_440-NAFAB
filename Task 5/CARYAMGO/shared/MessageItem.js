@@ -105,11 +105,11 @@ export default function MessagingItem({ picture, userName, bio, lastMessage, tim
         },
 
         Message: {
-            fontWeight: 300,
+            fontWeight: '300',
         },
 
         time: {
-            fontWeight: 300,
+            fontWeight: '300',
         },
 
         Notification: {

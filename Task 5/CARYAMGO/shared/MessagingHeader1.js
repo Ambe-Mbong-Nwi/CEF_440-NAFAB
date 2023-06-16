@@ -3,18 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import { AntDesign, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 
 
-export default function MessageHeader({ onBackPress }) {
+export default function MessageHeader1({ onBackPress }) {
     return(
         <View style={styles.container}>
             <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
                 <AntDesign name="arrowleft" size={24} color="white" />
             </TouchableOpacity>
             
-            <Text style={styles.Message}>Messaging</Text>
-            
-            <TouchableOpacity style={styles.search}>
-               <AntDesign name="search1" size={24} color="white"/>
-            </TouchableOpacity>
+               <Text style={styles.Message}>Messaging</Text>
             
         </View>
     )
@@ -41,8 +37,4 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 19,
     },
-
-    search: {
-        flex: 0.5,
-    }
 })
