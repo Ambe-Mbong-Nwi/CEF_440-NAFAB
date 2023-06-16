@@ -13,12 +13,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiscountOrderrStack from './routes/DiscountOrderrStack';
 import NavugationVendor from './pages/NavugationVendor';
 import DiscountProfile from './pages/DiscountProfile';
+import Messaging1 from './pages/Messaging1';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
+
     <Stack.Navigator>
       <Stack.Screen
         name="Home"
@@ -48,6 +50,41 @@ export default function App() {
           />
           
     </Stack.Navigator>
+
+      <Messaging1 />
+      {/* <Navigation /> */}
+     {/* <NavugationVendor/> */}
+    {/* <DiscountProfile/> */}
+    {/* <Stack.Navigator>
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={OptionPage}
+    //     options={{ headerShown: false }}
+    //   /> */}
+      {/* import the routes that link to the various screens   */}
+         {/* <Stack.Screen
+    //         name="SignUpVendor"
+    //         component={SignUpVendor}
+    //         options={{ headerShown: false }}
+    //       />
+    //          <Stack.Screen
+    //         name="SignUpBuyer"
+    //         component={SignUpBuyer}
+    //         options={{ headerShown: false }}
+    //       /> */}
+               {/* <Stack.Screen
+    //         name="WelcomePage"
+    //         component={WelcomePage}
+    //         options={{ headerShown: true }}
+    //       /> */}
+           {/* <Stack.Screen
+    //         name="Navigation"
+    //         component={Navigation}
+    //         options={{ headerShown: false }}
+    //       />
+          
+    // </Stack.Navigator> */}
+
   </NavigationContainer>
   )
 }

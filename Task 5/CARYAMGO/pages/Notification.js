@@ -46,16 +46,16 @@ export default function Notification() {
     
         container: {
             flex: 1,
-            paddingHorizontal: 10,
         },
         
         notificationbar: {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-around',
+            paddingTop: 40,
+            paddingBottom: 10,
             backgroundColor: '#097C00',
-            width: '100%',
-            height: 80,
+            marginBottom: 5,
         },
 
         notificationbartext: {
@@ -86,8 +86,8 @@ export default function Notification() {
             marginTop: 10,
             marginBottom: 10,
             borderRadius: 10,
-            height: 70,
-            width: 270,
+            height: '17%',
+            width: '99%',
         },
     
         information: {
