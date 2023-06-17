@@ -17,6 +17,7 @@ export default function CreateShop(){
         <ScrollView>
               <View style={styles.View1} >
                 <Text style={styles.text}>Add Shop</Text>
+                {/* switch between both icons on button click  */}
                 <TouchableOpacity onPress={toggleDetails}>
                    {isDetailsVisible ? (
                     <AntDesign name="minuscircleo" size={24} color="black" />

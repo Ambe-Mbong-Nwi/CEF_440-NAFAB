@@ -6,6 +6,7 @@ import SignUpVendor from './pages/SignUpVendor';
 import SignUpBuyer from './pages/SignUpBuyer';
 import WelcomePage from './pages/WelcomePage';
 import Navigation from './routes/Navigation';
+import ProfilePage from './pages/ProfilePage';
 import Navigation1 from './routes/Navigation1';
 // routes unformation 
 import 'react-native-gesture-handler';
@@ -33,8 +34,8 @@ export default function App() {
       {/* <NavugationBuyer/> */}
       {/* <Navigation1/> */}
        {/* <Navigation/>  */}
-      <Navigation1/>
-
+      {/* <Navigation1/> */}
+        <ProfilePage/>
       {/* <Navigation /> */}
       {/* <CustomerSupport /> */}
 
