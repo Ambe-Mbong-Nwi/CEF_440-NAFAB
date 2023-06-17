@@ -45,7 +45,7 @@ const validateForm = () => {
 
   // Check if there are any errors
   if (Object.keys(errors).length === 0) {
-    navigation.navigate('Navigation');
+    navigation.navigate('Navigation1');
     // reset form values after submitting the form 
     setUsername("")
     setEmail("")

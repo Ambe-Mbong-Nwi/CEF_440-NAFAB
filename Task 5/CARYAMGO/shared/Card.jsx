@@ -112,7 +112,7 @@ Input:{
     borderColor:'#0A9100',
     borderWidth:3,
     margin:5,
-    paddingL:5
+    paddingLeft:25
 },
 font:{
    marginTop:7 

@@ -13,6 +13,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DiscountOrderrStack from './routes/DiscountOrderrStack';
 import NavugationVendor from './pages/NavugationVendor';
+import NavugationBuyer from './pages/NavugationBuyer';
 import DiscountProfile from './pages/DiscountProfile';
 import Card1 from './shared/Card1';
 import Card from './shared/Card';
@@ -23,8 +24,11 @@ export default function App() {
   return (
     <NavigationContainer>
       {/* <NavugationVendor/> */}
-      <Navigation/>
+      {/* <NavugationBuyer/> */}
       <Navigation1/>
+      {/* <Card1/> */}
+      {/* <Navigation/> */}
+      {/* <Navigation1/> */}
     {/* <Stack.Navigator>
       <Stack.Screen
         name="Home"

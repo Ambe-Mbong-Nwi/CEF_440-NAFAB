@@ -1,11 +1,41 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 import React from 'react'
+import { MaterialCommunityIcons,Entypo ,FontAwesome } from '@expo/vector-icons';
 
-export default function Card1() {
+export default function Card1(props) {
   return (
-    <View>
-     
+    <View style={styles.card}  >
+    <View style={styles.imageIcon}> 
+        <View style={styles.image1} >  
+        <Image style={styles.image} source={props.src}/>
+        </View>
+    <View style={styles.icons}>
+    <MaterialCommunityIcons name="pencil-outline" size={24} color="black" style={styles.iconz}  />
+    <Entypo name="megaphone" size={24} color="red" style={styles.iconz} />
     </View>
+    </View>
+<View style={styles.description}>
+    <Text style={styles.name}>{props.name}</Text>
+    <Text style={styles.price}>XAF {props.price}/unit</Text>
+</View>
+<View style={styles.qty}>
+    <Text style={styles.qty1}> <Text>Quantity: </Text> <Text>{props.Qty}</Text></Text>
+    <Text style={styles.qty1}> <Text>Amount Left:</Text> <Text>{props.QtyLeft}%</Text></Text>
+</View>
+{/* <View style={styles.Amount}>
+<FontAwesome name="toggle-up" size={30} color='#0A9100' style={styles.font} />
+<TextInput
+placeholder='Amount'
+// Value={value}
+style={styles.Input}
+/>
+<FontAwesome name="toggle-down" size={30} color='#0A9100' style={styles.font}/>
+</View> */}
+<View style={styles.bottom} >  
+    <Text style={styles.owner}>{props.owner}'s shop</Text>
+    <Text  style={styles.marketname}>{props.marketname}</Text>
+ </View>
+</View>
   )
 }
 
@@ -77,7 +107,7 @@ const styles = StyleSheet.create({
         borderColor:'#0A9100',
         borderWidth:3,
         margin:5,
-        paddingL:5
+        paddingLeft:25
     },
     font:{
        marginTop:7 

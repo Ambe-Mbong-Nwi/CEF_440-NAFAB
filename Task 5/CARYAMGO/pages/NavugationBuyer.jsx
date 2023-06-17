@@ -9,30 +9,30 @@ import Discount from './Discount';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
 import Card1 from '../shared/Card1';
-import axios from 'axios';
+import axios from 'axios'
 
-export default function NavugationVendor({ navigation }) {
-  const profileimage = require('../assets/marketlady.png')
-  const carbage = require('../assets/cabbage.png')
-  const tomato = require('../assets/tomate.png') 
-  const carrot = require('../assets/carrots.png')
-  const sneqakers = 'https://carryamgo.onrender.com/media/Product%20Image/sneaker1.jpeg';
-  // below are the changes required to fetch the data from the Api 
-  const [data, setData] = useState([]);
-   // handle the Api fetch using Fetch  
-   const handleProductFetch =()=>{
-    fetch(`https://carryamgo.onrender.com/api/products/`)
-    .then(res => res.json())
-    .then(
-      (results) => {
-        console.log(results);
-        setData(results)
-      },
-    )
-  }
-useEffect(() => {
-  handleProductFetch()
-}, [])
+export default function NavugationBuyer({ navigation }) {
+    const profileimage = require('../assets/marketlady.png')
+    const carbage = require('../assets/cabbage.png')
+    const tomato = require('../assets/tomate.png') 
+    const carrot = require('../assets/carrots.png')
+    const sneqakers = 'https://carryamgo.onrender.com/media/Product%20Image/sneaker1.jpeg';
+    // below are the changes required to fetch the data from the Api 
+    const [data, setData] = useState([]);
+     // handle the Api fetch using Fetch  
+     const handleProductFetch =()=>{
+      fetch(`https://carryamgo.onrender.com/api/products/`)
+      .then(res => res.json())
+      .then(
+        (results) => {
+          console.log(results);
+          setData(results)
+        },
+      )
+    }
+  useEffect(() => {
+    handleProductFetch()
+  }, [])
   return (
     <SafeAreaView style={styles.Container} >
       <ScrollView 
@@ -61,15 +61,15 @@ useEffect(() => {
         </View>
     </View>
     <View style={styles.cardsContainer}>
-          <Card src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-          <Card src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card src={sneqakers} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card1 src={sneqakers} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
         </View>
 
     {/* getting data from the user and mapping through */}
-    <View>
+    {/* <View>
       {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
         <Card
           key={product_id}
@@ -81,47 +81,41 @@ useEffect(() => {
           marketname={name_market}
         />
       ))}
-    </View>
+    </View> */}
     </ScrollView>
     </SafeAreaView>
- 
   )
 }
 
 const styles = StyleSheet.create({
-  Container:{
-    // marginTop:50,
-    margin:15,
-    // width: '100%',
-  height:'100%',
-  },
-  Container1:{
-//  flexGrow:1  PASSWORD FOR WINSCRIBE: nMmNP3JC?un.c2y
-hide: true,
-  },
-  see:{
-    flexDirection:'row',
-    justifyContent:'flex-end',
-    fontSize:15,
-    fontWeight:'500',
-    marginBottom:5,
-  },
-  create:{
-    flexDirection:'row',
-  },
-  product:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-  },
-  cardsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-  // cards:{
-  //   flexDirection:'row',
-  //   width:'100%',
-  // }
-
+    Container:{
+        // marginTop:50,
+        margin:15,
+        // width: '100%',
+      height:'100%',
+      },
+      Container1:{
+    //  flexGrow:1  PASSWORD FOR WINSCRIBE: nMmNP3JC?un.c2y
+    hide: true,
+      },
+      see:{
+        flexDirection:'row',
+        justifyContent:'flex-end',
+        fontSize:15,
+        fontWeight:'500',
+        marginBottom:5,
+      },
+      create:{
+        flexDirection:'row',
+      },
+      product:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+      },
+      cardsContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'space-between',
+        width: '100%',
+      },
 })
