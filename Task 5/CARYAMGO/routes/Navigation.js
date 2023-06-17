@@ -25,7 +25,6 @@ export default function Navigation({navigation}) {
           {
             display: "flex",
             backgroundColor: '#EFFAEE',
-
             borderRadius: 30,
             // width: 300,
             width: '95%',
@@ -33,13 +32,14 @@ export default function Navigation({navigation}) {
             // marginRight:50,
             height: 60,
 
+
             borderRadius: 20,
             width: '97%',
             height: '10%',
 
+
             alignSelf: 'center',
             justifyContent: 'center',
-            marginBottom: 3,
           },
           null
         ],

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component,useEffect,useState } from 'react'
 import { Text, StyleSheet, View} from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons,EvilIcons } from '@expo/vector-icons';
@@ -8,12 +8,31 @@ import SearchBar from './SearchBar';
 import Discount from './Discount';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
+import Card1 from '../shared/Card1';
+import axios from 'axios';
 
 export default function NavugationVendor({ navigation }) {
   const profileimage = require('../assets/marketlady.png')
   const carbage = require('../assets/cabbage.png')
   const tomato = require('../assets/tomate.png') 
   const carrot = require('../assets/carrots.png')
+  const sneqakers = 'https://carryamgo.onrender.com/media/Product%20Image/sneaker1.jpeg';
+  // below are the changes required to fetch the data from the Api 
+  const [data, setData] = useState([]);
+   // handle the Api fetch using Fetch  
+   const handleProductFetch =()=>{
+    fetch(`https://carryamgo.onrender.com/api/products/`)
+    .then(res => res.json())
+    .then(
+      (results) => {
+        console.log(results);
+        setData(results)
+      },
+    )
+  }
+useEffect(() => {
+  handleProductFetch()
+}, [])
   return (
     <SafeAreaView style={styles.Container} >
       <ScrollView 
@@ -45,11 +64,24 @@ export default function NavugationVendor({ navigation }) {
           <Card src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
           <Card src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-          <Card src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card src={sneqakers} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
         </View>
-        <Text>
 
-        </Text>
+    {/* getting data from the user and mapping through */}
+    <View>
+      {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
+        <Card
+          key={product_id}
+          src={product_image}
+          name={product_name}
+          price={product_price}
+          Qty={product_quantity}
+          owner={seller_name}
+          marketname={name_market}
+        />
+      ))}
+    </View>
     </ScrollView>
     </SafeAreaView>
  
