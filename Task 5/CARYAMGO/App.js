@@ -22,14 +22,15 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    <Stack.Navigator>
+      <NavugationVendor/>
+    {/* <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={OptionPage}
         options={{ headerShown: false }}
-      />
+      /> */}
       {/* import the routes that link to the various screens */}
-         <Stack.Screen
+         {/* <Stack.Screen
             name="SignUpVendor"
             component={SignUpVendor}
             options={{ headerShown: false }}
@@ -55,7 +56,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           
-    </Stack.Navigator>
+    </Stack.Navigator> */}
   </NavigationContainer>
   )
 }

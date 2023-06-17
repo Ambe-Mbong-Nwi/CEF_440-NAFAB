@@ -22,7 +22,7 @@ export default function Card(props) {
             <Text style={styles.price}>XAF {props.price}/unit</Text>
         </View>
         <View style={styles.qty}>
-            <Text style={styles.qty1}> <Text>Quasntity: </Text> <Text>{props.Qty}</Text></Text>
+            <Text style={styles.qty1}> <Text>Quantity: </Text> <Text>{props.Qty}</Text></Text>
             <Text style={styles.qty1}> <Text>Amount Left:</Text> <Text>{props.QtyLeft}%</Text></Text>
         </View>
         <View style={styles.Amount}>
