@@ -26,7 +26,6 @@ export default function App() {
       {/* <NavugationVendor/> */}
       {/* <NavugationBuyer/> */}
       <Navigation1/>
-      {/* <Card1/> */}
       {/* <Navigation/> */}
       {/* <Navigation1/> */}
     {/* <Stack.Navigator>
