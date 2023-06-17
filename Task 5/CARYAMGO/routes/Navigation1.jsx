@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeOrderrStack1 from './HomeOrderrStack';
+import HomeOrderrStack1 from './HomeOrderrStack1';
 import DiscountOrderrStack from './DiscountOrderrStack';
 import MessageChatStack from './MessageChatStack';
 import Notification from '../pages/Notification';

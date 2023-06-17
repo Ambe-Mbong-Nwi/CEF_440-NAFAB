@@ -23,4 +23,3 @@ export default function HomeOrderrStack1() {
 );
 }
 
-const styles = StyleSheet.create({})
