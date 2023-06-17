@@ -5,17 +5,31 @@ import { Feather,AntDesign, MaterialCommunityIcons,SimpleLineIcons,Ionicons} fro
 
 export default function CreateShop(){
 
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue, setSelectedValue] = useState('');    //for different values of the picker
+
+    const [isDetailsVisible, setDetailsVisible] = useState(false);  //for hiding details.
+
+    const toggleDetails = () => {
+        setDetailsVisible(!isDetailsVisible);
+    };
 
     return(
         <ScrollView>
               <View style={styles.View1} >
                 <Text style={styles.text}>Add Shop</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={toggleDetails}>
+                   {isDetailsVisible ? (
+                    <AntDesign name="minuscircleo" size={24} color="black" />
+                   ) : (
                     <AntDesign name="pluscircleo" size={24} color="black" />
+                    )}
                 </TouchableOpacity>
               </View>
 
+
+            {/* //display details only if condition is true */}
+            {isDetailsVisible && (
+            <View>
               <View style={styles.allpickers}>
                 <View style={styles.dropdowncontainer}>
                     <Picker
@@ -53,8 +67,8 @@ export default function CreateShop(){
                 <TouchableOpacity style={styles.add}>
                     <Text style={styles.addtext}>Create Shop</Text>
                 </TouchableOpacity>
-             
-    
+            </View>
+             )}
             </ScrollView>
         )
     }
@@ -108,7 +122,8 @@ export default function CreateShop(){
             alignSelf: 'flex-end',
             borderRadius: 10,
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            marginBottom: 20,
     
     
         },

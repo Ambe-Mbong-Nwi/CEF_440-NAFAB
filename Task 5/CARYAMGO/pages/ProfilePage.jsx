@@ -5,15 +5,31 @@ import AddProduct from '../shared/AddProduct';
 import CreateShop from '../shared/CreateShop';
 import SubscriptionComponent from '../shared/SubscriptionComponent';
 import EditProduct from '../shared/EditProduct';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function ProfilePage(props) {
+
+    const navigation = useNavigation();   //defining navigation
+
+    //going to previous page
+    const handleBackPress = () => {
+        navigation.goBack();
+      };
+
+    //going to subscription page
+    const pressHandler = () => {
+        navigation.navigate('Subscription');
+    }
+
   return (
    <SafeAreaView style={styles.safeare}  >  
    <ScrollView >    
     <View  style={styles.main} >
         <View style={styles.main1} >  
-        <AntDesign name="arrowleft" size={24} color="white" /> 
+        <TouchableOpacity onPress={handleBackPress}>
+            <AntDesign name="arrowleft" size={24} color="white" /> 
+        </TouchableOpacity>
         <Text style={{fontSize:21,color:"white"  }}  >Profile</Text>
         <AntDesign name="poweroff" size={24} color="white" />
         </View>
@@ -91,7 +107,7 @@ export default function ProfilePage(props) {
 
         <CreateShop />
 
-        <SubscriptionComponent />
+        <SubscriptionComponent  onPress={ pressHandler }/>
 
         <EditProduct />
       

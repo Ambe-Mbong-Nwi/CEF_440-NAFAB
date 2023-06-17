@@ -1,13 +1,19 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import SubscriptionHeader from '../shared/SubscriptionHeader';
 
 
-export default function Subscription() {
+export default function Subscription({ navigation }) {
+
+    const handleBackPress = () => {
+        navigation.goBack();
+      };
+      
     return(
         <View>
         <ScrollView>
-            <Text>Subscription</Text>
+            <SubscriptionHeader onBackPress={handleBackPress}/>
             <View View style={styles.page}>
                 <View style={styles.plan}>
                     <Text style={styles.planName}>Basic</Text>
@@ -21,7 +27,7 @@ export default function Subscription() {
                         <AntDesign name="check" size={24} color="black" />
                         <Text style={styles.planinventory}>Inventory space of 25 items</Text>
                     </View>
-                    <TouchableOpacity style={styles.planbutton}>
+                    <TouchableOpacity style={styles.planbutton} onPress={handleBackPress}>
                         <Text style={styles.buttonText}>Subscribe</Text>
                     </TouchableOpacity>
                 </View>
@@ -38,7 +44,7 @@ export default function Subscription() {
                         <AntDesign name="check" size={24} color="black" />
                         <Text style={styles.planinventory}>Inventory space of 25 items</Text>
                     </View>
-                    <TouchableOpacity style={styles.planbutton}>
+                    <TouchableOpacity style={styles.planbutton} onPress={handleBackPress}>
                         <Text style={styles.buttonText}>Subscribe</Text>
                     </TouchableOpacity>
                 </View>
@@ -56,9 +62,10 @@ export default function Subscription() {
         },
 
         plan: {
-            width: 270,
+            width: '80%',
             height: 240,
-            marginTop: 15,
+            marginTop: 5,
+            marginBottom: 5,
             borderColor: 'grey',
             borderWidth: 1,
             backgroundColor: 'white',
@@ -69,6 +76,7 @@ export default function Subscription() {
         planName: {
             fontSize: 25,
             fontWeight: '900',
+            textAlign: 'left'
         },
 
         planPayInfo: {
@@ -112,8 +120,8 @@ export default function Subscription() {
         planbutton: {
             backgroundColor: 'white',
             borderRadius: 5,
-            width: 110,
-            marginLeft: 60,
+            width: '50%',
+            alignSelf: 'center',
             marginTop: 15,
             paddingHorizontal: 5,
             paddingVertical: 2,

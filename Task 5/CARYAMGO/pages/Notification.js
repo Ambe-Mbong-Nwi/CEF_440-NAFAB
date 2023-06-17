@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import { AntDesign, EvilIcons, MaterialIcons, Ionicons, Entypo} from '@expo/vector-icons';
-
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
+import { AntDesign, Feather} from '@expo/vector-icons';
+import NotificationModal from '../shared/NotificationModal';
  
 
 
@@ -12,7 +12,9 @@ export default function Notification() {
             <View style={styles.notificationbar}>
                 <AntDesign name="arrowleft" size={24} color="white" />
                 <Text style={styles.notificationbartext}>Notification</Text>
-                <Entypo name="dots-three-vertical" size={24} color="white" style={styles.notificationbaricon} />
+
+                <NotificationModal />
+                
             </View>
             <ScrollView>
             

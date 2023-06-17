@@ -13,14 +13,28 @@ import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from
     const [selectedValue2, setSelectedValue2] = useState('');
     const [selectedValue3, setSelectedValue3] = useState('');
 
+    const [isDetailsVisible, setDetailsVisible] = useState(false);
+
+    const toggleDetails = () => {
+        setDetailsVisible(!isDetailsVisible);
+    };
+
         return(
             <View style={styles.container}>
               <View style={styles.View1} >
                 <Text style={styles.text}>Add Product</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={toggleDetails}>
+                {isDetailsVisible ? (
+                    <AntDesign name="minuscircleo" size={24} color="black" />
+                   ) : (
                     <AntDesign name="pluscircleo" size={24} color="black" />
+                    )}
                 </TouchableOpacity>
               </View>
+
+
+              {isDetailsVisible && (
+            <View>
               <View style={styles.allpickers}>
                 <View style={styles.dropdowncontainer}>
                     <Picker
@@ -91,7 +105,8 @@ import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from
              </TouchableOpacity> 
             </View>
              </View>
-    
+             </View>
+            )}
             </View>
         )
     }
@@ -100,7 +115,7 @@ import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from
     const styles = StyleSheet.create({
 
         container: {
-            marginTop: 30
+            marginTop: 10
         },
 
         text: {

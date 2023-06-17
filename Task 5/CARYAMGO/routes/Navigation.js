@@ -3,6 +3,7 @@ import HomeOrderrStack from './HomeOrderrStack';
 import DiscountOrderrStack from './DiscountOrderrStack';
 import MessageChatStack from './MessageChatStack';
 import Notification from '../pages/Notification';
+import SubscriptionStack from './SubscriptionStack';
 // import AddToCart from '../pages/AddToCart';
 //import Messaging from '../pages/Messaging';
 import ProfilePage from '../pages/ProfilePage';
@@ -54,7 +55,7 @@ export default function Navigation({navigation}) {
                 iconName = focused ? 'today' : 'today-outline';
             } else if (route.name === 'Notification') {
                 iconName = focused ? 'notifications' : 'notifications-outline';
-            } else if (route.name === 'ProfilePage') {
+            } else if (route.name === 'SubscriptionStack') {
                 iconName = focused ? 'person' : 'person-outline';
             }
 
@@ -77,8 +78,6 @@ export default function Navigation({navigation}) {
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header
-        tabBarVisible: () => null,
-        tabBarVisible: false,
         tabBarStyle: { display: "none" },
       }}/>
 
@@ -99,11 +98,12 @@ export default function Navigation({navigation}) {
       }}/>
 
       <Tab.Screen 
-      name="ProfilePage" 
-      component={ProfilePage} 
+      name="SubscriptionStack" 
+      component={SubscriptionStack} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header
+        tabBarStyle: { display: "none" },
       }}/>
 
     </Tab.Navigator>

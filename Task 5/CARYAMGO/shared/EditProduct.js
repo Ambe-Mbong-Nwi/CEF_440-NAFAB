@@ -9,15 +9,28 @@ export default function EditProduct(){
     const [selectedValue1, setSelectedValue1] = useState('');
     const [selectedValue2, setSelectedValue2] = useState('');
 
+    const [isDetailsVisible, setDetailsVisible] = useState(false);
+
+    const toggleDetails = () => {
+        setDetailsVisible(!isDetailsVisible);
+    };
+
     return(
         <ScrollView>
               <View style={styles.View1} >
                 <Text style={styles.text}>Edit Products</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={toggleDetails}>
+                {isDetailsVisible ? (
+                    <AntDesign name="minuscircleo" size={24} color="black" />
+                   ) : (
                     <AntDesign name="pluscircleo" size={24} color="black" />
+                    )}
                 </TouchableOpacity>
               </View>
 
+
+              {isDetailsVisible && (
+            <View>
               <View style={styles.allpickers}>
                 <View style={styles.dropdowncontainer}>
                     <Picker
@@ -56,7 +69,8 @@ export default function EditProduct(){
                     <Text style={styles.addtext}>Find</Text>
                 </TouchableOpacity>
              
-    
+            </View>
+              )}
             </ScrollView>
         )
     }
@@ -110,7 +124,8 @@ export default function EditProduct(){
             alignSelf: 'flex-end',
             borderRadius: 10,
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            marginBottom: 20,
     
     
         },

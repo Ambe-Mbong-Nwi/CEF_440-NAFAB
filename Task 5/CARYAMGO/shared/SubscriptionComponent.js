@@ -1,24 +1,37 @@
 import { SafeAreaView, StyleSheet, Text, View,TextInput ,TouchableOpacity,ScrollView} from 'react-native'
-import { React } from 'react'
+import { React, useState } from 'react'
 import { Feather,AntDesign, MaterialCommunityIcons,SimpleLineIcons,Ionicons} from '@expo/vector-icons';
 
-export default function SubscriptionComponent(){
+export default function SubscriptionComponent({ onPress }){
+
+    const [isDetailsVisible, setDetailsVisible] = useState(false);
+
+    const toggleDetails = () => {
+        setDetailsVisible(!isDetailsVisible);
+    };
 
     return(
         <ScrollView>
               <View style={styles.View1} >
                 <Text style={styles.text}>Subscription</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={toggleDetails}>
+                {isDetailsVisible ? (
+                    <AntDesign name="minuscircleo" size={24} color="black" />
+                   ) : (
                     <AntDesign name="pluscircleo" size={24} color="black" />
+                    )}
                 </TouchableOpacity>
               </View>
 
+
+            {isDetailsVisible && (
+            <View>
               <View style={styles.subscribe}>
                 <Text style={styles.subscribetext}>To<Text style={styles.bold}> Subscribe to a Plan </Text>
                 click on the Subscription button below</Text>
               </View>
 
-              <TouchableOpacity style={styles.add}>
+              <TouchableOpacity style={styles.add}  onPress={onPress}>
                     <Text style={styles.addtext}>Subscribe</Text>
               </TouchableOpacity>
 
@@ -27,11 +40,11 @@ export default function SubscriptionComponent(){
                 click on the Upgrade button below</Text>
               </View>
 
-                <TouchableOpacity style={styles.add}>
+                <TouchableOpacity style={styles.add} onPress={onPress}>
                     <Text style={styles.addtext}>Upgrade</Text>
                 </TouchableOpacity>
-             
-    
+            </View>
+            )}
             </ScrollView>
         )
     }
@@ -43,7 +56,7 @@ export default function SubscriptionComponent(){
             flexDirection:"row",
             justifyContent:"space-between",
             paddingBottom:5,
-            marginTop: 30
+            marginTop: 10
         },
 
         text: {
