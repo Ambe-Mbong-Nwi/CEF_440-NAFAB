@@ -35,7 +35,7 @@ export default function Navigation({navigation}) {
             borderRadius: 20,
             width: '97%',
             height: '10%',
-n
+
             alignSelf: 'center',
             justifyContent: 'center',
             marginBottom: 3,

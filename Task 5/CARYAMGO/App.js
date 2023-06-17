@@ -14,6 +14,7 @@ import DiscountOrderrStack from './routes/DiscountOrderrStack';
 import NavugationVendor from './pages/NavugationVendor';
 import DiscountProfile from './pages/DiscountProfile';
 import Messaging1 from './pages/Messaging1';
+import Product from './pages/Product';
 
 
 const Stack = createNativeStackNavigator()
@@ -21,7 +22,9 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      <NavugationVendor/>
+      <Product />
+
+      {/* <NavugationVendor/> */}
     {/* <Stack.Navigator>
 
 
@@ -56,10 +59,10 @@ export default function App() {
           
 
     </Stack.Navigator> */}
-
+{/* 
     </Stack.Navigator>
 
-      <Messaging1 />
+      <Messaging1 /> */}
       {/* <Navigation /> */}
      {/* <NavugationVendor/> */}
     {/* <DiscountProfile/> */}

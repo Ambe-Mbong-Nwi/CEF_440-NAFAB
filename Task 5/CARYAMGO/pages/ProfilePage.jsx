@@ -68,12 +68,12 @@ export default function ProfilePage(props) {
                 fontSize:16,
                 textAlign:"center",
                 color:"white",
-                fontWeight:600
+                fontWeight:'600'
                  } } > {props.shopnmame}</Text>
             <Text style={{textAlign:"center",
             fontSize:15,
             color:"white" ,
-            fontWeight:600} }>{props.market} </Text>
+            fontWeight:'600'} }>{props.market} </Text>
         </View> 
     </View>
     <View style={styles.main2}>
