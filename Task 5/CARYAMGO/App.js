@@ -15,19 +15,33 @@ import DiscountOrderrStack from './routes/DiscountOrderrStack';
 import NavugationVendor from './pages/NavugationVendor';
 import NavugationBuyer from './pages/NavugationBuyer';
 import DiscountProfile from './pages/DiscountProfile';
+
 import Card1 from './shared/Card1';
 import Card from './shared/Card';
+
+import Messaging1 from './pages/Messaging1';
+import Product from './pages/Product';
+import CustomerSupport from './pages/CustomerSupport';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
+
       {/* <NavugationVendor/> */}
       {/* <NavugationBuyer/> */}
       <Navigation1/>
       {/* <Navigation/> */}
       {/* <Navigation1/> */}
+
+      <Navigation />
+      {/* <CustomerSupport /> */}
+
+      {/* <Product /> */}
+
+      {/* <NavugationVendor/> */}
+
     {/* <Stack.Navigator>
       <Stack.Screen
         name="Home"
@@ -62,6 +76,44 @@ export default function App() {
           />
           
     </Stack.Navigator> */}
+
+{/* 
+    </Stack.Navigator>
+
+      <Messaging1 /> */}
+      {/* <Navigation /> */}
+     {/* <NavugationVendor/> */}
+    {/* <DiscountProfile/> */}
+    {/* <Stack.Navigator>
+    //   <Stack.Screen
+    //     name="Home"
+    //     component={OptionPage}
+    //     options={{ headerShown: false }}
+    //   /> */}
+      {/* import the routes that link to the various screens   */}
+         {/* <Stack.Screen
+    //         name="SignUpVendor"
+    //         component={SignUpVendor}
+    //         options={{ headerShown: false }}
+    //       />
+    //          <Stack.Screen
+    //         name="SignUpBuyer"
+    //         component={SignUpBuyer}
+    //         options={{ headerShown: false }}
+    //       /> */}
+               {/* <Stack.Screen
+    //         name="WelcomePage"
+    //         component={WelcomePage}
+    //         options={{ headerShown: true }}
+    //       /> */}
+           {/* <Stack.Screen
+    //         name="Navigation"
+    //         component={Navigation}
+    //         options={{ headerShown: false }}
+    //       />
+          
+    // </Stack.Navigator> */}
+
   </NavigationContainer>
   )
 }

@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from . models import Seller, Buyer, Rating, Product, Order, Message, Notification, Shop, Promotion, Subscription
-
+from . models import User, Seller, Buyer, Rating, Product, Order, Message, Notification, Shop, Promotion, Subscription
+admin.site.register(User)
 admin.site.register(Seller) 
 admin.site.register(Buyer)
 admin.site.register(Rating)

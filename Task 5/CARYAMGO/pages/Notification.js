@@ -1,18 +1,30 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
-import { AntDesign, EvilIcons, MaterialIcons, Ionicons, Entypo} from '@expo/vector-icons';
-
- 
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
+import { AntDesign, Feather} from '@expo/vector-icons';
+import NotificationModal from '../shared/NotificationModal';
+import { useNavigation } from '@react-navigation/native';
 
 
 export default function Notification() {
+
+    const navigation = useNavigation();   //defining navigation
+
+    //going to previous page
+    const handleBackPress = () => {
+        navigation.goBack();
+      };
+
     return(
         
         <View style={styles.container}>
             <View style={styles.notificationbar}>
-                <AntDesign name="arrowleft" size={24} color="white" />
+                <TouchableOpacity onPress={handleBackPress}>
+                     <AntDesign name="arrowleft" size={24} color="white" />
+                </TouchableOpacity>
                 <Text style={styles.notificationbartext}>Notification</Text>
-                <Entypo name="dots-three-vertical" size={24} color="white" style={styles.notificationbaricon} />
+
+                <NotificationModal />
+
             </View>
             <ScrollView>
             
