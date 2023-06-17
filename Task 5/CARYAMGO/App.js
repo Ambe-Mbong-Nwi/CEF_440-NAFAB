@@ -32,8 +32,8 @@ export default function App() {
       {/* <NavugationVendor/> */}
       {/* <NavugationBuyer/> */}
       {/* <Navigation1/> */}
-       {/* <Navigation/>  */}
-      <Navigation1/>
+       <Navigation/> 
+      {/* <Navigation1/> */}
 
       {/* <Navigation /> */}
       {/* <CustomerSupport /> */}

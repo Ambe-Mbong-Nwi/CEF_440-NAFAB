@@ -47,10 +47,11 @@ export default function Card(props) {
 const styles = StyleSheet.create({
 image:{
     width:'100%',
-    height:150,
+   height:250,
+    // height:150,
   marginBottom:10,
-  borderTopLeftRadius:15,
-  borderTopRightRadius:15
+  borderTopLeftRadius:10,
+  borderTopRightRadius:10
 },
 image1:{
        position:'relative',   
@@ -58,6 +59,7 @@ image1:{
 icons:{
     position:'absolute',
     left:290,
+    top:10
 },
 iconz:{
     backgroundColor:'white',
@@ -72,7 +74,7 @@ width:'100%',
 // height:'65%',
 borderColor:'black',
 borderWidth:1,
-borderRadius:15,
+borderRadius:10,
 marginBottom:10
 },
 name:{
