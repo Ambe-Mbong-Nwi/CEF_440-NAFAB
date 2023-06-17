@@ -6,6 +6,7 @@ import SignUpVendor from './pages/SignUpVendor';
 import SignUpBuyer from './pages/SignUpBuyer';
 import WelcomePage from './pages/WelcomePage';
 import Navigation from './routes/Navigation';
+import ProfilePage from './pages/ProfilePage';
 import Navigation1 from './routes/Navigation1';
 // routes unformation 
 import 'react-native-gesture-handler';
@@ -29,27 +30,17 @@ export default function App() {
   return (
     <NavigationContainer>
 
-      {/* <NavugationVendor/> */}
-      {/* <NavugationBuyer/> */}
-      <Navigation1/>
-      {/* <Navigation/> */}
-      {/* <Navigation1/> */}
+  {/* <Navigation /> */}
+  {/* <Navigation1 /> */}
 
-      <Navigation />
-      {/* <CustomerSupport /> */}
-
-      {/* <Product /> */}
-
-      {/* <NavugationVendor/> */}
-
-    {/* <Stack.Navigator>
+    <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={OptionPage}
         options={{ headerShown: false }}
-      /> */}
+      />
       {/* import the routes that link to the various screens */}
-         {/* <Stack.Screen
+         <Stack.Screen
             name="SignUpVendor"
             component={SignUpVendor}
             options={{ headerShown: false }}
@@ -75,7 +66,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           
-    </Stack.Navigator> */}
+    </Stack.Navigator>
 
 {/* 
     </Stack.Navigator>

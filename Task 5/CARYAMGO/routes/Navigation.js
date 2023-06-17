@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeOrderrStack from './HomeOrderrStack';
+import HomeOrderrStack1 from './HomeOrderrStack1';
 import DiscountOrderrStack from './DiscountOrderrStack';
 import MessageChatStack from './MessageChatStack';
 import Notification from '../pages/Notification';
@@ -28,16 +29,10 @@ export default function Navigation({navigation}) {
             borderRadius: 30,
             // width: 300,
             width: '95%',
-            // marginLeft:50,
-            // marginRight:50,
+            // paddingTop:50,
             height: 60,
-
-
             borderRadius: 20,
             width: '97%',
-            height: '10%',
-
-
             alignSelf: 'center',
             justifyContent: 'center',
           },
@@ -51,7 +46,8 @@ export default function Navigation({navigation}) {
             iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'MessageChatStack') {
             iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
-            } else if (route.name === 'DiscountOrderrStack') {
+            // } else if (route.name === 'DiscountOrderrStack') {
+            } else if (route.name === 'CartStack') {
                 iconName = focused ? 'today' : 'today-outline';
             } else if (route.name === 'Notification') {
                 iconName = focused ? 'notifications' : 'notifications-outline';
@@ -82,8 +78,10 @@ export default function Navigation({navigation}) {
       }}/>
 
       <Tab.Screen 
-      name="DiscountOrderrStack" 
-      component={DiscountOrderrStack} 
+          name="CartStack" 
+          component={HomeOrderrStack1}
+      // name="DiscountOrderrStack" 
+      // component={DiscountOrderrStack} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header

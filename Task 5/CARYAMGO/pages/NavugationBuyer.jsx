@@ -5,7 +5,7 @@ import { Ionicons,EvilIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import SearchBar from './SearchBar';
-import Discount from './Discount';
+import Discount1 from './Discount1';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
 import Card1 from '../shared/Card1';
@@ -40,7 +40,7 @@ export default function NavugationBuyer({ navigation }) {
         showsHorizontalScrollIndicator={false}
       style={styles.Container1}> 
     <SearchBar/>
-    <Discount
+    <Discount1
     src={profileimage}
     Discount='40% OFF'
     discounted='XAF 150'
@@ -53,19 +53,16 @@ export default function NavugationBuyer({ navigation }) {
     </View>
     <View style={styles.product}>
       <View> 
-      <Text style={{fontSize:21,fontWeight:'600'  }}>All Products  </Text>
+      <Text style={{fontSize:21,fontWeight:'600'  }}>Available Products  </Text>
       </View>
-        <View style={styles.create} >  
-        <Text style={{color:'#0A9100',fontSize:20,marginRight:7  }} >Create Product</Text>
-        <AntDesign name="pluscircleo" size={24} color="#0A9100" />
-        </View>
     </View>
     <View style={styles.cardsContainer}>
           <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
           <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card1 src={sneqakers} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+
         </View>
 
     {/* getting data from the user and mapping throughs to display each  */}
@@ -73,7 +70,7 @@ export default function NavugationBuyer({ navigation }) {
       {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
         <Card
           key={product_id}
-          src={product_image}
+           src={{ uri: product_image }}
           name={product_name}
           price={product_price}
           Qty={product_quantity}
@@ -82,6 +79,7 @@ export default function NavugationBuyer({ navigation }) {
         />
       ))}
     </View> */}
+    <Text></Text>
     </ScrollView>
     </SafeAreaView>
   )

@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeOrderrStack1 from './HomeOrderrStack';
+import HomeOrderrStack1 from './HomeOrderrStack1';
 import DiscountOrderrStack from './DiscountOrderrStack';
 import MessageChatStack from './MessageChatStack';
 import Notification from '../pages/Notification';
@@ -43,14 +43,15 @@ export default function Navigation({navigation}) {
             iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'MessageChatStack') {
             iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
-            } else if (route.name === 'DiscountOrderrStack') {
+            } else if (route.name === 'CartStack') {
+            // } else if (route.name === 'DiscountOrderrStack') {
                 iconName = focused ? 'cart' : 'cart-outline';
             } else if (route.name === 'Notification') {
                 iconName = focused ? 'notifications' : 'notifications-outline';
             } else if (route.name === 'ProfilePage') {
                 iconName = focused ? 'person' : 'person-outline';
             }
-
+// name="CartStack" 
           // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
         },
@@ -77,8 +78,9 @@ export default function Navigation({navigation}) {
       }}/>
 
       <Tab.Screen 
-      name="DiscountOrderrStack" 
-      component={DiscountOrderrStack} 
+      // name="DiscountOrderrStack" 
+      name="CartStack" 
+      component={HomeOrderrStack1} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header

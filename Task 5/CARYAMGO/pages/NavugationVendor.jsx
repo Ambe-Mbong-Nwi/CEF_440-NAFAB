@@ -64,8 +64,7 @@ useEffect(() => {
           <Card src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
           <Card src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-          <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card src={sneqakers} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card src={{ uri: sneqakers}} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
         </View>
 
     {/* getting data from the user and mapping through */}
@@ -73,7 +72,7 @@ useEffect(() => {
       {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
         <Card
           key={product_id}
-          src={product_image}
+          src={{ uri: product_image }}
           name={product_name}
           price={product_price}
           Qty={product_quantity}
@@ -82,6 +81,9 @@ useEffect(() => {
         />
       ))}
     </View>
+    <Text>
+      lorem30
+    </Text>
     </ScrollView>
     </SafeAreaView>
  
@@ -92,8 +94,8 @@ const styles = StyleSheet.create({
   Container:{
     // marginTop:50,
     margin:15,
-    // width: '100%',
-  height:'100%',
+    marginBottom:500,
+     height:'100%',
   },
   Container1:{
 //  flexGrow:1  PASSWORD FOR WINSCRIBE: nMmNP3JC?un.c2y
