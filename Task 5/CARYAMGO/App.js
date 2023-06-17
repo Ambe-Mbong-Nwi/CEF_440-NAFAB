@@ -16,8 +16,7 @@ import NavugationVendor from './pages/NavugationVendor';
 import DiscountProfile from './pages/DiscountProfile';
 import Card1 from './shared/Card1';
 import Card from './shared/Card';
-// import NavigationBuyer from './pages/NavigationBuyer';
-// import HomeOrderrStack from './routes/HomeOrderrStack';
+
 
 const Stack = createNativeStackNavigator()
 export default function App() {
@@ -29,7 +28,7 @@ export default function App() {
         component={OptionPage}
         options={{ headerShown: false }}
       />
-      {/* import the routes that link to the various screens   */}
+      {/* import the routes that link to the various screens */}
          <Stack.Screen
             name="SignUpVendor"
             component={SignUpVendor}

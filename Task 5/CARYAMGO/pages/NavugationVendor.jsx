@@ -8,6 +8,8 @@ import SearchBar from './SearchBar';
 import Discount from './Discount';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
+import axios from 'axios';
+
 
 export default function NavugationVendor({ navigation }) {
   const profileimage = require('../assets/marketlady.png')
