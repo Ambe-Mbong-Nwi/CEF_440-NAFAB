@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomePage from '../pages/WelcomePage';
 import Order from '../pages/Order';
-import NavugationBuyer from '../Task 5/CARYAMGO/pages/NavugationBuyer';
+import NavugationBuyer from '../pages/NavugationBuyer';
 
 const Stack = createNativeStackNavigator();
 export default function HomeOrderrStack1() {
