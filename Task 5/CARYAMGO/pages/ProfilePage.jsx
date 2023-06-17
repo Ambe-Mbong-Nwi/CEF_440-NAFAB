@@ -1,55 +1,11 @@
 import { SafeAreaView, StyleSheet, Text, View,TextInput ,TouchableOpacity,ScrollView } from 'react-native'
 import React from 'react'
 import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from '@expo/vector-icons';
+import AddProduct from '../shared/AddProduct';
+import CreateShop from '../shared/CreateShop';
+import SubscriptionComponent from '../shared/SubscriptionComponent';
+import EditProduct from '../shared/EditProduct';
 
-// Edit PRODUCT component 
-const EditProduct =()=>{
-return(
-    <View>
-        <TextInput style={styles.Textinput} placeholder='market place' />
-        <TextInput style={styles.Textinput} placeholder='category' />
-        <View style={{justifyContent:"flex-end" ,flexDirection:"row" }} >
-        <TouchableOpacity 
-      style={styles.button} >
-          <Text style={styles.btnText}  >Edit</Text>
-  </TouchableOpacity>
-        </View>
-     
-    </View>
-)
-}
-//Add Product componrnt 
-const AddProduct=()=>{
-    return(
-        <View>
-         <TextInput style={styles.Textinput} placeholder='Productname' />   
-         <TextInput style={styles.Textinput} placeholder='Price' />
-         <TextInput style={styles.Textinput} placeholder='Quantity' />
-         {/* upload image */}
-         <View style={styles.upload} >
-            <View style={styles.box} >
-                <Text>add an image</Text>
-                <AntDesign name="clouduploado" size={24} color="#0A9100" />
-            </View>
-            {/* rounded box uoload image section  */}
-            <View>
-            <TouchableOpacity 
-            style={styles.button1} >
-          <Text style={styles.btnText}  >upload</Text>
-          <Feather name="upload" size={24} color="white" />
-           </TouchableOpacity>
-            </View>
-            <View style={styles.Viewbtn} >
-        <TouchableOpacity 
-          style={styles.button} >
-          <Text style={styles.btnText}  >Add</Text>
-         </TouchableOpacity> 
-        </View>
-         </View>
-
-        </View>
-    )
-}
 
 export default function ProfilePage(props) {
   return (
@@ -133,15 +89,12 @@ export default function ProfilePage(props) {
         <MaterialCommunityIcons name="pencil-outline" size={24} color="black" />
         </View>
 
-        <View style={styles.View1} >
-            <Text>Edit prpoducts </Text>
-            <AntDesign name="minuscircleo" size={24} color="black" />
-        </View>
-        <EditProduct/>
-        <View style={styles.View1} >
-            <Text>Add products </Text>
-            <AntDesign name="minuscircleo" size={24} color="black" />
-        </View>
+        <CreateShop />
+
+        <SubscriptionComponent />
+
+        <EditProduct />
+      
         <AddProduct/>
     </View>
     </ScrollView>
@@ -181,54 +134,5 @@ View11:{
     justifyContent:"space-between", 
     paddingLeft:10,
 },
-Textinput:{
-    height: 50,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop:5,
-    marginTop:8,
-    marginBottom:10,
-    borderRadius:7,
-    paddingLeft:7  
-},
-button:{
-    backgroundColor:'#0A9100',
-    paddingTop:7,
-    paddingBottom:7,
-    width:70,
-    borderRadius:7,
-    marginBottom:15, 
-  },
-  btnText:{
-    color:'white',
-    fontSize:16,
-    textAlign:'center'
-  },
-  button1:{
-    backgroundColor:'#0A9100',
-    paddingRight:10,
-    paddingLeft:10,
-    paddingTop:7,
-    paddingBottom:7,
-    width:100,
-    borderRadius:7,
-    marginBottom:15, 
-    flexDirection:"row",
-    justifyContent:"space-between", 
-    marginTop:40
-  },
-  box:{
-    borderColor: 'gray',
-    borderWidth: 1,
-    height:70,
-    padding:10
-  },
-  upload:{
-    flexDirection:"row",
-    justifyContent:"space-between",
-    marginBottom:20
-  },
-  Viewbtn:{
-    marginTop:80 
-  }
+
 })
