@@ -15,12 +15,14 @@ import NavugationVendor from './pages/NavugationVendor';
 import DiscountProfile from './pages/DiscountProfile';
 import Messaging1 from './pages/Messaging1';
 import Product from './pages/Product';
+import CustomerSupport from './pages/CustomerSupport';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
+      {/* <CustomerSupport /> */}
 
       <Product />
 

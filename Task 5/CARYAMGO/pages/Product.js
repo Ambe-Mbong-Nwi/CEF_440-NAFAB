@@ -26,19 +26,19 @@ export default function Product({ navigation }) {
                         multiline
                         placeholder="Product name"
                         style={styles.input}
-                        onChangeText={(text) => setMessage(text)}
+                        // onChangeText={(text) => setMessage(text)}
                     />
             <TextInput
                         multiline
                         placeholder="Price"
                         style={styles.input}
-                        onChangeText={(text) => setMessage(text)}
+                        // onChangeText={(text) => setMessage(text)}
                     />
             <TextInput
                         multiline
                         placeholder="Quantity"
                         style={styles.input}
-                        onChangeText={(text) => setMessage(text)}
+                        // onChangeText={(text) => setMessage(text)}
                     />
             </View>
 
