@@ -5,7 +5,7 @@ import { Ionicons,EvilIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import SearchBar from './SearchBar';
-import Discount from './Discount';
+import Discount1 from './Discount1';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
 import Card1 from '../shared/Card1';
@@ -40,7 +40,7 @@ export default function NavugationBuyer({ navigation }) {
         showsHorizontalScrollIndicator={false}
       style={styles.Container1}> 
     <SearchBar/>
-    <Discount
+    <Discount1
     src={profileimage}
     Discount='40% OFF'
     discounted='XAF 150'
@@ -79,6 +79,7 @@ export default function NavugationBuyer({ navigation }) {
         />
       ))}
     </View> */}
+    <Text></Text>
     </ScrollView>
     </SafeAreaView>
   )

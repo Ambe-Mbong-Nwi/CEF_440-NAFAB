@@ -72,10 +72,12 @@ iconz:{
 card:{   
 width:'100%',
 // height:'65%',
-borderColor:'black',
-borderWidth:1,
+// borderColor:'black',
+// borderWidth:1,
 borderRadius:10,
-marginBottom:10
+marginBottom:15,
+elevation: 5,
+backgroundColor: 'white',
 },
 name:{
     textTransform:'uppercase',

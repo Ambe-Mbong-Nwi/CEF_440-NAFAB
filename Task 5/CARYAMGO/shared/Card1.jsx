@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
     card:{   
     width:'48%',
     // height:'65%',
-    borderColor:'black',
-    borderWidth:1,
     borderRadius:10,
     marginBottom:10,
     paddingBottom:5,
+    elevation: 5,
+    backgroundColor: 'white',
     },
     name:{
         textTransform:'uppercase',
