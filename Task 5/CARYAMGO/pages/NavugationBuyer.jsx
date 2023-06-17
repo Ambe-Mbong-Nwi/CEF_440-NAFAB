@@ -68,7 +68,7 @@ export default function NavugationBuyer({ navigation }) {
           <Card1 src={sneqakers} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
         </View>
 
-    {/* getting data from the user and mapping through */}
+    {/* getting data from the user and mapping through to display each  */}
     {/* <View>
       {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
         <Card
