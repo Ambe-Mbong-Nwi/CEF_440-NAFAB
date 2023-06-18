@@ -3,8 +3,6 @@ import HomeOrderrStack1 from '../routes/HomeOrderrStack1';
 import DiscountOrderrStack from '../routes/DiscountOrderrStack';
 import MessageChatStack from '../routes/MessageChatStack';
 import Notification from '../pages/Notification';
-// import AddToCart from '../pages/AddToCart';
-//import Messaging from '../pages/Messaging';
 import ProfilePage from '../pages/ProfilePage';
 import Icon from 'react-native-vector-icons/Ionicons';
 // import WelcomePage from '../pages/WelcomePage';
