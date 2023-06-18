@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 import Card1 from '../shared/Card1';
-// receive the data from the Navigation buyer ( the component it is routed from )
+// receive the data from the Navigation buyer ( The component it is routed from )
 export default function OrderProduct({ route }) {
   const { data } = route.params;
 
