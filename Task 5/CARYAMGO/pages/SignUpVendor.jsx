@@ -75,7 +75,7 @@ const validatePhoneNumber = (phoneNumber) => {
 // subjected to changes 
 const validateEmail = (email) => {
   // Regular expression for email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[a-zA-Z0-9]{3,20}@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
