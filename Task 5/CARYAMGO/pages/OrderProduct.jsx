@@ -2,33 +2,57 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView,Image,TextInput,Toucha
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
-export default function OrderProduct() {
-  // const Image = require('../assets/tomate.png')
+export default function OrderProduct({ route,navigation }) {
   const carbage = require('../assets/cabbage.png')
+  // import the data gotten from the prop 
+  const { data } = route.params;
+  const {
+    product_image,
+    product_name,
+    product_price,
+    product_quantity,
+    seller_name,
+    name_market,
+  } = data;
   return (
     <ScrollView>
     <SafeAreaView style={styles.container}>
       <View style={styles.mainCtainer} >  
     <AntDesign 
-      // onPress={() => navigation.navigate('NavugationBuyer')}
+      onPress={() => navigation.navigate('Navigation1')}
     name="arrowleft" size={24} color="black" />
     {/* import the props for seller name {seller_name} */}
+    {/* <Card1
+src={{ uri: product_image }} done 
+name={product_name} done
+price={product_price} done 
+Qty={product_quantity} done 
+owner={seller_name} done 
+marketname={name_market} done 
+/> */}
     <View  style={styles.info1}>
-      <Text style={styles.seller} >Ambe's Shop </Text>
-      <Text style={styles.market} >Muea Market</Text>
+      {/* <Text style={styles.seller} >Ambe's Shop </Text> */}
+      <Text style={styles.seller} >{seller_name}</Text>
+      {/* <Text style={styles.market} >Muea Market </Text> */}
+      <Text style={styles.market} >{name_market}</Text>
       </View>
       <View style={styles.info2}>
         <View style={styles.imagediv}>  
-      <Image style={styles.image} source={carbage}  />
+      {/* <Image style={styles.image} source={carbage}  /> */}
+      <Image style={styles.image} source={{uri:product_image}}  />
       </View>
-      <Text style={styles.name}>Apple</Text> 
+      {/* <Text style={styles.name}>Apple</Text>  */}
+      <Text style={styles.name}>{product_name}</Text> 
       {/* for the quantity info */}
       <View style={styles.qty}>
-        <Text style={styles.qty1}> Quantity:200 </Text>
+        {/* <Text style={styles.qty1}> Quantity:200 </Text> */}
+        <Text style={styles.qty1}> {product_quantity} </Text>
+        {/* <Text style={styles.amt}>Amount Left: 10%  </Text> */}
         <Text style={styles.amt}>Amount Left: 10%  </Text>
       </View>
       <View style={styles.info3}> 
-      <Text style={styles.price}>150 XAF/unit </Text>
+      {/* <Text style={styles.price}>150 XAF/unit </Text>  */}
+      <Text style={styles.price}>{product_price}</Text>  
       <TextInput
          placeholder='Quantity'
          style={styles.Quantity}
@@ -56,6 +80,7 @@ const styles = StyleSheet.create({
     width:'100%',
     padding:8,
      paddingTop:80,
+     backgroundColor:'white',
   },
   mainCtainer:{
     backgroundColor:'white',
@@ -128,7 +153,7 @@ const styles = StyleSheet.create({
   },
   imagediv:{
     width:'100%',
-    backgroundColor:'red',
+    backgroundColor:'gray',
     borderRadius:10
   },
   image:{

@@ -32,8 +32,8 @@ export default function NavugationBuyer({ navigation }) {
   // display  loading while waiting for Api data to loead
   if(data.length===0){
     return(
-      <View>
-        <Text> Loading Products </Text>
+      <View style={styles.product}>
+        <Text style={styles.product1} > Loading Products </Text>
       </View>
     )
   }
@@ -129,4 +129,15 @@ const styles = StyleSheet.create({
     width: '48%',
     marginBottom: 10,
   },
+  product:{
+    // flex:1,
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center',
+  },
+  product1:{
+    fontSize:30
+  }
 });
+
+ 

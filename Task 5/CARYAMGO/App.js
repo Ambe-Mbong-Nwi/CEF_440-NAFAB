@@ -32,8 +32,8 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    <OrderProduct />
-  {/* <Stack.Navigator>
+    {/* <OrderProduct /> */}
+  <Stack.Navigator>
       <Stack.Screen
         name="Home"
         component={OptionPage}
@@ -80,7 +80,7 @@ export default function App() {
             options={{ headerShown: false }}
           /> 
           
-    </Stack.Navigator> */}
+    </Stack.Navigator>
   </NavigationContainer>
   )
 }
