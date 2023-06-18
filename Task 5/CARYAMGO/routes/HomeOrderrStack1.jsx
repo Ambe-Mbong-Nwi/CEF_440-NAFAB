@@ -2,9 +2,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import WelcomePage from '../pages/WelcomePage';
 import Order from '../pages/Order';
 import NavugationBuyer from '../pages/NavugationBuyer';
+import { StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
-const Stack = createNativeStackNavigator();
 export default function HomeOrderrStack1() {
+  const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator
     screenOptions={{headerShown: false}}>
@@ -20,6 +22,8 @@ export default function HomeOrderrStack1() {
     
     <Stack.Screen name="Order" component={Order} />
   </Stack.Navigator>
-);
+  )
 }
+
+const styles = StyleSheet.create({})
 
