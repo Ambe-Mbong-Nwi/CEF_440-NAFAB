@@ -191,7 +191,7 @@ style={[styles.Textinput,formErrors.password && styles.inputError]}
   </TouchableOpacity>
   <Text style={{fontSize:15  }}  >Already have an account
      <Text
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('Login1')}
      style={styles.text} > Sign in </Text> </Text>
     </View>
 

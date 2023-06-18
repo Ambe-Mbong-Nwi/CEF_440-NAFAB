@@ -1,10 +1,6 @@
 import { SafeAreaView, StyleSheet, Text, View,TextInput ,TouchableOpacity,ScrollView } from 'react-native'
 import { React, useState } from 'react';
 import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from '@expo/vector-icons';
-// import AddProduct from '../shared/AddProduct';
-// import CreateShop from '../shared/CreateShop';
-// import SubscriptionComponent from '../shared/SubscriptionComponent';
-// import EditProduct from '../shared/EditProduct';
 import ViewHistory from '../shared/ViewHistory';
 import { useNavigation } from '@react-navigation/native';
 

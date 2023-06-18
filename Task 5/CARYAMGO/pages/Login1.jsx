@@ -3,12 +3,14 @@ import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
 import Navigation from '../shared/Navigation';
 
-const Login = ({navigation}) => {
+export default function Login1({navigation}) {
+    // There is a form to be validated here  to validat the fields of the 
+    // login page while performing Authentication
   return (
     <SafeAreaView style={{  backgroundColor:'green', width:'100%',  }} > 
     <View style={styles.container1} >  
     <AntDesign 
-      onPress={() => navigation.navigate('SignUpBuyer')}
+      onPress={() => navigation.navigate('SignUpVendor')}
     name="arrowleft" size={24} color="black" />
     <View style={{   marginBottom:100,marginTop:50  }}  >  
     <Text
@@ -52,7 +54,7 @@ style={styles.Textinput}
   </TouchableOpacity>
   <Text style={{fontSize:15  }}  >New here ? 
   <Text 
-    onPress={() => navigation.navigate('SignUpBuyer')}
+    onPress={() => navigation.navigate('SignUpVendor')}
   style={styles.text} > Sign Up </Text> </Text>
     </View>
 
@@ -61,7 +63,8 @@ style={styles.Textinput}
   </SafeAreaView>
   )
 }
-const styles= StyleSheet.create({
+
+const styles = StyleSheet.create({
     Textinput:{
         height: 50,
         borderColor: 'gray',
@@ -103,4 +106,3 @@ const styles= StyleSheet.create({
         padding:30 
     }
 })
-export default Login
