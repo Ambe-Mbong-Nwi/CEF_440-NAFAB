@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from '../routes/Navigation';
+import Navigation from '../shared/Navigation';
 import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity } from 'react-native';
 import { EvilIcons, Ionicons, Feather} from '@expo/vector-icons';
 import ProductHeader from '../ProductHeader';

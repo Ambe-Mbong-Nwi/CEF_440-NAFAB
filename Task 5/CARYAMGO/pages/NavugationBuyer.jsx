@@ -1,5 +1,5 @@
 import React, { Component,useEffect,useState } from 'react'
-import { Text, StyleSheet, View} from 'react-native'
+import { Text, StyleSheet, View,TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Ionicons,EvilIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -10,6 +10,9 @@ import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
 import Card1 from '../shared/Card1';
 import axios from 'axios'
+// import Product from './Product';
+// import Navigation from '../shared/Navigation';
+// import OrderProduct from '../OrderProduct';
 
 export default function NavugationBuyer({ navigation }) {
     const profileimage = require('../assets/marketlady.png')
@@ -20,19 +23,24 @@ export default function NavugationBuyer({ navigation }) {
     // below are the changes required to fetch the data from the Api 
     const [data, setData] = useState([]);
      // handle the Api fetch using Fetch  
+     const results=0;
      const handleProductFetch =()=>{
       fetch(`https://carryamgo.onrender.com/api/products/`)
       .then(res => res.json())
       .then(
-        (results) => {
-          console.log(results);
+        (results) => { 
           setData(results)
         },
       )
     }
   useEffect(() => {
     handleProductFetch()
-  }, [])
+  }, []) 
+  // function to navigate to antohetr product 
+  const handleCardPress = () => {
+    alert('yo bro');
+    navigation.navigate('OrderProduct');
+  };
   return (
     <SafeAreaView style={styles.Container} >
       <ScrollView 
@@ -57,28 +65,36 @@ export default function NavugationBuyer({ navigation }) {
       </View>
     </View>
     <View style={styles.cardsContainer}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('OrderProduct')}>
           <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          </TouchableOpacity>
           <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
           <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-          <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
           <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-
         </View>
-
-    {/* getting data from the user and mapping throughs to display each  */}
-    {/* <View>
-      {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
-        <Card
-          key={product_id}
-           src={{ uri: product_image }}
-          name={product_name}
-          price={product_price}
-          Qty={product_quantity}
-          owner={seller_name}
-          marketname={name_market}
-        />
+        {/* end of changes anticipating modification  */}
+                <Text>Api values before </Text>
+  
+ <View style={styles.cardsContain}>
+      {data.map(({ product_image,product_name, product_price,product_quantity, 
+      QtyLeft, seller_name,name_market, product_id, product_description}) => (
+     <TouchableOpacity
+      key={product_id}
+      // onPress={() => navigation.navigate('OrderProduct')}
+      onPress={() => navigation.navigate('OrderProduct',{ results })}
+      >
+          <Card1
+            src={{ uri: product_image }}
+            name={product_name}
+            price={product_price}
+            Qty={product_quantity}
+            owner={seller_name}
+            marketname={name_market}
+          />
+        </TouchableOpacity>
       ))}
-    </View> */}
+    </View>
     <Text></Text>
     </ScrollView>
     </SafeAreaView>
