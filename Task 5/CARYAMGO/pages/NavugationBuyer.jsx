@@ -1,29 +1,17 @@
 import React, { Component,useEffect,useState } from 'react'
-import { Text, StyleSheet, View} from 'react-native'
+import { Text, StyleSheet, View,TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Ionicons,EvilIcons } from '@expo/vector-icons';
+import { Ionicons,EvilIcons,AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import SearchBar from './SearchBar';
 import Discount1 from './Discount1';
-import { AntDesign } from '@expo/vector-icons';
-import Card from '../shared/Card';
 import Card1 from '../shared/Card1';
-import Order from './Order';
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 
-
-export default function NavugationBuyer() {
-
-  const navigation = useNavigation();   //defining navigation
-
-  //going to customer support page
-  // const pressHandler = () => {
-  //     navigation.navigate('CustomerSupport');
-  // }
-
-
+export default function NavugationBuyer({ navigation }) {
+  // export default function NavugationBuyer() {
+  // const navigation = useNavigation();
     const profileimage = require('../assets/marketlady.png')
     const carbage = require('../assets/cabbage.png')
     const tomato = require('../assets/tomate.png') 
@@ -32,19 +20,19 @@ export default function NavugationBuyer() {
     // below are the changes required to fetch the data from the Api 
     const [data, setData] = useState([]);
      // handle the Api fetch using Fetch  
+     const results=0;
      const handleProductFetch =()=>{
       fetch(`https://carryamgo.onrender.com/api/products/`)
       .then(res => res.json())
       .then(
-        (results) => {
-          console.log(results);
+        (results) => { 
           setData(results)
         },
       )
     }
   useEffect(() => {
     handleProductFetch()
-  }, [])
+  }, []) 
   return (
     <SafeAreaView style={styles.Container} >
       <ScrollView 
@@ -74,23 +62,32 @@ export default function NavugationBuyer() {
           <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
           <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' navigation={navigation} />
           <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
+          <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
+          <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
 
         </View>
-
-    {/* getting data from the user and mapping throughs to display each  */}
-    {/* <View>
-      {data.map(({ product_image,product_name, product_price,product_quantity, QtyLeft, seller_name,name_market, product_id}) => (
-        <Card
-          key={product_id}
-           src={{ uri: product_image }}
-          name={product_name}
-          price={product_price}
-          Qty={product_quantity}
-          owner={seller_name}
-          marketname={name_market}
-        />
+  
+ <View style={styles.cardsContain}>
+      {data.map(({ product_image,product_name, product_price,product_quantity, 
+      QtyLeft, seller_name,name_market, product_id, product_description}) => (
+     <TouchableOpacity
+      key={product_id}
+// exporting data such that it can be received as a prop in the ohter navigation 
+      onPress={() => navigation.navigate('OrderProduct', { data: { product_image, product_name, product_price, product_quantity, seller_name, name_market } })}
+      >
+          <Card1
+            src={{ uri: product_image }}
+            name={product_name}
+            price={product_price}
+            Qty={product_quantity}
+            owner={seller_name}
+            marketname={name_market}
+          />
+        </TouchableOpacity>
       ))}
-    </View> */}
+    </View>
     <Text></Text>
     </ScrollView>
     </SafeAreaView>

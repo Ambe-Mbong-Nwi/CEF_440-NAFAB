@@ -58,7 +58,7 @@ const validateForm = () => {
   {/* validate the email input field */}
   const validateEmail = (email) => {
     // Regular expression for email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9]{3,20}@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
@@ -151,10 +151,13 @@ style={[styles.Textinput,formErrors.password && styles.inputError]}
       <TouchableOpacity 
       onPress={validateForm}
       style={styles.button} >
-          <Text style={styles.btnText}  >Sign Up</Text>
+          <Text
+          style={styles.btnText}  >Sign Up</Text>
   </TouchableOpacity>
   <Text style={{fontSize:15  }}  >Already have an account
-     <Text style={styles.text} > Sign in </Text> </Text>
+     <Text
+      onPress={() => navigation.navigate('Login')}
+     style={styles.text} > Sign in </Text> </Text>
     </View>
 
   </View>

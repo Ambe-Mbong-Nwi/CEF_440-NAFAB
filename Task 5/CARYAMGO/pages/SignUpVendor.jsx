@@ -3,7 +3,7 @@ import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,Switch,
 import { useState,React } from 'react';
 import { Feather,AntDesign } from '@expo/vector-icons';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import Login from './Login';
 export default function SignUpVendor({navigation}) {
 
       // states to validate the form 
@@ -75,7 +75,7 @@ const validatePhoneNumber = (phoneNumber) => {
 // subjected to changes 
 const validateEmail = (email) => {
   // Regular expression for email validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[a-zA-Z0-9]{3,20}@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 };
 
@@ -190,7 +190,9 @@ style={[styles.Textinput,formErrors.password && styles.inputError]}
           <Text style={styles.btnText}  >Sign Up</Text>
   </TouchableOpacity>
   <Text style={{fontSize:15  }}  >Already have an account
-     <Text style={styles.text} > Sign in </Text> </Text>
+     <Text
+        onPress={() => navigation.navigate('Login')}
+     style={styles.text} > Sign in </Text> </Text>
     </View>
 
   </View>
