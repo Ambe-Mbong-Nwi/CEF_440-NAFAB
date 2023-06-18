@@ -1,15 +1,18 @@
 import { View, Text,TextInput,Button,StyleSheet,TouchableOpacity,SafeAreaView   } from 'react-native'
 import React from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
+import Navigation from '../shared/Navigation';
 
-const Login = () => {
+const Login = ({navigation}) => {
     function trymy(){
         alert("yo");
       }
   return (
     <SafeAreaView style={{  backgroundColor:'green', width:'100%',  }} > 
     <View style={styles.container1} >  
-    <AntDesign name="arrowleft" size={24} color="black" />
+    <AntDesign 
+      onPress={() => navigation.navigate('SignUpBuyer')}
+    name="arrowleft" size={24} color="black" />
     <View style={{   marginBottom:100,marginTop:50  }}  >  
     <Text
       style={{
@@ -50,7 +53,10 @@ style={styles.Textinput}
       style={styles.button} >
           <Text style={styles.btnText}  >LOGIN</Text>
   </TouchableOpacity>
-  <Text style={{fontSize:15  }}  >New here ? <Text style={styles.text} > Sign Up </Text> </Text>
+  <Text style={{fontSize:15  }}  >New here ? 
+  <Text 
+    onPress={() => navigation.navigate('SignUpBuyer')}
+  style={styles.text} > Sign Up </Text> </Text>
     </View>
 
   </View>
@@ -92,7 +98,7 @@ const styles= StyleSheet.create({
     },
     container1: {
         backgroundColor: '#fff',
-        marginTop:150,
+        marginTop:100,
         padding:15,
         paddingTop:50,
         width:'100%',
