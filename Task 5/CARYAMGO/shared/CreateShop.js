@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View,TextInput ,TouchableOpacity,ScrollView} from 'react-native'
 import { Picker } from '@react-native-picker/picker'
 import { React, useState } from 'react'
-import { Feather,AntDesign, MaterialCommunityIcons,SimpleLineIcons,Ionicons} from '@expo/vector-icons';
+import { AntDesign} from '@expo/vector-icons';
 
 export default function CreateShop(){
 

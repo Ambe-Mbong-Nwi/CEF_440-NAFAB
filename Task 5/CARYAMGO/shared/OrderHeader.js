@@ -10,15 +10,7 @@ export default function OrderHeader({ onBackPress }) {
                 <AntDesign name="arrowleft" size={24} color="white" />
             </TouchableOpacity>
             
-               <Text style={styles.Message}>Messaging</Text>
-               <View style={styles.searchOptions}>
-                    <TouchableOpacity style={styles.search}>
-                        <FontAwesome5 name="search" size={24} color="white" />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <SimpleLineIcons name="options-vertical" size={24} color="white" />
-                    </TouchableOpacity>
-               </View>
+               <Text style={styles.Message}>Order</Text>
          
             
         </View>

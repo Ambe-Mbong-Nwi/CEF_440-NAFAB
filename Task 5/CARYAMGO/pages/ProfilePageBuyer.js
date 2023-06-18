@@ -1,14 +1,15 @@
 import { SafeAreaView, StyleSheet, Text, View,TextInput ,TouchableOpacity,ScrollView } from 'react-native'
 import { React, useState } from 'react';
 import { Feather,AntDesign,MaterialCommunityIcons,SimpleLineIcons,Ionicons} from '@expo/vector-icons';
-import AddProduct from '../shared/AddProduct';
-import CreateShop from '../shared/CreateShop';
-import SubscriptionComponent from '../shared/SubscriptionComponent';
-import EditProduct from '../shared/EditProduct';
+// import AddProduct from '../shared/AddProduct';
+// import CreateShop from '../shared/CreateShop';
+// import SubscriptionComponent from '../shared/SubscriptionComponent';
+// import EditProduct from '../shared/EditProduct';
+import ViewHistory from '../shared/ViewHistory';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function ProfilePage(props) {
+export default function ProfilePageBuyer(props) {
 
     const navigation = useNavigation();   //defining navigation
 
@@ -17,10 +18,10 @@ export default function ProfilePage(props) {
         navigation.goBack();
       };
 
-    //going to subscription page
-    const pressHandler = () => {
-        navigation.navigate('Subscription');
-    }
+    // //going to subscription page
+    // const pressHandler = () => {
+    //     navigation.navigate('Subscription');
+    // }
 
     //hiding and displaying information.
     const [isDetailsVisible, setDetailsVisible] = useState(false);
@@ -122,13 +123,7 @@ export default function ProfilePage(props) {
         </View>
         </View> )}
 
-        <CreateShop />
-
-        <SubscriptionComponent  onPress={ pressHandler }/>
-
-        <EditProduct />
-      
-        <AddProduct/>
+        <ViewHistory />
     </View>
     </ScrollView>
     </SafeAreaView> 

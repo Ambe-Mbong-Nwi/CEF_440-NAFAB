@@ -3,10 +3,16 @@ import { View, Text, StyleSheet, TouchableOpacity, TextInput } from 'react-nativ
 import { AntDesign, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 
 
-export default function CustomerSupportHeader({ onBackPress }) {
+export default function CustomerSupportHeader({ toggleModal }) {
+
+    const handleBackButtonPress = () => {
+        // Call the toggleModal function passed from props
+        toggleModal();
+      };
+
     return(
         <View style={styles.container}>
-            <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
+            <TouchableOpacity style={styles.backButton} onPress={handleBackButtonPress} >
                 <AntDesign name="arrowleft" size={24} color="white" />
             </TouchableOpacity>
             

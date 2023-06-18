@@ -5,17 +5,13 @@ import { EvilIcons, Ionicons, Feather} from '@expo/vector-icons';
 import CustomerSupportHeader from '../shared/CustomerSupportHeader';
 
 
-export default function CustomerSupport({ navigation }) {
-
-    const handleBackPress = () => {
-        navigation.goBack();
-      };
+export default function CustomerSupport({ toggleModal }) {
 
     return(
         <ScrollView style={styles.container}> 
      
             <View>
-                <CustomerSupportHeader onBackPress={handleBackPress} />
+                <CustomerSupportHeader toggleModal={toggleModal} />
             </View>
             <View style={styles.innercontainer}>
             <Text style={styles.contacts}>Our Contacts</Text>

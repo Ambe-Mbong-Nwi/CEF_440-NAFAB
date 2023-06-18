@@ -9,9 +9,21 @@ import Discount1 from './Discount1';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
 import Card1 from '../shared/Card1';
-import axios from 'axios'
+import Order from './Order';
+import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
-export default function NavugationBuyer({ navigation }) {
+
+export default function NavugationBuyer() {
+
+  const navigation = useNavigation();   //defining navigation
+
+  //going to customer support page
+  // const pressHandler = () => {
+  //     navigation.navigate('CustomerSupport');
+  // }
+
+
     const profileimage = require('../assets/marketlady.png')
     const carbage = require('../assets/cabbage.png')
     const tomato = require('../assets/tomate.png') 
@@ -39,7 +51,7 @@ export default function NavugationBuyer({ navigation }) {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       style={styles.Container1}> 
-    <SearchBar/>
+    <SearchBar  />
     <Discount1
     src={profileimage}
     Discount='40% OFF'
@@ -57,11 +69,11 @@ export default function NavugationBuyer({ navigation }) {
       </View>
     </View>
     <View style={styles.cardsContainer}>
-          <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-          <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
-          <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
-          <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+          <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
+          <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' navigation={navigation} />
+          <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
+          <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' navigation={navigation} />
+          <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
 
         </View>
 

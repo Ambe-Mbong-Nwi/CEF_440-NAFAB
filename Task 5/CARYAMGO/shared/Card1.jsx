@@ -1,8 +1,16 @@
-import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
+import { Image, StyleSheet, Text, TextInput, View, TouchableOpacity} from 'react-native'
 import React from 'react'
 import { MaterialCommunityIcons,Entypo ,FontAwesome,MaterialIcons,EvilIcons  } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Card1(props) {
+
+    const navigation = useNavigation();   //defining navigation
+
+    const pressHandler = () => {
+        navigation.navigate('Order');
+    }
+
   return (
     <View style={styles.card}  >
     <View style={styles.imageIcon}> 
@@ -11,7 +19,9 @@ export default function Card1(props) {
         </View>
         {/* shopping bad  */}
     <View style={styles.icon}>
-    <MaterialIcons name="shopping-bag" size={24} color="black" style={styles.iconz} />  
+    <TouchableOpacity onPress={pressHandler}>
+        <MaterialIcons name="shopping-bag" size={24} color="black" style={styles.iconz} />  
+    </TouchableOpacity>
     </View>
     {/*cart informations*/}
     <View style={styles.info} >
