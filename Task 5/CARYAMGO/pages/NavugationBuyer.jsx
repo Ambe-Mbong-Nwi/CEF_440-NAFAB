@@ -68,11 +68,18 @@ export default function NavugationBuyer({ navigation }) {
           <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
 
         </View>
+        {/* end of changes anticipating modification  */}
+                <Text>Api values before </Text>
+
+
+        </View>
+
   
- <View style={styles.cardsContain}>
+ <View >
       {data.map(({ product_image,product_name, product_price,product_quantity, 
       QtyLeft, seller_name,name_market, product_id, product_description}) => (
      <TouchableOpacity
+     style={styles.cardsContain}
       key={product_id}
 // exporting data such that it can be received as a prop in the ohter navigation 
       onPress={() => navigation.navigate('OrderProduct', { data: { product_image, product_name, product_price, product_quantity, seller_name, name_market } })}
@@ -120,9 +127,16 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
       },
       cardsContainer: {
+        // flexDirection: 'row',
+        // flexWrap: 'wrap',
+        // justifyContent: 'space-between',
+        // width: '100%',
+        // borderBottomColor:'black',
+        // borderEndWidth:1
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         width: '100%',
+        marginBottom: 15,
       },
 })

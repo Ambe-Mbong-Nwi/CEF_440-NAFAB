@@ -3,8 +3,6 @@ import HomeOrderrStack1 from '../routes/HomeOrderrStack1';
 import DiscountOrderrStack from '../routes/DiscountOrderrStack';
 import MessageChatStack from '../routes/MessageChatStack';
 import Notification from '../pages/Notification';
-// import AddToCart from '../pages/AddToCart';
-//import Messaging from '../pages/Messaging';
 import ProfilePage from '../pages/ProfilePage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ProfilePageBuyer from '../pages/ProfilePageBuyer';
@@ -40,7 +38,7 @@ export default function Navigation1({navigation}) {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === "HomeOrderrStack" ) {
+          if (route.name === "HomeOrderrStack1" ) {
             iconName = focused ? 'home' : 'home-outline';
             } else if (route.name === 'MessageChatStack') {
             iconName = focused ? 'chatbubble-ellipses' : 'chatbubble-ellipses-outline';
@@ -59,7 +57,7 @@ export default function Navigation1({navigation}) {
       })}>
 
       <Tab.Screen 
-      name="HomeOrderrStack" 
+      name="HomeOrderrStack1" 
       component={HomeOrderrStack1} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen

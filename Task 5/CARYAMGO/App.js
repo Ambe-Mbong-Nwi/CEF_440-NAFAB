@@ -9,7 +9,7 @@ import Navigation from './shared/Navigation';
 import ProfilePage from './pages/ProfilePage';
 import Navigation1 from './shared/Navigation1';
 import AddToCart from './pages/AddToCart';
-import OrderProduct from './OrderProduct';
+import OrderProduct from './pages/OrderProduct';
 import Login from './pages/Login';
 // routes unformation 
 import 'react-native-gesture-handler';
@@ -31,8 +31,8 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-
-  {/* <Navigation /> */}
+{/* 
+    <Navigation />  */}
   {/* <Product/> */}
   {/* <AddToCart/> */}
   {/* <OrderHeader/> */}
