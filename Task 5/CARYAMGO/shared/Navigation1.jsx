@@ -5,6 +5,7 @@ import MessageChatStack from '../routes/MessageChatStack';
 import Notification from '../pages/Notification';
 import ProfilePage from '../pages/ProfilePage';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ProfilePageBuyer from '../pages/ProfilePageBuyer';
 // import WelcomePage from '../pages/WelcomePage';
 
 const Tab = createBottomTabNavigator();
@@ -46,7 +47,7 @@ export default function Navigation1({navigation}) {
                 iconName = focused ? 'cart' : 'cart-outline';
             } else if (route.name === 'Notification') {
                 iconName = focused ? 'notifications' : 'notifications-outline';
-            } else if (route.name === 'ProfilePage') {
+            } else if (route.name === 'ProfilePageBuyer') {
                 iconName = focused ? 'person' : 'person-outline';
             }
 // name="CartStack" 
@@ -92,9 +93,10 @@ export default function Navigation1({navigation}) {
         header: () => null,   //remove the default header
       }}/>
 
+{/* buyer profile page */}
       <Tab.Screen 
-      name="ProfilePage" 
-      component={ProfilePage} 
+      name="ProfilePageBuyer" 
+      component={ProfilePageBuyer} 
       options={{
         tabBarLabel: () => null, // remove the label for the Home screen
         header: () => null,   //remove the default header

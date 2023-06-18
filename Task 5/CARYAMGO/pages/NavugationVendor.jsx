@@ -8,6 +8,7 @@ import SearchBar from './SearchBar';
 import Discount from './Discount';
 import { AntDesign } from '@expo/vector-icons';
 import Card from '../shared/Card';
+import CreateProductModal from '../routes/CreateProductModal';
 import Card1 from '../shared/Card1';
 import axios from 'axios';
 
@@ -55,10 +56,7 @@ useEffect(() => {
       <View> 
       <Text style={{fontSize:21,fontWeight:'600'  }}>All Products  </Text>
       </View>
-        <View style={styles.create} >  
-        <Text style={{color:'#0A9100',fontSize:20,marginRight:7  }} >Create Product</Text>
-        <AntDesign name="pluscircleo" size={24} color="#0A9100" />
-        </View>
+      <CreateProductModal />
     </View>
     <View style={styles.cardsContainer}>
           <Card src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />

@@ -13,7 +13,7 @@ export default function Order({ navigation }) {
     return(
         <View style={styles.container}>
            <OrderHeader onBackPress={handleBackPress} />
-         
+         <Text>ORDER PAGE</Text>
             
         </View>
     )

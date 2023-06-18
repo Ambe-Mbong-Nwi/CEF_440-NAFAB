@@ -2,20 +2,17 @@ import React from 'react';
 import Navigation from '../shared/Navigation';
 import { StyleSheet, Text, View, ScrollView, TextInput, Image, TouchableOpacity } from 'react-native';
 import { EvilIcons, Ionicons, Feather} from '@expo/vector-icons';
-import ProductHeader from '../ProductHeader';
+import ProductHeader from '../shared/ProductHeader';
 
 
-export default function Product({ navigation }) {
+export default function Product({ navigation, toggleModal}) {
 
-    const handleBackPress = () => {
-        navigation.goBack();
-      };
 
     return(
         <ScrollView style={styles.container}> 
      
             <View>
-                <ProductHeader onBackPress={handleBackPress} />
+                <ProductHeader toggleModal={toggleModal} />
             </View>
             <View style={styles.message}> 
                 <Text style={styles.message1}>Create/edit your products with</Text>
@@ -70,7 +67,7 @@ const styles = StyleSheet.create({
     },
 
     message: {
-        marginTop: 15,
+        marginTop: 5,
         fontSize: 25,
         flexDirection: 'column',
         alignItems: 'center',
@@ -98,7 +95,7 @@ const styles = StyleSheet.create({
 
     input: {
         width: '90%',
-        height: 40,
+        height: 35,
         borderRadius: 1,
         paddingHorizontal: 20,
         borderWidth: 0.19,

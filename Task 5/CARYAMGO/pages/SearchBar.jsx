@@ -1,35 +1,36 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, Modal } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Ionicons,EvilIcons } from '@expo/vector-icons';
+import { Ionicons,EvilIcons, FontAwesome } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native-gesture-handler';
+import CustomerSupportModal from '../routes/CustomerSupportModal';
+
+
 export default function SearchBar() {
   return (
     // <SafeAreaView style={styles.Container} >
     <View style={styles.searchBar} >
-    <Ionicons name="settings-sharp" size={28} color="black" />
-    {/* ICON SECTION */}
-    <View style={styles.search}  >
-    <EvilIcons 
-       style={{ 
-        padding: 3,
-        marginTop:3,
+      <Ionicons name="settings-sharp" size={28} color="black" style={styles.settings}/>
+      {/* ICON SECTION */}
+      <View style={styles.search}  >
+        <EvilIcons 
+          style={{ 
+            padding: 3,
+            marginTop:3,
 
-        }}
-    name="search" size={24} color="black" />
-    <TextInput
-    placeholder='Search'
-    style={{ 
-      width: 200,
-      }}
-    />
-    </View>
-    <MaterialIcons 
+            }}
+        name="search" size={24} color="black" />
+        <TextInput
+        placeholder='Search'
         style={{ 
-          padding:2,
+          width: 200,
           }}
-    name="add-shopping-cart" size={28} color="black" />
+        />
+      </View>
+      <TouchableOpacity >
+        <CustomerSupportModal />
+      </TouchableOpacity>
     </View>
     // </SafeAreaView>
   )
@@ -38,18 +39,28 @@ export default function SearchBar() {
 const styles = StyleSheet.create({
     searchBar:{
     flexDirection:"row",
-    marginLeft:5,
     width: '100%',
-    // marginRight:10,
+    justifyContent: 'center',
+    alignItems: 'center',
     },
+
     search:{
+      flex: 4,
       borderColor: 'grey',
       borderWidth: 1,
       width: 250,
       flexDirection:"row",
       borderRadius: 30,
-      marginLeft:5,
-      marginRight:5,
-      marginBottom:10,
+      marginHorizontal: 5
     },
+
+    settings: {
+      flex: 0.5
+    },
+
+    cussupport: {
+      flex: 0.5,
+      alignSelf: 'center',
+      justifyContent: 'flex-end'
+    }
 })

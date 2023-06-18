@@ -39,7 +39,7 @@ export default function NavugationBuyer({ navigation }) {
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
       style={styles.Container1}> 
-    <SearchBar/>
+    <SearchBar  />
     <Discount1
     src={profileimage}
     Discount='40% OFF'
@@ -57,13 +57,23 @@ export default function NavugationBuyer({ navigation }) {
       </View>
     </View>
     <View style={styles.cardsContainer}>
+          <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
+          <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' navigation={navigation} />
+          <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
+          <Card1 src={tomato} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' navigation={navigation} />
+          <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' navigation={navigation} />
           <Card1 src={tomato} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card1 src={carbage} name='White cabbage' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Muea market' />
           <Card1 src={carrot} name='Red Carrot' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
           <Card1 src={{ uri: sneqakers }} name='Red Tomato' price='500' Qty="200" QtyLeft='10' owner='Amber' marketname='Buea market' />
+
         </View>
         {/* end of changes anticipating modification  */}
                 <Text>Api values before </Text>
+
+
+        </View>
+
   
  <View >
       {data.map(({ product_image,product_name, product_price,product_quantity, 
