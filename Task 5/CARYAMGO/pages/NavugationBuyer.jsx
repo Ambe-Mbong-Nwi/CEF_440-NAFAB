@@ -29,6 +29,14 @@ export default function NavugationBuyer({ navigation }) {
   useEffect(() => {
     handleProductFetch();
   }, []);
+  // display  loading while waiting for Api data to loead
+  if(data.length===0){
+    return(
+      <View>
+        <Text> Loading Products </Text>
+      </View>
+    )
+  }
 
   return (
     <SafeAreaView style={styles.Container}>
