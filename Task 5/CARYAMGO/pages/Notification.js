@@ -8,11 +8,11 @@ import { useNavigation } from '@react-navigation/native';
 export default function Notification() {
 
     const navigation = useNavigation();   //defining navigation
-
     //going to previous page
     const handleBackPress = () => {
         navigation.goBack();
       };
+    //   handle the notification
 
     return(
         

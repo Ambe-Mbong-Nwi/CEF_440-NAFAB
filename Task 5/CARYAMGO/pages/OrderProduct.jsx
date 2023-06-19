@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View, SafeAreaView, ScrollView,Image,TextInput,TouchableOpacity } from 'react-native';
-import React from 'react'
+import React, { useState } from 'react'
 import { Feather,AntDesign } from '@expo/vector-icons';
 
 export default function OrderProduct({ route,navigation }) {
   const carbage = require('../assets/cabbage.png')
+  // get the states 
+  const [total,setTotal]= useState(0);
+  const [quantity,setQuantity ]= useState('')
+  const [formErrors, setFormErrors] = useState({});
   // import the data gotten from the prop 
   const { data } = route.params;
   const {
@@ -14,61 +18,91 @@ export default function OrderProduct({ route,navigation }) {
     seller_name,
     name_market,
   } = data;
+  // implement the logic about calculating the products 
+  let totalprice=0;
+  const placeOrder =()=>{
+     // Validate username
+     const errors = {};
+  if (!quantity) {
+    errors.quantity = 'Quantity is required';
+    setFormErrors(errors);
+  }
+    if(quantity<=product_quantity){
+      totalprice = quantity*product_price,
+      setTotal(totalprice)
+    }
+ else{
+  alert('invalid Order')
+ } 
+  }
+  console.log(total);
+  // Route to messaging page 
+  const routePage=()=>{
+    if(total>=product_price){
+navigation.navigate('MessageChatStack')
+    }
+    else if(total<=product_price){
+      alert('place avlid order')
+    }
+
+  }
+
   return (
     <ScrollView>
     <SafeAreaView style={styles.container}>
       <View style={styles.mainCtainer} >  
-    <AntDesign 
-      onPress={() => navigation.navigate('Navigation1')}
+    <AntDesign      
+      onPress={() => navigation.navigate('Navigation1')}   
     name="arrowleft" size={24} color="black" />
-    {/* import the props for seller name {seller_name} */}
-    {/* <Card1
-src={{ uri: product_image }} done 
-name={product_name} done
-price={product_price} done 
-Qty={product_quantity} done 
-owner={seller_name} done 
-marketname={name_market} done 
-/> */}
+
     <View  style={styles.info1}>
-      {/* <Text style={styles.seller} >Ambe's Shop </Text> */}
       <Text style={styles.seller} >{seller_name}</Text>
-      {/* <Text style={styles.market} >Muea Market </Text> */}
       <Text style={styles.market} >{name_market}</Text>
       </View>
       <View style={styles.info2}>
         <View style={styles.imagediv}>  
-      {/* <Image style={styles.image} source={carbage}  /> */}
       <Image style={styles.image} source={{uri:product_image}}  />
       </View>
-      {/* <Text style={styles.name}>Apple</Text>  */}
       <Text style={styles.name}>{product_name}</Text> 
-      {/* for the quantity info */}
       <View style={styles.qty}>
-        {/* <Text style={styles.qty1}> Quantity:200 </Text> */}
-        <Text style={styles.qty1}> {product_quantity} </Text>
-        {/* <Text style={styles.amt}>Amount Left: 10%  </Text> */}
-        <Text style={styles.amt}>Amount Left: 10%  </Text>
+        <Text style={styles.qty1}> Quantity:{product_quantity} </Text>
       </View>
       <View style={styles.info3}> 
-      {/* <Text style={styles.price}>150 XAF/unit </Text>  */}
-      <Text style={styles.price}>{product_price}</Text>  
-      <TextInput
-         placeholder='Quantity'
-         style={styles.Quantity}
-       />
+      <Text style={styles.price}>{product_price}</Text> 
+      {/* flexed view */}
+      <View style={styles.flexed} >  
+        <View style={styles.flexed1}> 
+        <TextInput
+          keyboardType="phone-pad"
+          placeholder='Quantity'
+          // style={[styles.Textinput,formErrors.market && styles.inputError]}
+          style={[styles.Quantity,formErrors.quantity && styles.inputError]}
+          value={quantity}
+          onChangeText={setQuantity}
+        />
+         {formErrors.quantity && <Text style={styles.error}>{formErrors.quantity}</Text>}
+         </View>
+          <View style={styles.flexed2}> 
+          <TouchableOpacity
+            style={styles.button1}
+            onPress={placeOrder}
+            >
+            <Text style={styles.text}>Check-Total </Text>
+          </TouchableOpacity>
+        </View>
+       </View> 
        <Text style={styles.Total}>TOTAL AMOUNT</Text>
-       <Text style={styles.totalAmt}>XAF XXX</Text>
+       <Text style={styles.totalAmt}>XAF {total} </Text>
        <View style={styles.buttondiv}> 
-       <TouchableOpacity style={styles.button}>
+       <TouchableOpacity
+        style={styles.button}
+        onPress={routePage}
+        >
         <Text style={styles.text}>Order </Text>
        </TouchableOpacity>
        </View>
       </View>
       </View>
-     
-   
-
     </View>
     </SafeAreaView>
     </ScrollView>
@@ -160,6 +194,35 @@ const styles = StyleSheet.create({
     width:'100%',
     height:300,
     borderRadius:10
-  }
- 
+  },
+  flexed:{
+    flexDirection:'row',
+    width:'100%',
+    justifyContent:'space-between'
+  },
+  flexed1:{
+  width:'60%',
+  marginRight:5
+  },
+  flexed2:{
+    width:'45%',
+    marginLeft:5,
+  },
+  button1:{
+    backgroundColor:'#0A9100',
+    padding:7,
+    borderRadius:8,
+    width:'80%',
+    paddingTop:12,
+    paddingBottom:12
+  },
+     // display the errors incase the form values are incorrect 
+     error: {
+      color: 'red',
+      marginTop: -10,
+      fontSize:13
+    },
+    inputError: {
+      borderColor: 'red',
+    },
 })

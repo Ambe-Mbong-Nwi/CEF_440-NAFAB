@@ -33,7 +33,7 @@ export default function NavugationBuyer({ navigation }) {
   if(data.length===0){
     return(
       <View style={styles.product}>
-        <Text style={styles.product1} > Loading Products </Text>
+        <Text style={styles.product1} > Loading Products... </Text>
       </View>
     )
   }
@@ -131,12 +131,18 @@ const styles = StyleSheet.create({
   },
   product:{
     // flex:1,
-    flexDirection:'column',
-    justifyContent:'center',
-    alignItems:'center',
+    // flexDirection:'column',
+    // justifyContent:'center',
+    // alignItems:'center',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   product1:{
-    fontSize:30
+    fontSize:20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: '300',
   }
 });
 
