@@ -6,7 +6,7 @@ import SubscriptionStack from '../routes/SubscriptionStack';
 import ProfilePage from '../pages/ProfilePage';
 import Icon from 'react-native-vector-icons/Ionicons';
 import HomeOrderrStack from '../routes/HomeOrderrStack';
-// import HomeOrderrStack1 from '../routes/HomeOrderrStack1'
+import HomeOrderrStack1 from '../routes/HomeOrderrStack1'
 
 const Tab = createBottomTabNavigator();
 
