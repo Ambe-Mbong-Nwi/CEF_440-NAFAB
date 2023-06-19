@@ -12,6 +12,7 @@ import AddToCart from './pages/AddToCart';
 import OrderProduct from './pages/OrderProduct';
 import Login from './pages/Login';
 import Login1 from './pages/Login1';
+import ForgotPassword from './pages/ForgotPassword'
 // routes unformation 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -26,13 +27,14 @@ import Messaging1 from './pages/Messaging1';
 import Product from './pages/Product';
 import CustomerSupport from './pages/CustomerSupport';
 import Order from './pages/Order';
+import Notification from './pages/Notification';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    {/* <OrderProduct /> */}
+     
   <Stack.Navigator>
       <Stack.Screen
         name="Home"
@@ -74,13 +76,17 @@ export default function App() {
             component={Login}
             options={{ headerShown: false }}
           /> 
-                      <Stack.Screen
+            <Stack.Screen
             name="Login1"
             component={Login1}
             options={{ headerShown: false }}
           /> 
-          
-    </Stack.Navigator>
+           <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{ headerShown: false }}
+          />  
+    </Stack.Navigator> 
   </NavigationContainer>
   )
 }

@@ -11,11 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function NavugationBuyer({ navigation }) {
   const profileimage = require('../assets/marketlady.png');
-  const carbage = require('../assets/cabbage.png');
-  const tomato = require('../assets/tomate.png');
-  const carrot = require('../assets/carrots.png');
-  const sneqakers = 'https://carryamgo.onrender.com/media/Product%20Image/sneaker1.jpeg';
-
   const [data, setData] = useState([]);
 
   const handleProductFetch = () => {
