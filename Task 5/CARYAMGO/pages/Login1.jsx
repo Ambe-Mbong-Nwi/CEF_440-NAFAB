@@ -42,7 +42,9 @@ style={styles.Textinput}
  placeholder='password'
   />
   <View style={{ justifyContent:'flex-end', flexDirection:'row',marginBottom:100    }}  >
-    <Text style={styles.text}> Forgot password ?</Text>
+    <Text
+      onPress={() => navigation.navigate('ForgotPassword')}
+    style={styles.text}> Forgot password ?</Text>
   </View>
  
 
