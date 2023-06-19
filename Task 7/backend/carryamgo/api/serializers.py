@@ -4,7 +4,7 @@ from .models import Seller, Buyer, Rating, Shop, Product, Order, Message, Notifi
 
 
 class SellerSerializer(serializers.ModelSerializer):
-    id=serializers.ReadOnlyField(source='user.id')
+    id = serializers.ReadOnlyField(source='user.id')
     email = serializers.ReadOnlyField(source='user.email')
     username = serializers.ReadOnlyField(source='user.username')
     password = serializers.ReadOnlyField(source='user.password')
@@ -38,15 +38,40 @@ class ShopSerializer(serializers.ModelSerializer):
 
 
 class ProductSerializer(serializers.ModelSerializer):
+    shop_name = serializers.CharField(source='shop.shop_name', read_only=True)
+    seller_name = serializers.CharField(source='seller.user.username', read_only=True)
+    name_market = serializers.CharField(source='seller.name_market', read_only=True)
+
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['product_id', 'product_name', 'product_price', 'product_quantity',
+                  'product_image', 'shop_name', 'seller_name', 'name_market']
 
 
 class OrderSerializer(serializers.ModelSerializer):
+    buyer = serializers.ReadOnlyField(source='buyer.user.username')
+    product = serializers.ReadOnlyField(source='product.product_name')
+    seller = serializers.ReadOnlyField(source='seller.user.username')
+    product_price = serializers.ReadOnlyField(source='product.product_price')
+    product_image = serializers.SerializerMethodField()
+
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['order_id', 'order_quantity', 'order_price', 'order_status', 'product_price',
+                  'buyer', 'product', 'seller', 'product_image', 'created_at']
+
+    def get_product_image(self, instance):
+        return instance.product.product_image.url if instance.product.product_image else None
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['product_image'] = self.get_product_image(instance)
+        return representation
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['order_price'] = instance.calculate_order_price()
+        return representation
 
 
 class MessageSerializer(serializers.ModelSerializer):

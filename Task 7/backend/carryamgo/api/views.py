@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.hashers import make_password
 from django.utils.crypto import get_random_string
-from rest_framework.permissions import IsAuthenticated
+# from rest_framework.permissions import IsAuthenticated
 
 from .models import Seller, Buyer, Rating, Shop, Product, Order, Message, Notification, Promotion, Subscription
 from .serializers import (
@@ -20,121 +20,121 @@ User = get_user_model()
 class SellerListCreateView(generics.ListCreateAPIView):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class SellerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Seller.objects.all()
     serializer_class = SellerSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class BuyerListCreateView(generics.ListCreateAPIView):
     queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class BuyerRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Buyer.objects.all()
     serializer_class = BuyerSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class RatingListCreateView(generics.ListCreateAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class RatingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Rating.objects.all()
     serializer_class = RatingSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class ShopListCreateView(generics.ListCreateAPIView):
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class ShopRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Shop.objects.all()
     serializer_class = ShopSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class OrderListCreateView(generics.ListCreateAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class OrderRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class MessageListCreateView(generics.ListCreateAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class MessageRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Message.objects.all()
     serializer_class = MessageSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class NotificationListCreateView(generics.ListCreateAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class NotificationRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Notification.objects.all()
     serializer_class = NotificationSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class PromotionListCreateView(generics.ListCreateAPIView):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class PromotionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class SubscriptionListCreateView(generics.ListCreateAPIView):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class SubscriptionRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class SellerAuthenticationAPIView(APIView):
