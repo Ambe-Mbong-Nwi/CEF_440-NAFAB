@@ -93,15 +93,36 @@ class Product(models.Model):
                 seller=self.seller,
             )
 
+    @property
+    def name_market(self):
+        return self.seller.name_market
+
+    def to_dict(self):
+        return {
+            'product_id': self.product_id,
+            'product_name': self.product_name,
+            'product_price': self.product_price,
+            'product_quantity': self.product_quantity,
+            'product_image': self.product_image.url if self.product_image else None,
+            'shop': self.shop.shop_name,
+            'seller': self.seller.user.username,
+            'name_market': self.name_market,
+            'created_at': self.created_at,
+        }
+
+    def decrease_quantity(self, quantity):
+        if self.product_quantity >= quantity:
+            self.product_quantity -= quantity
+            self.save()
+
 
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     order_quantity = models.IntegerField(blank=False)
     order_price = models.IntegerField(blank=False, default=0)
     order_status = models.CharField(max_length=100, default='Pending')
-    product_price = models.IntegerField(blank=False, default=0)
-    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name='orders')
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='orders')
+    buyer = models.ForeignKey(Buyer, on_delete=models.CASCADE, related_name='orders')
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='orders', default=None)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -109,24 +130,28 @@ class Order(models.Model):
         self.product_price = self.product.product_price
         self.order_price = self.calculate_order_price()
         super().save(*args, **kwargs)
+        self.product.product_quantity -= self.order_quantity
+        self.product.save()
 
     def calculate_order_price(self):
-        final_price = self.order_quantity * self.product_price
+        final_price = self.order_quantity * self.product.product_price
         return final_price
 
     def __str__(self):
         return self.order_status
 
-    def save(self, *args, **kwargs):
-        created = not self.pk  # Check if the order is being created
-        super().save(*args, **kwargs)
-        if created:
-            Notification.objects.create(
-                notification_type='order',
-                notification='New order made',
-                buyer=self.buyer,
-                seller=self.seller,
-            )
+    def to_dict(self):
+        return {
+            'order_id': self.order_id,
+            'order_quantity': self.order_quantity,
+            'order_price': self.order_price,
+            'order_status': self.order_status,
+            'product_price': self.product.product_price,
+            'buyer': self.buyer.user.username,
+            'product': self.product.product_name,
+            'seller': self.seller.user.username,
+            'created_at': self.created_at,
+        }
 
 
 class Message(models.Model):
