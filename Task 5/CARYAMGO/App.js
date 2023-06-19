@@ -27,13 +27,14 @@ import Messaging1 from './pages/Messaging1';
 import Product from './pages/Product';
 import CustomerSupport from './pages/CustomerSupport';
 import Order from './pages/Order';
+import Notification from './pages/Notification';
 
 
 const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-    {/* <OrderProduct /> */}
+     
   <Stack.Navigator>
       <Stack.Screen
         name="Home"
@@ -84,10 +85,8 @@ export default function App() {
             name="ForgotPassword"
             component={ForgotPassword}
             options={{ headerShown: false }}
-          /> 
-          {/* ForgotPassword */}
-          
-    </Stack.Navigator>
+          />  
+    </Stack.Navigator> 
   </NavigationContainer>
   )
 }
