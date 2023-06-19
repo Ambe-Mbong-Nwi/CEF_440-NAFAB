@@ -75,7 +75,8 @@ const validatePhoneNumber = (phoneNumber) => {
 // subjected to changes 
 const validateEmail = (email) => {
   // Regular expression for email validation
-  const emailRegex = /^[a-zA-Z0-9]{3,20}@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[A-Za-z0-9]+(?:[_.+-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$/;
+
   return emailRegex.test(email);
 };
 
@@ -191,7 +192,7 @@ style={[styles.Textinput,formErrors.password && styles.inputError]}
   </TouchableOpacity>
   <Text style={{fontSize:15  }}  >Already have an account
      <Text
-        onPress={() => navigation.navigate('Login')}
+        onPress={() => navigation.navigate('Login1')}
      style={styles.text} > Sign in </Text> </Text>
     </View>
 

@@ -58,7 +58,8 @@ const validateForm = () => {
   {/* validate the email input field */}
   const validateEmail = (email) => {
     // Regular expression for email validation
-    const emailRegex = /^[a-zA-Z0-9]{3,20}@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[A-Za-z0-9]+(?:[_.+-][A-Za-z0-9]+)*@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*$/;
+
     return emailRegex.test(email);
   };
 
@@ -70,8 +71,8 @@ const validatePhoneNumber = (phoneNumber) => {
 
 
   return (
- <ScrollView> 
-    <SafeAreaView style={{  backgroundColor:'green' }} > 
+ <ScrollView style={{ backgroundColor:'white'}} > 
+    <SafeAreaView style={{ backgroundColor:'green',paddingTop:30 }} > 
     <View style={styles.container1} >  
     <AntDesign
      onPress={() => navigation.navigate('Home')}
@@ -196,21 +197,19 @@ const styles= StyleSheet.create({
     container: {
       justifyContent: 'center',
       alignItems: 'center',
+      
     },
     text:{
       color:'#0CAA00'
     },
     container1: {
         backgroundColor: '#fff',
-
-        marginTop:150,
-
         marginTop:80,
-
         padding:15,
         paddingTop:50,
         width:'100%',
-        height:'100%'
+        height:'100%',
+        // paddingBottom:500
     },
     // display the errors incase the form values are incorrect 
     error: {

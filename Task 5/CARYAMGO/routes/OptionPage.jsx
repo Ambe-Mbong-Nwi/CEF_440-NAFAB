@@ -12,17 +12,17 @@ export default function OptionPage({ navigation }) {
     <View style={styles.main}>
       <Text style={styles.maintxt}  > Join CarryAm-Go As a  </Text>
       <View style={{ width:'80%',  marginTop:20    }} >
-        {/* Route to the signup form  */}
+        {/* Route to the Vendor Login form  */}
         <TouchableOpacity 
         style={styles.button} 
-        onPress={() => navigation.navigate('SignUpVendor')}
+        onPress={() => navigation.navigate('Login1')}
         >
             <Text style={styles.btnText}>  Vendor </Text>    
         </TouchableOpacity >
         {/* Route to the buyer form  */}
         <TouchableOpacity 
         style={styles.button}
-        onPress={() => navigation.navigate('SignUpBuyer')}
+        onPress={() => navigation.navigate('Login')}
         >
         <Text  style={styles.btnText}>Buyer </Text>       
         </TouchableOpacity>

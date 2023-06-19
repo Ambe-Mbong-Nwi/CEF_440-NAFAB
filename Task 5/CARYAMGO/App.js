@@ -11,6 +11,7 @@ import Navigation1 from './shared/Navigation1';
 import AddToCart from './pages/AddToCart';
 import OrderProduct from './pages/OrderProduct';
 import Login from './pages/Login';
+import Login1 from './pages/Login1';
 // routes unformation 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -31,15 +32,7 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-{/* 
-    <Navigation />  */}
-  {/* <Product/> */}
-  {/* <AddToCart/> */}
-  {/* <OrderHeader/> */}
-  {/* <Order/> */}
-  {/* <Navigation1 /> */}
-  {/* <OrderProduct/> */}
-
+    {/* <OrderProduct /> */}
   <Stack.Navigator>
       <Stack.Screen
         name="Home"
@@ -79,6 +72,11 @@ export default function App() {
                 <Stack.Screen
             name="Login"
             component={Login}
+            options={{ headerShown: false }}
+          /> 
+                      <Stack.Screen
+            name="Login1"
+            component={Login1}
             options={{ headerShown: false }}
           /> 
           

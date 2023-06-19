@@ -1,12 +1,3 @@
-// import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import DiscountOrderrStack from '../routes/DiscountOrderrStack';
-// import MessageChatStack from '../routes/MessageChatStack';
-// import Notification from '../pages/Notification';
-// import SubscriptionStack from '../routes/SubscriptionStack';
-// import ProfilePage from '../pages/ProfilePage';
-// import Icon from 'react-native-vector-icons/Ionicons';
-// import HomeOrderrStack from '../routes/HomeOrderrStack';
-// import HomeOrderrStack1 from '../routes/HomeOrderrStack1';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DiscountOrderrStack from '../routes/DiscountOrderrStack';
 import MessageChatStack from '../routes/MessageChatStack';

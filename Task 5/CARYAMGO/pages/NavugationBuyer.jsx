@@ -29,6 +29,14 @@ export default function NavugationBuyer({ navigation }) {
   useEffect(() => {
     handleProductFetch();
   }, []);
+  // display  loading while waiting for Api data to loead
+  if(data.length===0){
+    return(
+      <View style={styles.product}>
+        <Text style={styles.product1} > Loading Products... </Text>
+      </View>
+    )
+  }
 
   return (
     <SafeAreaView style={styles.Container}>
@@ -121,4 +129,21 @@ const styles = StyleSheet.create({
     width: '48%',
     marginBottom: 10,
   },
+  product:{
+    // flex:1,
+    // flexDirection:'column',
+    // justifyContent:'center',
+    // alignItems:'center',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  product1:{
+    fontSize:20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontWeight: '300',
+  }
 });
+
+ 
