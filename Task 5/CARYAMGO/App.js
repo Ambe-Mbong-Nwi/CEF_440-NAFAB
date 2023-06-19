@@ -12,6 +12,7 @@ import AddToCart from './pages/AddToCart';
 import OrderProduct from './pages/OrderProduct';
 import Login from './pages/Login';
 import Login1 from './pages/Login1';
+import ForgotPassword from './pages/ForgotPassword'
 // routes unformation 
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
@@ -74,11 +75,17 @@ export default function App() {
             component={Login}
             options={{ headerShown: false }}
           /> 
-                      <Stack.Screen
+            <Stack.Screen
             name="Login1"
             component={Login1}
             options={{ headerShown: false }}
           /> 
+           <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{ headerShown: false }}
+          /> 
+          {/* ForgotPassword */}
           
     </Stack.Navigator>
   </NavigationContainer>
